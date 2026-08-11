@@ -1,0 +1,78 @@
+{
+  "name": "月言官方插件库",
+  "description": "月言博客插件清单（设计稿《插件商城》演示数据：SEO 优化/评论反垃圾/图片 CDN/站点统计增强/Markdown 增强/备份助手）",
+  "plugins": [
+    {
+      "id": "seo-optimizer",
+      "name": "SEO 优化",
+      "version": "1.2.0",
+      "category": "seo",
+      "price": 0,
+      "installs": 12400,
+      "official": true,
+      "description": "站点地图、元信息、Open Graph 与结构化数据，一键提升收录。",
+      "capabilities": ["站点地图", "元信息", "Open Graph", "robots.txt"],
+      "repo_url": "https://github.com/roberts9012062/boke"
+    },
+    {
+      "id": "comment-anti-spam",
+      "name": "评论反垃圾",
+      "version": "2.0.1",
+      "category": "security",
+      "price": 29,
+      "installs": 8100,
+      "official": true,
+      "description": "智能识别垃圾评论与外链，保护讨论区干净有序。",
+      "capabilities": ["黑名单", "AI 识别", "审核队列", "永久授权"],
+      "repo_url": "https://github.com/roberts9012062/boke"
+    },
+    {
+      "id": "image-cdn",
+      "name": "图片 CDN",
+      "version": "1.0.3",
+      "category": "performance",
+      "price": 0,
+      "installs": 9600,
+      "official": false,
+      "description": "自动压缩与边缘分发，加速封面与灯箱加载。",
+      "capabilities": ["自动压缩", "边缘分发"],
+      "repo_url": "https://github.com/roberts9012062/boke"
+    },
+    {
+      "id": "stats-pro",
+      "name": "站点统计增强",
+      "version": "1.4.0",
+      "category": "analytics",
+      "price": 49,
+      "installs": 5200,
+      "official": false,
+      "description": "访客来源、热门内容与转化漏斗，比基础报表更细。",
+      "capabilities": ["访客来源", "热门内容", "转化漏斗"],
+      "repo_url": "https://github.com/roberts9012062/boke"
+    },
+    {
+      "id": "markdown-plus",
+      "name": "Markdown 增强",
+      "version": "3.0.1",
+      "category": "writing",
+      "price": 0,
+      "installs": 15800,
+      "official": false,
+      "description": "代码高亮、目录、脚注与数学公式，写作更顺手。",
+      "capabilities": ["代码高亮", "目录", "脚注", "数学公式"],
+      "repo_url": "https://github.com/roberts9012062/boke"
+    },
+    {
+      "id": "backup-assistant",
+      "name": "备份助手",
+      "version": "1.1.0",
+      "category": "ops",
+      "price": 19,
+      "installs": 4300,
+      "official": false,
+      "description": "定时导出内容与媒体，支持云端与本地双通道。",
+      "capabilities": ["定时导出", "云本地双通道"],
+      "repo_url": "https://github.com/roberts9012062/boke"
+    }
+  ]
+}
