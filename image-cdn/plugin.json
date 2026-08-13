@@ -1,0 +1,16 @@
+{
+  "id": "image-cdn",
+  "name": "图片 CDN",
+  "version": "1.0.3",
+  "category": "performance",
+  "price": 0,
+  "installs": 9600,
+  "official": false,
+  "description": "自动压缩与边缘分发，加速封面与灯箱加载。",
+  "capabilities": [
+    "自动压缩",
+    "边缘分发"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0"
+}
