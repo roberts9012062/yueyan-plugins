@@ -1,0 +1,4 @@
+{
+  "name": "月言官方插件库",
+  "description": "月言博客官方插件商城内容源：每个插件一个文件夹，内含 plugin.json（元数据）与 README.md（介绍）。"
+}
