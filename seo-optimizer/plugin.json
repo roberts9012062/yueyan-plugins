@@ -38,7 +38,7 @@
       "key": "og_image",
       "label": "默认 OG 图",
       "type": "text",
-      "default": ""
+      "default": "/og-default.svg"
     }
   ]
 }
