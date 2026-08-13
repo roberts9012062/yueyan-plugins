@@ -1,0 +1,42 @@
+{
+  "id": "comment-anti-spam",
+  "name": "评论反垃圾",
+  "version": "2.0.1",
+  "category": "security",
+  "price": 29,
+  "installs": 8100,
+  "official": true,
+  "description": "智能识别垃圾评论与外链，保护讨论区干净有序。",
+  "capabilities": [
+    "黑名单",
+    "AI 识别",
+    "审核队列",
+    "永久授权"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0",
+  "settings_schema": [
+    {
+      "key": "block_links",
+      "label": "拦截含外链评论",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "blacklist_words",
+      "label": "黑名单关键词",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "policy",
+      "label": "拦截策略",
+      "type": "select",
+      "default": "block",
+      "options": [
+        "block",
+        "review"
+      ]
+    }
+  ]
+}
