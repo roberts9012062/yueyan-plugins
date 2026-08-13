@@ -1,0 +1,16 @@
+{
+  "id": "backup-assistant",
+  "name": "备份助手",
+  "version": "1.1.0",
+  "category": "ops",
+  "price": 19,
+  "installs": 4300,
+  "official": false,
+  "description": "定时导出内容与媒体，支持云端与本地双通道。",
+  "capabilities": [
+    "定时导出",
+    "云本地双通道"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0"
+}
