@@ -1,0 +1,21 @@
+{
+  "id": "markdown-plus",
+  "name": "Markdown 增强",
+  "version": "3.0.1",
+  "category": "writing",
+  "price": 0,
+  "installs": 15800,
+  "official": false,
+  "description": "代码高亮、目录、脚注与数学公式，写作更顺手。",
+  "capabilities": [
+    "代码高亮",
+    "目录",
+    "脚注",
+    "数学公式"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0",
+  "conflicts": [
+    "markdown-legacy"
+  ]
+}
