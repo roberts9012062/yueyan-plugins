@@ -1,0 +1,44 @@
+{
+  "id": "seo-optimizer",
+  "name": "SEO 优化",
+  "version": "1.2.0",
+  "category": "seo",
+  "price": 0,
+  "installs": 12400,
+  "official": true,
+  "description": "发帖 SEO 面板（标题/描述/URL 别名/收录策略）+ 元信息校验，一键提升收录。",
+  "capabilities": [
+    "站点地图",
+    "元信息",
+    "Open Graph",
+    "robots.txt",
+    "发帖 SEO 面板"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugins/seo-optimizer/settings",
+    "label": "SEO 优化",
+    "icon": "seo"
+  },
+  "settings_schema": [
+    {
+      "key": "site_title_suffix",
+      "label": "站点标题后缀",
+      "type": "text",
+      "default": "· 月言"
+    },
+    {
+      "key": "auto_sitemap",
+      "label": "自动生成 sitemap",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "og_image",
+      "label": "默认 OG 图",
+      "type": "text",
+      "default": ""
+    }
+  ]
+}
