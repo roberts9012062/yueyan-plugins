@@ -1,0 +1,20 @@
+{
+  "id": "stats-pro",
+  "name": "站点统计增强",
+  "version": "1.4.0",
+  "category": "analytics",
+  "price": 49,
+  "installs": 5200,
+  "official": false,
+  "description": "访客来源、热门内容与转化漏斗，比基础报表更细。",
+  "capabilities": [
+    "访客来源",
+    "热门内容",
+    "转化漏斗"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0",
+  "requires": [
+    "seo-optimizer"
+  ]
+}
