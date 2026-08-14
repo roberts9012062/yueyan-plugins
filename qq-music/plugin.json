@@ -6,7 +6,7 @@
   "price": 0,
   "installs": 0,
   "official": true,
-  "description": "QQ 音乐嵌入播放：站长登录 QQ 音乐，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录。",
+  "description": "QQ 音乐嵌入播放：站长用手机 QQ 扫码登录，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录。",
   "capabilities": [
     "api",
     "frontend",
