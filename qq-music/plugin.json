@@ -8,10 +8,10 @@
   "official": true,
   "description": "QQ 音乐嵌入播放：站长登录 QQ 音乐，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录。",
   "capabilities": [
-    "自定义 API",
-    "前端扩展",
-    "后台独立页面",
-    "设置项"
+    "api",
+    "frontend",
+    "admin.page",
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0",
