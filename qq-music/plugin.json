@@ -1,0 +1,35 @@
+{
+  "id": "qq-music",
+  "name": "QQ 音乐",
+  "version": "0.1.0",
+  "category": "enhancement",
+  "price": 0,
+  "installs": 0,
+  "official": true,
+  "description": "QQ 音乐嵌入播放：站长登录 QQ 音乐，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录。",
+  "capabilities": [
+    "自定义 API",
+    "前端扩展",
+    "后台独立页面",
+    "设置项"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugin-pages/qq-music/login",
+    "label": "QQ 音乐",
+    "icon": "music"
+  },
+  "settings_schema": [
+    {
+      "key": "default_quality",
+      "label": "音质",
+      "type": "select",
+      "default": "standard",
+      "options": [
+        "standard",
+        "higher"
+      ]
+    }
+  ]
+}
