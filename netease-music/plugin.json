@@ -1,0 +1,38 @@
+{
+  "id": "netease-music",
+  "name": "网易云音乐",
+  "version": "0.1.0",
+  "category": "enhancement",
+  "price": 0,
+  "installs": 0,
+  "official": true,
+  "description": "网易云音乐嵌入播放：站长登录网易云，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录。",
+  "capabilities": [
+    "自定义 API",
+    "前端扩展",
+    "后台独立页面",
+    "设置项"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugin-pages/netease-music/login",
+    "label": "网易云音乐",
+    "icon": "music"
+  },
+  "settings_schema": [
+    {
+      "key": "autoplay",
+      "label": "访客进入自动播放",
+      "type": "switch",
+      "default": "off"
+    },
+    {
+      "key": "default_level",
+      "label": "音质",
+      "type": "select",
+      "default": "standard",
+      "options": ["standard", "higher", "exhigh"]
+    }
+  ]
+}
