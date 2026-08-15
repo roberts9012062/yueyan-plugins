@@ -8,9 +8,8 @@
   "official": false,
   "description": "访客来源、热门内容与转化漏斗，比基础报表更细。",
   "capabilities": [
-    "访客来源",
-    "热门内容",
-    "转化漏斗"
+    "frontend",
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0",
