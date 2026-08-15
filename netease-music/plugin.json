@@ -8,10 +8,10 @@
   "official": true,
   "description": "网易云音乐嵌入播放：站长登录网易云，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录。",
   "capabilities": [
-    "自定义 API",
-    "前端扩展",
-    "后台独立页面",
-    "设置项"
+    "api",
+    "frontend",
+    "admin.page",
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0",
@@ -32,7 +32,15 @@
       "label": "音质",
       "type": "select",
       "default": "standard",
-      "options": ["standard", "higher", "exhigh"]
+      "options": [
+        "standard",
+        "higher",
+        "exhigh"
+      ]
     }
-  ]
+  ],
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "ab9d9993635f14e8d474a493e91a9c07f97aac7aaec5252a67c42073816e115d"
+  }
 }
