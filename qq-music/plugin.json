@@ -31,5 +31,9 @@
         "higher"
       ]
     }
-  ]
+  ],
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "b88504d1cb1a7f4590c2021f5258fd8d8630f9c25b188c2aaf768aed4579be53"
+  }
 }
