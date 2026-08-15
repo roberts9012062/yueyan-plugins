@@ -1,7 +1,7 @@
 {
   "id": "demo-plugin",
   "name": "演示插件",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "category": "enhancement",
   "price": 29,
   "installs": 0,
