@@ -8,10 +8,7 @@
   "official": false,
   "description": "代码高亮、目录、脚注与数学公式，写作更顺手。",
   "capabilities": [
-    "代码高亮",
-    "目录",
-    "脚注",
-    "数学公式"
+    "hooks"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0",
