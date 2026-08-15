@@ -8,8 +8,7 @@
   "official": false,
   "description": "自动压缩与边缘分发，加速封面与灯箱加载。",
   "capabilities": [
-    "自动压缩",
-    "边缘分发"
+    "frontend"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0"
