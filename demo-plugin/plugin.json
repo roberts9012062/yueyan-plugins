@@ -8,11 +8,15 @@
   "official": true,
   "description": "M3.5 付费插件演示：进程外隔离、钩子、自定义 API、许可证激活（demo_pro 功能）。",
   "capabilities": [
-    "进程外隔离",
-    "同步/异步钩子",
-    "自定义 API",
-    "许可证激活"
+    "hooks",
+    "api",
+    "settings",
+    "data.read"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
-  "core_version": ">=0.1.0"
+  "core_version": ">=0.1.0",
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "2b94a010b8ff25afbae89a1111e383d1fe810c68448db7d60539b4efa7d850e5"
+  }
 }
