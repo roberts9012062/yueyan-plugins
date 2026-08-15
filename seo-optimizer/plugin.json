@@ -8,11 +8,9 @@
   "official": true,
   "description": "发帖 SEO 面板（标题/描述/URL 别名/收录策略）+ 元信息校验，一键提升收录。",
   "capabilities": [
-    "站点地图",
-    "元信息",
-    "Open Graph",
-    "robots.txt",
-    "发帖 SEO 面板"
+    "hooks",
+    "frontend",
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0",
@@ -40,5 +38,9 @@
       "type": "image",
       "default": "/og-default.svg"
     }
-  ]
+  ],
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "b6332d6cbc8485e779b3dc43f2805502d1b7844c9e3ccab41ec24121bc5143bc"
+  }
 }
