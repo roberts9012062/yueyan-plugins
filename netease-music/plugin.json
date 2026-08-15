@@ -14,6 +14,7 @@
     "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
+  "music_provider": "netease",
   "core_version": ">=0.1.0",
   "nav": {
     "href": "/admin/plugin-pages/netease-music/login",
