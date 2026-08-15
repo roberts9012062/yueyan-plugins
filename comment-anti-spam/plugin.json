@@ -8,10 +8,9 @@
   "official": true,
   "description": "智能识别垃圾评论与外链，保护讨论区干净有序。",
   "capabilities": [
-    "黑名单",
-    "AI 识别",
-    "审核队列",
-    "永久授权"
+    "hooks",
+    "ai",
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0",
