@@ -8,8 +8,7 @@
   "official": false,
   "description": "定时导出内容与媒体，支持云端与本地双通道。",
   "capabilities": [
-    "定时导出",
-    "云本地双通道"
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/boke",
   "core_version": ">=0.1.0"
