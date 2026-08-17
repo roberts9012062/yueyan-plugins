@@ -1,0 +1,20 @@
+{
+  "extensionPoints": [
+    {
+      "slot": "post.footer",
+      "entry": "index.js",
+      "mode": "append"
+    },
+    {
+      "slot": "comment.item",
+      "entry": "comment-item.js",
+      "mode": "append"
+    }
+  ],
+  "pages": [
+    {
+      "route": "demo",
+      "entry": "page-demo.js"
+    }
+  ]
+}
