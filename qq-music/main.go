@@ -37,7 +37,7 @@ func (p *QQMusicPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:           pluginID,
 		Name:         "QQ 音乐",
-		Version:      "0.1.0",
+		Version:      "0.2.0",
 		Author:       "月言官方",
 		Description:  "QQ 音乐嵌入播放：站长登录 QQ 音乐，插件获取真实播放地址，自研播放器双主题播放。",
 		Capabilities: []string{"hooks", "api", "frontend", "settings", "admin.page"},
