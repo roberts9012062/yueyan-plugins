@@ -1,12 +1,12 @@
 {
   "id": "qq-music",
   "name": "QQ 音乐",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
   "official": true,
-  "description": "QQ 音乐嵌入播放：站长用手机 QQ 扫码登录，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录。",
+  "description": "QQ 音乐嵌入播放：站长用手机 QQ 扫码登录，插件获取歌曲真实播放地址，自研播放器双主题播放，访客无需登录；v0.2.0 首页背景音乐自动连播切歌 + 登录页 Tab 选中色修复。",
   "capabilities": [
     "api",
     "frontend",
@@ -35,6 +35,6 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "b88504d1cb1a7f4590c2021f5258fd8d8630f9c25b188c2aaf768aed4579be53"
+    "sha256": "468df6f1e33d271312671c7e99513623bfa2153e992a40e0f8c9d0d8fb8171d3"
   }
 }
