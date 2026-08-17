@@ -1,0 +1,30 @@
+{
+  "id": "demo-plugin",
+  "name": "演示插件",
+  "version": "0.2.0",
+  "description": "M3.7 演示插件：钩子、自定义 API、许可证（demo_pro）、设置项（schema 驱动）",
+  "author": {
+    "name": "月言官方",
+    "github": "roberts9012062"
+  },
+  "license": "BSL-1.1",
+  "pricing": {
+    "model": "paid",
+    "edition": "pro",
+    "features": [
+      "demo_pro"
+    ]
+  },
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "hooks",
+    "api",
+    "settings",
+    "data.read"
+  ],
+  "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+  ]
+}
