@@ -1,0 +1,9 @@
+{
+  "extensionPoints": [],
+  "pages": [
+    {
+      "route": "login",
+      "entry": "login-page.js"
+    }
+  ]
+}
