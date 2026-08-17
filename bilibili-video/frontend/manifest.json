@@ -1,0 +1,15 @@
+{
+  "extensionPoints": [],
+  "pages": [
+    {
+      "route": "login",
+      "entry": "login-page.js"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bilibili",
+      "entry": "player.js?v=2"
+    }
+  ]
+}
