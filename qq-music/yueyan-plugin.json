@@ -1,11 +1,11 @@
 {
   "id": "qq-music",
   "name": "QQ 音乐",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "月言官方"
   },
-  "description": "QQ 音乐嵌入播放：站长登录 QQ 音乐，插件获取真实播放地址，自研播放器双主题播放。",
+  "description": "QQ 音乐嵌入播放：站长扫码登录，插件获取真实播放地址，自研播放器双主题播放，首页背景音乐自动连播切歌。",
   "sdk": ">=1.0.0",
   "capabilities": [
     "api",
