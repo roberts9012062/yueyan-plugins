@@ -13,7 +13,7 @@
     "admin.page",
     "settings"
   ],
-  "repo_url": "https://github.com/roberts9012062/boke",
+  "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
   "nav": {
     "href": "/admin/plugin-pages/bilibili-video/login",
@@ -42,6 +42,6 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "d749827ca5e50fe26dd238bd69374e537e4f3417b30b2ba0ed775de1a6649abd"
+    "sha256": "b22a50aef3c0bbcc00ad4265c0d4f7e6bdfc94d1cdb4b9072b8f55b468e5730b"
   }
 }
