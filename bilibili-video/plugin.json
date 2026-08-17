@@ -1,0 +1,47 @@
+{
+  "id": "bilibili-video",
+  "name": "B站视频",
+  "version": "0.1.0",
+  "category": "enhancement",
+  "price": 0,
+  "installs": 0,
+  "official": true,
+  "description": "B站视频嵌入：站长扫码/短信登录 B 站，发帖插入视频并选择 360P~1080P 清晰度，游客可观看高清；游客扫码登录自己的 B 站账号后用自己的身份观看高清。",
+  "capabilities": [
+    "api",
+    "frontend",
+    "admin.page",
+    "settings"
+  ],
+  "repo_url": "https://github.com/roberts9012062/boke",
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugin-pages/bilibili-video/login",
+    "label": "B站视频",
+    "icon": "video"
+  },
+  "settings_schema": [
+    {
+      "key": "default_quality",
+      "label": "默认清晰度",
+      "type": "select",
+      "default": "80",
+      "options": [
+        "16",
+        "32",
+        "64",
+        "80"
+      ]
+    },
+    {
+      "key": "allow_guest_hd",
+      "label": "允许游客用站长账号看高清",
+      "type": "switch",
+      "default": "on"
+    }
+  ],
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "99afd8f2df2f0668a925ea75ec9b20c5be6383831a1df36e61ad68aa088d0ec4"
+  }
+}
