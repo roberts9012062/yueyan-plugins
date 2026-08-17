@@ -11,7 +11,7 @@
     "frontend",
     "settings"
   ],
-  "repo_url": "https://github.com/roberts9012062/boke",
+  "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
   "requires": [
     "seo-optimizer"
