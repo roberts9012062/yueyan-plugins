@@ -42,6 +42,6 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "99afd8f2df2f0668a925ea75ec9b20c5be6383831a1df36e61ad68aa088d0ec4"
+    "sha256": "d749827ca5e50fe26dd238bd69374e537e4f3417b30b2ba0ed775de1a6649abd"
   }
 }
