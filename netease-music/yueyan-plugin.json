@@ -1,0 +1,14 @@
+{
+  "id": "netease-music",
+  "name": "网易云音乐",
+  "version": "0.1.0",
+  "author": { "name": "月言官方" },
+  "description": "网易云音乐嵌入播放：站长登录网易云，插件获取真实播放地址，自研播放器双主题播放。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "api",
+    "frontend",
+    "admin.page",
+    "settings"
+  ]
+}
