@@ -38,7 +38,7 @@ func (p *BilibiliPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "B站视频",
-		Version:     "0.1.0",
+		Version:     "0.1.1",
 		Author:      "月言官方",
 		Description: "B站视频嵌入：站长扫码登录后，发帖可插入 B 站视频并选择 360P~1080P 清晰度，游客可观看高清。",
 		Capabilities: []string{"hooks", "api", "frontend", "settings", "admin.page"},
