@@ -1,0 +1,16 @@
+{
+  "id": "bilibili-video",
+  "name": "B站视频",
+  "version": "0.1.0",
+  "author": {
+    "name": "月言官方"
+  },
+  "description": "B站视频嵌入：站长扫码/短信登录 B 站，发帖插入视频并选择 360P~1080P 清晰度，游客可观看高清（游客登录自己的 B 站账号后用自己的身份看高清）。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "api",
+    "frontend",
+    "admin.page",
+    "settings"
+  ]
+}
