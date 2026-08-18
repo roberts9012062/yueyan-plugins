@@ -1,0 +1,73 @@
+{
+  "id": "tts-reader",
+  "name": "朗读",
+  "version": "1.0.2",
+  "category": "enhancement",
+  "price": 0,
+  "installs": 0,
+  "official": false,
+  "description": "帖子语音朗读：时间线卡片与帖子页「🔊 朗读」一键听全文（标题+摘要/正文），内置无 Key 免费 Edge 引擎，可选自定义合成端点；音频按哈希缓存，可设默认音色/语速/上限。",
+  "capabilities": [
+    "api",
+    "frontend",
+    "settings"
+  ],
+  "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugins/tts-reader/settings",
+    "label": "朗读",
+    "icon": "mic"
+  },
+  "settings_schema": [
+    {
+      "key": "default_voice",
+      "label": "默认音色",
+      "type": "select",
+      "default": "zh-CN-XiaoxiaoNeural",
+      "options": [
+        "zh-CN-XiaoxiaoNeural",
+        "zh-CN-XiaoyiNeural",
+        "zh-CN-YunjianNeural",
+        "zh-CN-YunxiNeural",
+        "zh-CN-YunyangNeural",
+        "zh-CN-liaoning-XiaobeiNeural"
+      ]
+    },
+    {
+      "key": "default_rate",
+      "label": "默认语速",
+      "type": "select",
+      "default": "+0%",
+      "options": [
+        "-20%",
+        "-10%",
+        "+0%",
+        "+10%",
+        "+20%"
+      ]
+    },
+    {
+      "key": "max_chars",
+      "label": "单次朗读最大字数",
+      "type": "text",
+      "default": "3000"
+    },
+    {
+      "key": "custom_endpoint",
+      "label": "自定义合成端点（留空用内置免费引擎）",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "custom_key",
+      "label": "自定义端点 API Key（可选）",
+      "type": "text",
+      "default": ""
+    }
+  ],
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "eda6751c02528f8c803b5d554b6e7d609aba018e7e6f61ebc9a479df80b3af89"
+  }
+}
