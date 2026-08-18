@@ -1,0 +1,20 @@
+{
+  "id": "tts-reader",
+  "name": "朗读",
+  "version": "1.0.2",
+  "author": {
+    "name": "月言"
+  },
+  "description": "帖子正文语音朗读：访客一键听全文，内置免费 Edge 引擎，可选自定义合成端点。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "api",
+    "frontend",
+    "settings"
+  ],
+  "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+  ]
+}
