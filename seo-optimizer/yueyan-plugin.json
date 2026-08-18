@@ -2,12 +2,15 @@
   "id": "seo-optimizer",
   "name": "SEO 优化",
   "version": "1.2.0",
-  "author": { "name": "月言官方" },
+  "author": {
+    "name": "月言官方"
+  },
   "description": "发帖 SEO 面板（标题/描述/别名/收录）+ 元信息校验，一键提升收录。",
   "sdk": ">=1.0.0",
   "capabilities": [
     "hooks",
     "frontend",
-    "settings"
+    "settings",
+    "data.read"
   ]
 }
