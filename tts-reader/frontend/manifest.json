@@ -1,0 +1,14 @@
+{
+  "extensionPoints": [
+    {
+      "slot": "post.footer",
+      "entry": "reader.js",
+      "mode": "append"
+    },
+    {
+      "slot": "post.card.actions",
+      "entry": "reader.js",
+      "mode": "append"
+    }
+  ]
+}
