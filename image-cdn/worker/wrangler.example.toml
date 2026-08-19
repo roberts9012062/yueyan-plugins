@@ -1,22 +1,32 @@
 # wrangler.example.toml
-# 月言图床 Worker 部署配置示例：复制为 wrangler.toml 后按注释改三处即可部署。
+# 月言图床 Worker 部署配置模板：复制为 wrangler.toml 后按注释改三处即可部署。
 #
-# 部署步骤（详见同目录 README.md）：
-#   1. Cloudflare Dashboard 创建 R2 存储桶（如 yueyan-media）
-#   2. 本目录执行：cp wrangler.example.toml wrangler.toml（改 bucket 名）
-#   3. npx wrangler secret put API_KEY（生成并保存一个长随机串）
-#   4. npx wrangler deploy
-#   5. boke 后台「Cloudflare 图床」插件填 Worker URL（https://xxx.workers.dev）与 API_KEY
-
+# 一键部署（推荐，本机已 wrangler login）：
+#   ./scripts/deploy-image-worker.sh
+#
+# 手动步骤：
+#   1. Cloudflare Dashboard 创建 R2 存储桶（或 wrangler r2 bucket create <桶名>）
+#   2. cp wrangler.example.toml wrangler.toml（改桶名与自定义域）
+#   3. 生成密钥：openssl rand -hex 32，执行 npx wrangler secret put API_KEY 粘贴
+#   4. npx wrangler deploy（自定义域自动建 DNS 与证书，生效约 1-3 分钟）
+#   5. boke 后台「Cloudflare 图床」插件填访问域名与 API_KEY
+#
+# 注意：顶层键（routes）必须置于所有表段（[[r2_buckets]]/[vars]）之前——
+#       TOML 键值对归属其前最近的表头，放错段会被静默忽略。
 name = "yueyan-image-bed"
 main = "index.js"
 compatibility_date = "2026-01-01"
 
-# R2 存储桶绑定（bucket 改为你的桶名）
+# 自定义域（国内访问 workers.dev 不稳定，建议绑自定义域；域名需托管在本账号）
+# routes = [
+#   { pattern = "imgs.example.com", custom_domain = true }
+# ]
+
+# R2 存储桶绑定（wrangler 4.x 字段名为 bucket_name，不是 bucket）
 [[r2_buckets]]
 binding = "R2BIND"
-bucket = "yueyan-media"
+bucket_name = "yueyan-media"
 
-# 公开访问基址（默认用 Worker 自身域名代理 /f/*——可改为 R2 自定义域）
+# 公开访问基址（默认用 Worker 自身域名代理 /f/*；绑自定义域后改为自定义域）
 # [vars]
-# PUBLIC_BASE = "https://media.example.com"
+# PUBLIC_BASE = "https://imgs.example.com"
