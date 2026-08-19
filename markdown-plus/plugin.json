@@ -1,18 +1,50 @@
 {
   "id": "markdown-plus",
   "name": "Markdown 增强",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "category": "writing",
   "price": 0,
   "installs": 15800,
-  "official": false,
-  "description": "代码高亮、目录、脚注与数学公式，写作更顺手。",
+  "official": true,
+  "description": "帖子正文展示增强：外链新窗口安全打开、图片懒加载、标题锚点定位。免费。",
   "capabilities": [
-    "hooks"
+    "hooks",
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
   "conflicts": [
     "markdown-legacy"
+  ],
+  "nav": {
+    "href": "/admin/plugins/markdown-plus/settings",
+    "label": "Markdown 增强",
+    "icon": "posts"
+  },
+  "settings_schema": [
+    {
+      "key": "external_links",
+      "label": "外链新窗口打开（加 target/rel 安全属性）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "lazy_images",
+      "label": "图片懒加载（loading=lazy）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "heading_anchors",
+      "label": "标题锚点（h1-h6 加 id 便于定位分享）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "link_nofollow",
+      "label": "外链加 nofollow（防 SEO 外链权重流失）",
+      "type": "switch",
+      "default": "off"
+    }
   ]
 }
