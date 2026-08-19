@@ -1,0 +1,18 @@
+{
+  "id": "image-cdn",
+  "name": "Cloudflare 图床",
+  "version": "2.0.0",
+  "author": {
+    "name": "月言官方"
+  },
+  "description": "媒体上传直达 Cloudflare R2 对象存储：填 Workers URL 与 Key 配对即用，公开 URL 回站展示。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "settings"
+  ],
+  "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+  ]
+}
