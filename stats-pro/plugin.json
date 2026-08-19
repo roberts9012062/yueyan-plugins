@@ -1,19 +1,31 @@
 {
   "id": "stats-pro",
   "name": "站点统计增强",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "category": "analytics",
-  "price": 49,
+  "price": 0,
   "installs": 5200,
-  "official": false,
-  "description": "访客来源、热门内容与转化漏斗，比基础报表更细。",
+  "official": true,
+  "description": "访客 PV/UV 计数、热门内容排行与后台统计面板，比基础报表更细。免费。",
   "capabilities": [
+    "api",
     "frontend",
-    "settings"
+    "settings",
+    "admin.page"
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
-  "requires": [
-    "seo-optimizer"
+  "nav": {
+    "href": "/admin/plugin-pages/stats-pro/dashboard",
+    "label": "站点统计",
+    "icon": "report"
+  },
+  "settings_schema": [
+    {
+      "key": "exclude_admin",
+      "label": "管理员访问不计数",
+      "type": "switch",
+      "default": "on"
+    }
   ]
 }
