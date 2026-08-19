@@ -1,0 +1,9 @@
+{
+  "extensionPoints": [],
+  "pages": [
+    {
+      "route": "dashboard",
+      "entry": "dashboard-page.js"
+    }
+  ]
+}
