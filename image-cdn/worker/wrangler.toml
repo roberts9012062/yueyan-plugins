@@ -1,0 +1,23 @@
+# wrangler.toml
+# 月言图床 Worker 部署配置（实际生效配置；模板见 wrangler.example.toml）。
+# 说明：国内访问 workers.dev 域名不稳定，绑定自定义域 imgs.bd8.top 作为
+# 统一访问入口（上传 API 与公开读图同域）。
+# 注意：顶层键（routes）必须置于所有表段（[[r2_buckets]]/[vars]）之前——
+# TOML 键值对归属其前最近的表头，放错段会被静默忽略。
+name = "yueyan-image-bed"
+main = "index.js"
+compatibility_date = "2026-01-01"
+
+# 自定义域（部署时自动建 DNS 记录与证书；域名需已托管在本 Cloudflare 账号）
+routes = [
+  { pattern = "imgs.bd8.top", custom_domain = true }
+]
+
+# R2 存储桶绑定（wrangler 4.x 字段名为 bucket_name）
+[[r2_buckets]]
+binding = "R2BIND"
+bucket_name = "yueyan-media"
+
+# 公开访问基址（上传返回的 URL 用自定义域）
+[vars]
+PUBLIC_BASE = "https://imgs.bd8.top"
