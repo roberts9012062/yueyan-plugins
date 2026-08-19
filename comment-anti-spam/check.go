@@ -92,7 +92,7 @@ func checkByAI(ctx context.Context, cfg map[string]string, content string) *verd
 		return nil // 未声明 data.read 或宿主未下发连接：跳过 AI 检测
 	}
 	model := strings.TrimSpace(cfg["ai_model"])
-	if model == "" {
+	if model == "" || model == aiModelAuto { // 空/自动：取第一个可用模型
 		models, err := svc.GetAIModels(ctx)
 		if err != nil || len(models) == 0 || len(models[0].Models) == 0 {
 			return nil // 站点未配置 AI：跳过
