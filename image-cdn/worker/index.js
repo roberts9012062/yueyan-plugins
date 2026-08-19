@@ -24,6 +24,9 @@ export default {
       if (url.pathname === "/upload" && request.method === "POST") {
         return handleUpload(request, env);
       }
+      if (url.pathname === "/list" && request.method === "GET") {
+        return handleList(request, env, url);
+      }
       if (key && request.method === "GET") {
         return handleGet(env, key);
       }
@@ -123,6 +126,27 @@ async function handleGet(env, key) {
   headers.set("Cache-Control", "public, max-age=31536000, immutable");
   headers.set("ETag", obj.etag);
   return new Response(obj.body, { status: 200, headers });
+}
+
+// handleList 对象列表（Bearer key；?cursor= 分页，每页 60，时间倒序）。
+// 返回 {objects:[{key,url,size,uploaded}], cursor}——uploaded 为 ISO 时间。
+async function handleList(request, env, url) {
+  if (!authorized(request, env)) {
+    return json(401, { error: "invalid key" });
+  }
+  if (!env.R2BIND) {
+    return json(500, { error: "R2 binding missing" });
+  }
+  const cursor = url.searchParams.get("cursor") || undefined;
+  const listed = await env.R2BIND.list({ cursor, limit: 60 });
+  const base = (env.PUBLIC_BASE || new URL(request.url).origin).replace(/\/+$/, "");
+  const objects = (listed.objects || []).map((o) => ({
+    key: o.key,
+    url: `${base}/f/${o.key}`,
+    size: o.size,
+    uploaded: o.uploaded ? new Date(o.uploaded).toISOString() : "",
+  })).sort((a, b) => (a.uploaded < b.uploaded ? 1 : -1)); // 同页内时间倒序（新图在前）
+  return json(200, { objects, cursor: listed.truncated ? listed.cursor : "" });
 }
 
 // handleDelete 删除对象（鉴权）。
