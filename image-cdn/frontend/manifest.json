@@ -1,0 +1,9 @@
+{
+  "extensionPoints": [],
+  "pages": [
+    {
+      "route": "library",
+      "entry": "library-page.js"
+    }
+  ]
+}
