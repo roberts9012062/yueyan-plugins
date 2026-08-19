@@ -1,0 +1,19 @@
+{
+  "id": "markdown-plus",
+  "name": "Markdown 增强",
+  "version": "3.1.0",
+  "author": {
+    "name": "月言官方"
+  },
+  "description": "帖子正文展示增强：外链新窗口安全打开、图片懒加载、标题锚点定位。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "hooks",
+    "settings"
+  ],
+  "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+  ]
+}
