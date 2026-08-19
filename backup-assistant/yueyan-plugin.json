@@ -1,0 +1,20 @@
+{
+  "id": "backup-assistant",
+  "name": "备份助手",
+  "version": "1.2.0",
+  "author": {
+    "name": "月言官方"
+  },
+  "description": "媒体库定时/手动备份：ZIP 打包落盘 + 保留策略自动清理 + 完成通知 webhook（云端通道）。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "api",
+    "settings",
+    "admin.page"
+  ],
+  "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+  ]
+}
