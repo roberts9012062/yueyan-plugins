@@ -1,0 +1,22 @@
+# wrangler.example.toml
+# 月言图床 Worker 部署配置示例：复制为 wrangler.toml 后按注释改三处即可部署。
+#
+# 部署步骤（详见同目录 README.md）：
+#   1. Cloudflare Dashboard 创建 R2 存储桶（如 yueyan-media）
+#   2. 本目录执行：cp wrangler.example.toml wrangler.toml（改 bucket 名）
+#   3. npx wrangler secret put API_KEY（生成并保存一个长随机串）
+#   4. npx wrangler deploy
+#   5. boke 后台「Cloudflare 图床」插件填 Worker URL（https://xxx.workers.dev）与 API_KEY
+
+name = "yueyan-image-bed"
+main = "index.js"
+compatibility_date = "2026-01-01"
+
+# R2 存储桶绑定（bucket 改为你的桶名）
+[[r2_buckets]]
+binding = "R2BIND"
+bucket = "yueyan-media"
+
+# 公开访问基址（默认用 Worker 自身域名代理 /f/*——可改为 R2 自定义域）
+# [vars]
+# PUBLIC_BASE = "https://media.example.com"
