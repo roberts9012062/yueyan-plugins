@@ -10,6 +10,7 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -118,4 +119,57 @@ func uploadToWorker(baseURL string, apiKey string, filename string, mimeType str
 		Mime:       result.Mime,
 		Size:       result.Size,
 	}, nil
+}
+
+// listWorker 对象列表：GET {url}/list?cursor=（Bearer key）→ Worker 响应原样字节。
+func listWorker(baseURL string, apiKey string, cursor string) ([]byte, error) {
+	target := strings.TrimSuffix(baseURL, "/") + "/list"
+	if cursor != "" {
+		target += "?cursor=" + url.QueryEscape(cursor)
+	}
+	req, err := http.NewRequest(http.MethodGet, target, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Authorization", "Bearer "+apiKey)
+	resp, err := newWorkerClient(workerHealthTimeout).Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Worker 请求失败：%w", err)
+	}
+	defer resp.Body.Close()
+	raw, _ := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("HTTP %d：%s", resp.StatusCode, strings.TrimSpace(string(raw)))
+	}
+	return raw, nil
+}
+
+// deleteWorkerObject 删除对象：DELETE {url}/f/:key（Bearer key；key 路径转义防注入）。
+func deleteWorkerObject(baseURL string, apiKey string, objectKey string) error {
+	target := strings.TrimSuffix(baseURL, "/") + "/f/" + url.PathEscape(objectKey)
+	req, err := http.NewRequest(http.MethodDelete, target, nil)
+	if err != nil {
+		return err
+	}
+	req.Header.Set("Authorization", "Bearer "+apiKey)
+	resp, err := newWorkerClient(workerHealthTimeout).Do(req)
+	if err != nil {
+		return fmt.Errorf("Worker 请求失败：%w", err)
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		raw, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
+		return fmt.Errorf("HTTP %d：%s", resp.StatusCode, strings.TrimSpace(string(raw)))
+	}
+	return nil
+}
+
+// base64Decode 标准 base64 解码薄封装（统一导入处）。
+func base64Decode(s string) ([]byte, error) {
+	return base64.StdEncoding.DecodeString(s)
+}
+
+// base64Encode 标准 base64 编码薄封装。
+func base64Encode(data []byte) string {
+	return base64.StdEncoding.EncodeToString(data)
 }
