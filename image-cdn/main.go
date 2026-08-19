@@ -73,11 +73,12 @@ func (p *ImageBedPlugin) RegisterAPI(api *sdk.APIMux) {
 	api.Handle("POST", "/manage/delete", handleDelete)
 }
 
-// handleManageUpload 后台管理页直传：与 seam 转存同链路（压缩 + Worker），
-// 但仅管理员可调且不落 media_assets（图床管理语义——对象进 R2 即出现在列表）。
+// handleManageUpload 直传上传：与 seam 转存同链路（压缩 + Worker）。
+// 权限：登录用户即可（发帖页"CF图床上传"通道——插图是常规发帖行为）；
+// 只进 R2 不落 media_assets（图床直传语义，仅正文引用不占图集名额）。
 func handleManageUpload(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
-	if !sdk.TrustedCaller(ctx) {
-		return jsonOut(403, map[string]any{"error": "仅管理员可上传"})
+	if !sdk.CallerIsSystem(ctx) && sdk.CallerID(ctx) <= 0 {
+		return jsonOut(403, map[string]any{"error": "请先登录"})
 	}
 	return handleUpload(ctx, method, path, body)
 }
