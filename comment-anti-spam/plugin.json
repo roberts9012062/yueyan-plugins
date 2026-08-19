@@ -1,20 +1,36 @@
 {
   "id": "comment-anti-spam",
   "name": "评论反垃圾",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "category": "security",
-  "price": 29,
+  "price": 0,
   "installs": 8100,
   "official": true,
-  "description": "智能识别垃圾评论与外链，保护讨论区干净有序。",
+  "description": "评论提交前多级反垃圾：黑名单词、外链拦截、AI 智能识别（可选），支持拒绝与留痕两种策略。免费。",
   "capabilities": [
     "hooks",
     "ai",
-    "settings"
+    "settings",
+    "data.read"
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugins/comment-anti-spam/settings",
+    "label": "评论反垃圾",
+    "icon": "comments"
+  },
   "settings_schema": [
+    {
+      "key": "policy",
+      "label": "拦截策略（block=直接拒绝，review=放行并记录日志）",
+      "type": "select",
+      "default": "block",
+      "options": [
+        "block",
+        "review"
+      ]
+    },
     {
       "key": "block_links",
       "label": "拦截含外链评论",
@@ -23,19 +39,21 @@
     },
     {
       "key": "blacklist_words",
-      "label": "黑名单关键词",
+      "label": "黑名单关键词（逗号或空格分隔）",
       "type": "text",
       "default": ""
     },
     {
-      "key": "policy",
-      "label": "拦截策略",
-      "type": "select",
-      "default": "block",
-      "options": [
-        "block",
-        "review"
-      ]
+      "key": "ai_check",
+      "label": "AI 智能识别（需已在后台配置 AI；失败自动放行）",
+      "type": "switch",
+      "default": "off"
+    },
+    {
+      "key": "ai_model",
+      "label": "AI 模型（留空用第一个可用模型）",
+      "type": "text",
+      "default": ""
     }
   ]
 }
