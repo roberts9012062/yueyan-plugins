@@ -1,0 +1,21 @@
+{
+  "id": "comment-anti-spam",
+  "name": "评论反垃圾",
+  "version": "2.1.0",
+  "author": {
+    "name": "月言官方"
+  },
+  "description": "评论提交前多级反垃圾：黑名单词、外链拦截、AI 智能识别（可选），支持拒绝与留痕两种策略。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "hooks",
+    "ai",
+    "settings",
+    "data.read"
+  ],
+  "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+  ]
+}
