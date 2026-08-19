@@ -1,38 +1,39 @@
-# Cloudflare 图床
+# CF图床
 
-> 媒体上传直达 Cloudflare R2 对象存储：填 Workers URL 与 Key 配对即用，公开 URL 回站展示。免费。
+> 媒体上传直达 Cloudflare R2：配对即用、服务端压缩、后台图片管理与发帖图库联动。免费。
 
 ## 功能特性
 
 - **上传直达 R2**：配对后站点图片上传不再落本地磁盘，直接存入你的 Cloudflare R2 桶；
-- **公开 URL 回站**：R2 对象经 Worker 公开代理（`/f/{key}`，immutable 长缓存），帖子与媒体库直接引用；
-- **配对即用**：插件只需两步配置——Workers URL + API Key，保存后自动接管图片上传；
+- **后台图片管理**：侧栏「插件 → CF图床」网格浏览全部图片，点击/拖拽文件/拖拽文件夹上传，单选/批量删除；
+- **服务端压缩**：JPEG 质量（30-95）+ 最大边长等比缩放，参数在插件设置中调整（已达标的自动跳过）；
+- **发帖图库联动**：写一帖的图片弹窗内嵌"从 CF图床 选择"——点选已有图片插入正文；图片上传区支持拖拽多张/整个文件夹；
 - **平滑降级**：Worker 不可达或未配对时上传自动回退本地存储，站点不断图。
 
 ## 安装与配对（三步）
 
-1. **部署 Worker**：按 `worker/README.md` 部署参考实现到你的 Cloudflare 账号（创建 R2 桶 → `wrangler secret put API_KEY` → `wrangler deploy`）；
-2. **安装插件**：后台「插件商城」→「Cloudflare 图床」→ 免费安装；
-3. **填配对信息**：侧栏「插件 → Cloudflare 图床 → 设置」，填 Worker URL 与 API Key 保存。
-
-## 工作原理
-
-```
-发帖/媒体库上传图片
-  → boke 宿主（类型/大小白名单校验，与本地一致）
-    → 插件（media.storage 存储接缝接管）
-      → Worker POST /upload（Bearer API Key）
-        → R2 对象存储（yyyymm/随机名.jpg）
-          → 公开 URL 落库 media_assets，帖子展示直连
-```
-
-- 仅**图片**走图床（jpg/jpeg/png/gif/webp，≤10MB）；音频/视频仍走本地存储；
-- 插件停用/卸载即回归本地上传（接缝注册可逆），历史 R2 图片 URL 不受影响；
-- Worker 参考实现与部署配置在 [worker/](worker/README.md) 目录。
+1. **部署 Worker**：按 `worker/README.md` 部署参考实现到你的 Cloudflare 账号（或本机已登录 wrangler 时直接 `./scripts/deploy-image-worker.sh` 一键部署）；
+2. **安装插件**：后台「插件商城」→「CF图床」→ 免费安装；
+3. **填配对信息**：侧栏「插件 → CF图床 → 设置」，填访问域名与 API Key 保存。
 
 ## 配置说明
 
-| 设置项 | 说明 |
-|--------|------|
-| Workers URL | 部署的 Worker 地址（https:// 开头） |
-| API Key | Worker 的 `API_KEY` secret（`wrangler secret put API_KEY` 设置的值） |
+| 设置项 | 说明 | 默认 |
+|--------|------|------|
+| Workers URL | Worker 访问地址（建议自定义域） | 空 |
+| API Key | Worker 的 `API_KEY` secret | 空 |
+| 服务端压缩 | JPEG 质量/边长缩放总开关 | 开 |
+| JPEG 压缩质量 | 30-95 | 80 |
+| 最大边长像素 | 超出等比缩小；0=不缩放 | 1920 |
+
+## 权限说明
+
+- 图片列表（图库）：登录用户可查（发帖页选择器）；
+- 上传直传/批量删除：仅管理员（后台管理页）；
+- 常规发帖上传：登录用户（宿主媒体接口，经存储接缝直达 R2 并登记媒体库）。
+
+## 技术说明
+
+- 宿主经 `media.storage` 存储接缝接管上传（仅图片；音频/视频仍走本地）；
+- Worker API：`/health` `/upload` `/list` `/f/:key`（GET 公开读、DELETE 鉴权删）；
+- 压缩在插件进程内完成（JPEG 质量+缩放；PNG 缩放重编码；GIF/WebP 原样），两层压缩幂等。
