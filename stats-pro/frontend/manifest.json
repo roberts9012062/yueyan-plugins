@@ -1,0 +1,15 @@
+{
+  "extensionPoints": [
+    {
+      "slot": "post.footer",
+      "entry": "tracker.js",
+      "mode": "append"
+    }
+  ],
+  "pages": [
+    {
+      "route": "dashboard",
+      "entry": "dashboard-page.js"
+    }
+  ]
+}
