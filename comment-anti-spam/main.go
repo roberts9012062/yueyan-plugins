@@ -41,7 +41,7 @@ func (p *AntiSpamPlugin) Info() sdk.Info {
 			{Key: "block_links", Label: "拦截含外链评论", Type: "switch", Default: "on"},
 			{Key: "blacklist_words", Label: "黑名单关键词（逗号或空格分隔）", Type: "text", Default: ""},
 			{Key: "ai_check", Label: "AI 智能识别（需已在后台配置 AI；失败自动放行）", Type: "switch", Default: "off"},
-			{Key: "ai_model", Label: "AI 模型（留空用第一个可用模型）", Type: "text", Default: ""},
+			{Key: "ai_model", Label: "AI 模型（自动=第一个可用模型；选项来自后台 AI 设置）", Type: "select", Default: "auto", Options: aiModelOptions()},
 		},
 	}
 }
@@ -73,6 +73,35 @@ func (p *AntiSpamPlugin) Hooks() []sdk.Hook {
 			Handler: p.handleComment,
 		},
 	}
+}
+
+// aiModelAuto 下拉"自动"选项值（选中时 AI 判定取第一个可用模型）。
+const aiModelAuto = "auto"
+
+// aiModelOptions AI 模型下拉选项：经宿主数据服务读取后台 AI 设置已配置的模型
+// （GetAIModels 返回供应商分组，展开为平铺模型名列表并去重——多供应商可能配置
+// 同名模型）。数据服务未连接（插件启动初期的 Info 校验）或站点未配置 AI 时仅返回
+// "自动"一项——设置页打开时插件已 running，能拿到完整列表。
+func aiModelOptions() []string {
+	options := []string{aiModelAuto}
+	seen := map[string]bool{aiModelAuto: true}
+	svc := sdk.Data(context.Background())
+	if svc == nil {
+		return options
+	}
+	models, err := svc.GetAIModels(context.Background())
+	if err != nil {
+		return options
+	}
+	for _, group := range models {
+		for _, model := range group.Models {
+			if !seen[model] {
+				seen[model] = true
+				options = append(options, model)
+			}
+		}
+	}
+	return options
 }
 
 // handleComment 评论检测入口：解析载荷 → 多级检测 → 按策略放行/拒绝/留痕。
