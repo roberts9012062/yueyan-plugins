@@ -1,15 +1,34 @@
 {
   "id": "image-cdn",
-  "name": "图片 CDN",
-  "version": "1.0.3",
+  "name": "Cloudflare 图床",
+  "version": "2.0.0",
   "category": "performance",
   "price": 0,
   "installs": 9600,
-  "official": false,
-  "description": "自动压缩与边缘分发，加速封面与灯箱加载。",
+  "official": true,
+  "description": "媒体上传直达 Cloudflare R2 对象存储：填 Workers URL 与 Key 配对即用，公开 URL 回站展示。免费。",
   "capabilities": [
-    "frontend"
+    "settings"
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
-  "core_version": ">=0.1.0"
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugins/image-cdn/settings",
+    "label": "Cloudflare 图床",
+    "icon": "media"
+  },
+  "settings_schema": [
+    {
+      "key": "workers_url",
+      "label": "Workers URL（如 https://yueyan-image-bed.xxx.workers.dev）",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "api_key",
+      "label": "API Key（wrangler secret put API_KEY 设置的值）",
+      "type": "text",
+      "default": ""
+    }
+  ]
 }
