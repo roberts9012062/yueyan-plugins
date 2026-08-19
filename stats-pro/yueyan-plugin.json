@@ -1,0 +1,21 @@
+{
+  "id": "stats-pro",
+  "name": "站点统计增强",
+  "version": "1.5.0",
+  "author": {
+    "name": "月言官方"
+  },
+  "description": "访客 PV/UV 计数、热门内容排行与后台统计面板，比基础报表更细。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "api",
+    "frontend",
+    "settings",
+    "admin.page"
+  ],
+  "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+  ]
+}
