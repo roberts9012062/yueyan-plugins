@@ -1,26 +1,28 @@
 {
   "id": "image-cdn",
-  "name": "Cloudflare 图床",
-  "version": "2.0.0",
+  "name": "CF图床",
+  "version": "2.1.0",
   "category": "performance",
   "price": 0,
   "installs": 9600,
   "official": true,
-  "description": "媒体上传直达 Cloudflare R2 对象存储：填 Workers URL 与 Key 配对即用，公开 URL 回站展示。免费。",
+  "description": "媒体上传直达 Cloudflare R2：配对即用、服务端压缩、后台图片管理与发帖图库联动。免费。",
   "capabilities": [
-    "settings"
+    "settings",
+    "api",
+    "admin.page"
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
   "nav": {
-    "href": "/admin/plugins/image-cdn/settings",
-    "label": "Cloudflare 图床",
+    "href": "/admin/plugin-pages/image-cdn/library",
+    "label": "CF图床",
     "icon": "media"
   },
   "settings_schema": [
     {
       "key": "workers_url",
-      "label": "Workers URL（如 https://yueyan-image-bed.xxx.workers.dev）",
+      "label": "Workers URL（如 https://imgs.example.com）",
       "type": "text",
       "default": ""
     },
@@ -29,6 +31,24 @@
       "label": "API Key（wrangler secret put API_KEY 设置的值）",
       "type": "text",
       "default": ""
+    },
+    {
+      "key": "compress_enabled",
+      "label": "服务端压缩（JPEG 质量/边长缩放；已达标的自动跳过）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "compress_quality",
+      "label": "JPEG 压缩质量（30-95）",
+      "type": "text",
+      "default": "80"
+    },
+    {
+      "key": "max_dimension",
+      "label": "最大边长像素（超出等比缩小；0=不缩放）",
+      "type": "text",
+      "default": "1920"
     }
   ]
 }
