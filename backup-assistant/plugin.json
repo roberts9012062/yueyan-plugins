@@ -1,15 +1,47 @@
 {
   "id": "backup-assistant",
   "name": "备份助手",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "category": "ops",
-  "price": 19,
+  "price": 0,
   "installs": 4300,
-  "official": false,
-  "description": "定时导出内容与媒体，支持云端与本地双通道。",
+  "official": true,
+  "description": "媒体库定时/手动备份：ZIP 打包落盘 + 保留策略自动清理 + 完成通知 webhook（云端通道）。免费。",
   "capabilities": [
-    "settings"
+    "api",
+    "settings",
+    "admin.page"
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
-  "core_version": ">=0.1.0"
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugin-pages/backup-assistant/dashboard",
+    "label": "备份助手",
+    "icon": "backup"
+  },
+  "settings_schema": [
+    {
+      "key": "schedule",
+      "label": "定时备份（off=关闭，daily=每天，weekly=每周）",
+      "type": "select",
+      "default": "off",
+      "options": [
+        "off",
+        "daily",
+        "weekly"
+      ]
+    },
+    {
+      "key": "retention_count",
+      "label": "保留份数（超出自动清理最旧）",
+      "type": "text",
+      "default": "5"
+    },
+    {
+      "key": "webhook_url",
+      "label": "完成通知 webhook（POST 备份元信息，留空不通知）",
+      "type": "text",
+      "default": ""
+    }
+  ]
 }
