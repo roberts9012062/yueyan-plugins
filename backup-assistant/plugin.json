@@ -1,12 +1,12 @@
 {
   "id": "backup-assistant",
   "name": "备份助手",
-  "version": "1.2.0",
+  "version": "1.3.1",
   "category": "ops",
   "price": 0,
   "installs": 4300,
   "official": true,
-  "description": "媒体库定时/手动备份：ZIP 打包落盘 + 保留策略自动清理 + 完成通知 webhook（云端通道）。免费。",
+  "description": "全站备份：数据库（pg_dump）+ 媒体库 + 前端/后端源代码与构建产物；定点定时（每天/每周 HH:MM，错过自动补跑）+ 保留策略 + 完成通知。免费。",
   "capabilities": [
     "api",
     "settings",
@@ -14,6 +14,10 @@
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "fc9214fe4bea65b813711c8c5449b28b301c2fac005b04c39c5f8d2e7d1b7da7"
+  },
   "nav": {
     "href": "/admin/plugin-pages/backup-assistant/dashboard",
     "label": "备份助手",
@@ -30,6 +34,69 @@
         "daily",
         "weekly"
       ]
+    },
+    {
+      "key": "schedule_time",
+      "label": "备份时刻（HH:MM，24 小时制；错过的时刻启动后自动补跑）",
+      "type": "text",
+      "default": "03:00"
+    },
+    {
+      "key": "weekly_day",
+      "label": "每周备份日（仅每周调度生效；0=周日 … 6=周六）",
+      "type": "select",
+      "default": "0",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "key": "backup_db",
+      "label": "备份数据库（pg_dump -Fc；需本机有 pg_dump）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "backup_media",
+      "label": "备份媒体库（data/media 上传文件）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "backup_frontend",
+      "label": "备份前端（源代码 + .next 构建产物）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "backup_backend",
+      "label": "备份后端（Go 源代码 + server.exe 二进制）",
+      "type": "switch",
+      "default": "on"
+    },
+    {
+      "key": "pg_dump_path",
+      "label": "pg_dump 路径（留空=自动探测 PATH 与常见安装目录）",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "db_user",
+      "label": "备份专用数据库账号（留空=用宿主连接账号；建议只读账号）",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "db_password",
+      "label": "备份专用数据库密码（配合上方账号使用）",
+      "type": "text",
+      "default": ""
     },
     {
       "key": "retention_count",
