@@ -1,13 +1,19 @@
 // marketplace-repo/backup-assistant/main.go
-// 备份助手插件（进程外，免费）：媒体库定时/手动备份 + 保留策略 + 完成通知。
+// 备份助手插件（进程外，免费）：数据库 + 前端 + 后端全量定时/手动备份。
 //
 // 能力划分：
 //   - api：POST /run 立即备份、GET /history 备份历史（管理员）
-//   - settings：调度周期（off/daily/weekly）、保留份数、完成通知 webhook
-//   - admin.page：后台「备份助手」页（备份历史 + 立即备份按钮，见 frontend/）
+//   - settings：定点调度（每天/每周 HH:MM）、四类备份内容开关、pg_dump 路径、
+//     保留份数、完成通知 webhook
+//   - admin.page：后台「备份助手」页（备份历史 + 立即备份 + 下载，见 frontend/）
 //
-// 说明：备份对象为站点媒体库（data/media 目录打包 ZIP）；「云端通道」以完成通知
-// webhook 实现（备份完成后 POST 元信息到站长配置的地址，可对接网盘/群机器人）。
+// 备份对象（v1.3.0 起，均可独立开关）：
+//   - 数据库：pg_dump -Fc（连接信息取宿主环境变量/.env；pg_restore 可恢复）
+//   - 媒体库：data/media 目录
+//   - 前端：frontend 源代码（排除 node_modules/.next）+ .next 构建产物（排除 cache）
+//   - 后端：Go 源代码（cmd/internal/pkg/db/scripts 等）+ server.exe 二进制
+//
+// 「云端通道」以完成通知 webhook 实现（备份完成后 POST 元信息到站长配置的地址）。
 package main
 
 import (
@@ -21,8 +27,11 @@ import (
 	"github.com/roberts9012062/boke/pkg/plugin-sdk/server"
 )
 
-// pluginID 插件唯一 ID（与 plugin.json / yueyan-plugin.json 一致）。
-const pluginID = "backup-assistant"
+// 插件唯一 ID 与版本（与 plugin.json / yueyan-plugin.json 一致）。
+const (
+	pluginID      = "backup-assistant"
+	pluginVersion = "1.3.1"
+)
 
 // scheduleTick 调度巡检间隔（分钟级精度足够；每次巡检重读配置——设置变更无需重启）。
 const scheduleTick = time.Minute
@@ -41,12 +50,21 @@ func (p *BackupPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:           pluginID,
 		Name:         "备份助手",
-		Version:      "1.2.0",
+		Version:      pluginVersion,
 		Author:       "月言官方",
-		Description:  "媒体库定时/手动备份：ZIP 打包落盘 + 保留策略自动清理 + 完成通知 webhook（云端通道）。免费。",
+		Description:  "全站备份：数据库（pg_dump）+ 媒体库 + 前端/后端源代码与构建产物；定点定时（每天/每周 HH:MM，错过自动补跑）+ 保留策略 + 完成通知。免费。",
 		Capabilities: []string{"api", "settings", "admin.page"},
 		Settings: []sdk.SettingField{
 			{Key: "schedule", Label: "定时备份（off=关闭，daily=每天，weekly=每周）", Type: "select", Default: "off", Options: []string{"off", "daily", "weekly"}},
+			{Key: "schedule_time", Label: "备份时刻（HH:MM，24 小时制；错过的时刻启动后自动补跑）", Type: "text", Default: "03:00"},
+			{Key: "weekly_day", Label: "每周备份日（仅每周调度生效；0=周日 … 6=周六）", Type: "select", Default: "0", Options: []string{"0", "1", "2", "3", "4", "5", "6"}},
+			{Key: "backup_db", Label: "备份数据库（pg_dump -Fc；需本机有 pg_dump）", Type: "switch", Default: "on"},
+			{Key: "backup_media", Label: "备份媒体库（data/media 上传文件）", Type: "switch", Default: "on"},
+			{Key: "backup_frontend", Label: "备份前端（源代码 + .next 构建产物）", Type: "switch", Default: "on"},
+			{Key: "backup_backend", Label: "备份后端（Go 源代码 + server.exe 二进制）", Type: "switch", Default: "on"},
+			{Key: "pg_dump_path", Label: "pg_dump 路径（留空=自动探测 PATH 与常见安装目录）", Type: "text", Default: ""},
+			{Key: "db_user", Label: "备份专用数据库账号（留空=用宿主连接账号；建议只读账号）", Type: "text", Default: ""},
+			{Key: "db_password", Label: "备份专用数据库密码（配合上方账号使用）", Type: "text", Default: ""},
 			{Key: "retention_count", Label: "保留份数（超出自动清理最旧）", Type: "text", Default: "5"},
 			{Key: "webhook_url", Label: "完成通知 webhook（POST 备份元信息，留空不通知）", Type: "text", Default: ""},
 		},
@@ -121,7 +139,7 @@ func (p *BackupPlugin) stopScheduler() {
 	}
 }
 
-// runDueBackup 到点备份判定：调度开启且距上次成功备份超过周期则执行。
+// runDueBackup 到点备份判定：定点调度开启且上次成功备份早于最近应跑时刻则执行。
 // 失败不记录 last_run（下个巡检周期重试），错误写 stderr 便于排查。
 func (p *BackupPlugin) runDueBackup() {
 	store := p.storeSafe()
@@ -129,13 +147,11 @@ func (p *BackupPlugin) runDueBackup() {
 		return
 	}
 	cfg := sdk.Config(context.Background())
-	interval, ok := scheduleInterval(cfg["schedule"])
-	if !ok {
-		return // off / 非法值：不调度
-	}
+	c := clockOrDefault(cfg["schedule_time"])
+	day := weeklyDayOrDefault(cfg["weekly_day"])
 	state, _ := store.loadState()
-	if time.Since(state.LastRun) < interval {
-		return
+	if !dueForBackup(time.Now(), state.LastRun, cfg["schedule"], day, c) {
+		return // off / 未到点 / 今日已备份
 	}
 	if _, err := store.runBackup(cfg); err != nil {
 		fmt.Fprintln(os.Stderr, "[backup-assistant] 定时备份失败：", err)
@@ -143,22 +159,10 @@ func (p *BackupPlugin) runDueBackup() {
 	}
 }
 
-// scheduleInterval 调度周期换算（off 或非法值返回 false；纯函数）。
-func scheduleInterval(schedule string) (time.Duration, bool) {
-	switch schedule {
-	case "daily":
-		return 24 * time.Hour, true
-	case "weekly":
-		return 7 * 24 * time.Hour, true
-	default:
-		return 0, false
-	}
-}
-
 // RegisterAPI 自定义 API（宿主挂 /api/v1/plugins/backup-assistant/**；管理端点统一 TrustedCaller 拦截）：
 //
-//	POST /run      立即备份 → {file, size, created_at} 或 {error}
-//	GET  /history  备份历史 + 调度状态 → {items, schedule, last_run}
+//	POST /run      立即备份 → {file, size, created_at, parts} 或 {error}
+//	GET  /history  备份历史 + 调度状态 → {items, schedule, schedule_time, ...}
 func (p *BackupPlugin) RegisterAPI(api *sdk.APIMux) {
 	api.Handle("POST", "/run", p.handleRun)
 	api.Handle("GET", "/history", p.handleHistory)
