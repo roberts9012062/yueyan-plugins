@@ -27,5 +27,10 @@
       "type": "switch",
       "default": "on"
     }
-  ]
+  ],
+  "assets": {
+    "sha256_by_platform": {
+      "linux-arm64": "0fb1f7cc8a5cc10bd4e5f93373a5f416ce7c1345e90b9584d4567b26e1126ede"
+    }
+  }
 }
