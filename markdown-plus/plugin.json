@@ -50,6 +50,7 @@
   "assets": {
     "sha256_by_platform": {
       "linux-arm64": "2881eccb16908aa264d59ed8e46bd9a7970e3d98dc05c151c88c2e8199187930"
-    }
+    },
+    "pattern": "{id}-{version}-{os}-{arch}.bpk"
   }
 }
