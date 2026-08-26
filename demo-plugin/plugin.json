@@ -17,6 +17,10 @@
   "core_version": ">=0.1.0",
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "2b94a010b8ff25afbae89a1111e383d1fe810c68448db7d60539b4efa7d850e5"
+    "sha256": "2b94a010b8ff25afbae89a1111e383d1fe810c68448db7d60539b4efa7d850e5",
+    "sha256_by_platform": {
+      "linux-arm64": "bd5d0b25b99d99d644ddc78b5ac104d9db735b0c74944bb7a05bc5a23c43a1d9",
+      "windows-amd64": "2b94a010b8ff25afbae89a1111e383d1fe810c68448db7d60539b4efa7d850e5"
+    }
   }
 }
