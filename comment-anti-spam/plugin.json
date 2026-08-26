@@ -58,5 +58,10 @@
         "auto"
       ]
     }
-  ]
+  ],
+  "assets": {
+    "sha256_by_platform": {
+      "linux-arm64": "4cde8c3576ca19c787aad779346792aeb7921b666c0283ed230a0eb23940c67e"
+    }
+  }
 }
