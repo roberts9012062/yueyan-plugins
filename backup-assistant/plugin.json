@@ -16,7 +16,11 @@
   "core_version": ">=0.1.0",
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "fc9214fe4bea65b813711c8c5449b28b301c2fac005b04c39c5f8d2e7d1b7da7"
+    "sha256": "fc9214fe4bea65b813711c8c5449b28b301c2fac005b04c39c5f8d2e7d1b7da7",
+    "sha256_by_platform": {
+      "windows-amd64": "fc9214fe4bea65b813711c8c5449b28b301c2fac005b04c39c5f8d2e7d1b7da7",
+      "linux-arm64": "ae2cd176654b45eedfcc4fd7f8746e505efeb0313bd31f9b0315f3ba4232a176"
+    }
   },
   "nav": {
     "href": "/admin/plugin-pages/backup-assistant/dashboard",
