@@ -42,6 +42,10 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "e7d1ffc6f8f25ca5c6dc47ea3b93c9c7174dce4c28c61a54e329844b53d41afd"
+    "sha256": "e7d1ffc6f8f25ca5c6dc47ea3b93c9c7174dce4c28c61a54e329844b53d41afd",
+    "sha256_by_platform": {
+      "windows-amd64": "e7d1ffc6f8f25ca5c6dc47ea3b93c9c7174dce4c28c61a54e329844b53d41afd",
+      "linux-arm64": "fec598efb7e1dd36781aca9002f49ef9722728c752dd7af49f47894edd9ab249"
+    }
   }
 }
