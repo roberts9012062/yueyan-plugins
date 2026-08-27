@@ -1,7 +1,7 @@
 {
   "id": "bilibili-video",
   "name": "B站视频",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
@@ -42,10 +42,10 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "e7d1ffc6f8f25ca5c6dc47ea3b93c9c7174dce4c28c61a54e329844b53d41afd",
+    "sha256": "967c7e5e3873ec8ed4126c63f40d01f704a75a0677d62fcd233bd7ba11f65870",
     "sha256_by_platform": {
-      "windows-amd64": "e7d1ffc6f8f25ca5c6dc47ea3b93c9c7174dce4c28c61a54e329844b53d41afd",
-      "linux-arm64": "fec598efb7e1dd36781aca9002f49ef9722728c752dd7af49f47894edd9ab249"
+      "windows-amd64": "967c7e5e3873ec8ed4126c63f40d01f704a75a0677d62fcd233bd7ba11f65870",
+      "linux-arm64": "ee43fce3fd154f4a1f8caaf3f525d578095a6f51c654f8e11d21a0de9fb1c19c"
     }
   }
 }
