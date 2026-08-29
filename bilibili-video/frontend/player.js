@@ -101,10 +101,16 @@ export default function register(ctx) {
   // 清晰度由 B 站播放器内选择（浏览器已登录 B 站则可用登录态看高清）。
   const renderOfficial = () => {
     playing = true;
+    // has_head=0 隐藏 B 站自带头部（其标题配色在跨域 iframe 内不受本站控制，
+    // 深色站点下观感差）——标题条改为本站自绘：白色标题 + 浅灰副题，配色可控
     box.innerHTML =
       '<iframe src="https://player.bilibili.com/player.html?bvid=' + escapeHtml(bvid) +
-      '&page=1&high_quality=1&danmaku=0&autoplay=0" scrolling="no" frameborder="no" framespacing="0" allowfullscreen="true" ' +
-      'style="display:block;width:100%;aspect-ratio:16/9;border:none" title="B站视频"></iframe>';
+      '&page=1&high_quality=1&danmaku=0&autoplay=0&has_head=0" scrolling="no" frameborder="no" framespacing="0" allowfullscreen="true" ' +
+      'style="display:block;width:100%;aspect-ratio:16/9;border:none" title="B站视频"></iframe>' +
+      '<div style="padding:10px 14px;display:flex;flex-direction:column;gap:2px;background:var(--yy-card,#161c2b)">' +
+      '<p style="margin:0;font-size:14px;font-weight:600;color:#ffffff;line-height:1.5">' + escapeHtml(String(props.title || bvid)) + '</p>' +
+      '<p style="margin:0;font-size:12px;color:#c9d3e6">UP：' + escapeHtml(String(props.author || "未知")) + ' · 哔哩哔哩</p>' +
+      "</div>";
   };
 
   // renderShell 初始渲染（封面卡片 + 信息栏 + 菜单 + 弹层骨架 + 挂载校验）：
