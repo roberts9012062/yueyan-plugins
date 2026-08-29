@@ -64,6 +64,12 @@ func (p *BilibiliPlugin) registerVideoAPI(api *sdk.APIMux) {
 		if err := json.Unmarshal(body, &req); err != nil || req.Bvid == "" || req.Cid == 0 {
 			return 400, jsonResp(map[string]any{"error": "缺少 bvid / cid"}), nil
 		}
+		// 官方嵌入模式（全站设置 player_mode=official）：短路返回模式标记，不解析
+		// 真实流地址——前端据此换 B 站官方 iframe 播放器（浏览器直连 B 站 CDN，
+		// 国内速度快；清晰度由 B 站播放器控制，浏览器 B 站登录态可用）
+		if sdk.Config(ctx)["player_mode"] == "official" {
+			return 200, jsonResp(map[string]any{"player_mode": "official"}), nil
+		}
 		if req.Qn != bilibili.QN360 && req.Qn != bilibili.QN480 && req.Qn != bilibili.QN720 && req.Qn != bilibili.QN1080 {
 			req.Qn = bilibili.QN480
 		}
@@ -74,6 +80,8 @@ func (p *BilibiliPlugin) registerVideoAPI(api *sdk.APIMux) {
 		return 200, jsonResp(map[string]any{
 			"quality": info.Quality, "quality_desc": bilibili.QualityDesc(info.Quality),
 			"durl": info.Durl, "dash": info.Dash, "timelength": info.Timelength, "source": source,
+			// qualities 全档位表：老文章块 props 未存清晰度表时前端据此补全菜单
+			"qualities": qualityTable(),
 		}), nil
 	})
 

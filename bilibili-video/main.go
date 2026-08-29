@@ -38,7 +38,7 @@ func (p *BilibiliPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "B站视频",
-		Version:     "0.1.2",
+		Version:     "0.1.9",
 		Author:      "月言官方",
 		Description: "B站视频嵌入：站长扫码登录后，发帖可插入 B 站视频并选择 360P~1080P 清晰度，游客可观看高清。",
 		Capabilities: []string{"hooks", "api", "frontend", "settings", "admin.page"},
@@ -46,6 +46,8 @@ func (p *BilibiliPlugin) Info() sdk.Info {
 			{Key: "default_quality", Label: "默认清晰度", Type: "select", Default: "80",
 				Options: []string{"16", "32", "64", "80"}},
 			{Key: "allow_guest_hd", Label: "允许游客用站长账号看高清", Type: "switch", Default: "on"},
+			{Key: "player_mode", Label: "播放器模式", Type: "select", Default: "custom",
+				Options: []string{"custom", "official"}},
 		},
 	}
 }

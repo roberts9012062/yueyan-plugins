@@ -1,7 +1,7 @@
 {
   "id": "bilibili-video",
   "name": "B站视频",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
@@ -38,14 +38,24 @@
       "label": "允许游客用站长账号看高清",
       "type": "switch",
       "default": "on"
+    },
+    {
+      "key": "player_mode",
+      "label": "播放器模式",
+      "type": "select",
+      "default": "custom",
+      "options": [
+        "custom",
+        "official"
+      ]
     }
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "53878f31d3ecb8fdc1e73bae23b449fe69257ebc79671d5d0ab8b5da6c289d76",
+    "sha256": "f4491c65f39e98c1a3394efd2614bf9269938ebf3c90bb9b82fa68ef1156d39f",
     "sha256_by_platform": {
-      "windows-amd64": "53878f31d3ecb8fdc1e73bae23b449fe69257ebc79671d5d0ab8b5da6c289d76",
-      "linux-arm64": "013f5b6cb9ac994a7e2b4411096bf72df6830ad073cc566b99a49f59bbba9eff"
+      "windows-amd64": "f4491c65f39e98c1a3394efd2614bf9269938ebf3c90bb9b82fa68ef1156d39f",
+      "linux-arm64": "476dee37af5305a348e1d4e2f34b94bceb594a7e7345ff189aa0f02e9c7b3e0e"
     }
   }
 }

@@ -12,6 +12,21 @@ import { playDash } from "./dash-player.js?v=6"; // 版本参数：绕模块图�
 const BRIDGE = "/api/v1/video/bilibili";
 const TOKEN_KEY = "yueyan-bilibili-guest-token";
 const NAME_KEY = "yueyan-bilibili-guest-name";
+const MODE_KEY = "yueyan-bilibili-player-mode";
+const MODE_TTL = 30 * 60 * 1000; // 官方模式记忆有效期（ms）：过期后重新经 /url 校验设置，站长切回 custom 能自动恢复
+
+// readMode 读取播放器模式记忆（会话级；TTL 内免 /url 直接官方嵌入，过期回退自研流程）。
+function readMode() {
+  try {
+    const raw = JSON.parse(sessionStorage.getItem(MODE_KEY) || "null");
+    if (raw && raw.mode === "official" && Date.now() - Number(raw.ts) < MODE_TTL) {
+      return "official";
+    }
+  } catch (e) {
+    /* 解析异常按无记忆处理 */
+  }
+  return "custom";
+}
 
 // bridgeCall 调用宿主公开桥接端点（POST JSON；返回解析后的 JSON）。
 async function bridgeCall(path, body) {
@@ -82,6 +97,24 @@ export default function register(ctx) {
     return Boolean(q && q.need_login);
   };
 
+  // renderOfficial B 站官方嵌入播放器（iframe）：浏览器直连 B 站 CDN，国内速度快；
+  // 清晰度由 B 站播放器内选择（浏览器已登录 B 站则可用登录态看高清）。
+  const renderOfficial = () => {
+    playing = true;
+    box.innerHTML =
+      '<iframe src="https://player.bilibili.com/player.html?bvid=' + escapeHtml(bvid) +
+      '&page=1&high_quality=1&danmaku=0&autoplay=0" scrolling="no" frameborder="no" framespacing="0" allowfullscreen="true" ' +
+      'style="display:block;width:100%;aspect-ratio:16/9;border:none" title="B站视频"></iframe>';
+  };
+
+  // 官方嵌入模式（/url 下发 + 会话记忆）：直接 iframe，不走封面点击/解析流程。
+  if (readMode() === "official") {
+    renderOfficial();
+    return () => {
+      box.remove();
+    };
+  }
+
   // playQn 解析并播放指定清晰度。
   const playQn = async (qn) => {
     const stage = box.querySelector("[data-stage]");
@@ -96,12 +129,24 @@ export default function register(ctx) {
         tip.textContent = r.error;
         return;
       }
+      // 官方嵌入模式（全站设置下发）：记忆后换 iframe（本次解析结果弃用）
+      if (r.player_mode === "official") {
+        sessionStorage.setItem(MODE_KEY, JSON.stringify({ mode: "official", ts: Date.now() }));
+        renderOfficial();
+        return;
+      }
       currentQn = Number(r.quality) || qn;
       durlList = Array.isArray(r.durl) ? r.durl : [];
       dashGroup = r.dash || null;
       segIndex = 0;
-      if (menuPending && Array.isArray(r.qualities) && r.qualities.length > 0) {
-        qualities.push(...r.qualities);
+      // 菜单档位补全：老文章块 props 未存清晰度表（或存的是旧版低档表）时，
+      // 以 /url 响应的全档位表合并补充（按 qn 去重，保留 need_login 标注）
+      if (Array.isArray(r.qualities) && r.qualities.length > 0) {
+        for (const q of r.qualities) {
+          if (!qualities.some((it) => Number(it.qn) === Number(q.qn))) {
+            qualities.push(q);
+          }
+        }
         menuPending = false;
       }
       renderMenu();
