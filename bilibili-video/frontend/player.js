@@ -6,7 +6,7 @@
 // ctx: { slot: "block:bilibili", el, api, user, props: {bvid,cid,title,cover,author,duration,quality,qualities} }
 // 说明：播放/扫码走宿主公开桥接（匿名访客可用），不经 ctx.api（其需宿主登录）。
 import { escapeHtml } from "/plugin-sdk/shared.js";
-import { playDash } from "./dash-player.js?v=2"; // 版本参数：绕模块图缓存（升级必改）
+import { playDash } from "./dash-player.js?v=6"; // 版本参数：绕模块图缓存（升级必改）
 
 // 公开桥接前缀与游客 token 存储键。
 const BRIDGE = "/api/v1/video/bilibili";
@@ -51,6 +51,8 @@ export default function register(ctx) {
   const cid = Number(props.cid) || 0;
   const qualities = Array.isArray(props.qualities) ? props.qualities : [];
 
+  // 补全标记：嵌入块缺清晰度表（接口发帖场景）时，首次 /url 响应附带表补全菜单
+  let menuPending = qualities.length === 0;
   let selectedQn = Number(props.quality) || 32; // 用户选择的清晰度（菜单高亮）
   let currentQn = selectedQn; // 实际播放的清晰度（B 站按身份自动降级后的值）
   let guestToken = localStorage.getItem(TOKEN_KEY) || "";
@@ -60,6 +62,7 @@ export default function register(ctx) {
   let dashGroup = null;
   let dashStop = null; // DASH 播放控制器（中断/清理）
   let segIndex = 0;
+  let pendingPlayTip = ""; // MSE 装载完成（真正出图）后的提示条文案
   let pollTimer = null;
 
   const box = document.createElement("div");
@@ -97,11 +100,21 @@ export default function register(ctx) {
       durlList = Array.isArray(r.durl) ? r.durl : [];
       dashGroup = r.dash || null;
       segIndex = 0;
+      if (menuPending && Array.isArray(r.qualities) && r.qualities.length > 0) {
+        qualities.push(...r.qualities);
+        menuPending = false;
+      }
+      renderMenu();
       renderVideo(qn);
       // 提示条报实际播放档位；与所选不一致时说明降级原因
       const srcNote = r.source === "guest" ? "（你的 B 站账号）" : r.source === "admin" ? "" : "（未登录 B 站）";
       const downgrade = currentQn !== qn ? "，已自动降级" : "";
-      tip.textContent = "正在播放 " + escapeHtml(String(r.quality_desc || fmtDesc(currentQn))) + downgrade + " " + srcNote;
+      pendingPlayTip = "正在播放 " + String(r.quality_desc || fmtDesc(currentQn)) + downgrade + " " + srcNote;
+      // DASH 走 MSE 渐进装载：装载期间提示「正在缓冲」，画面出图（playing）后切换文案；
+      // durl 直连即点即播，直接展示最终文案
+      if (!dashGroup) {
+        tip.textContent = pendingPlayTip;
+      }
       renderMenu();
     } catch (e) {
       tip.textContent = "解析失败：" + String(e);
@@ -123,11 +136,34 @@ export default function register(ctx) {
     video.playsInline = true;
     video.preload = "auto";
     video.style.cssText = "display:block;width:100%;aspect-ratio:16/9;background:#000";
-    if (dashGroup) {
-      // DASH：先挂载元素再装载（MediaSource 对 detached 元素行为不稳，实测必须先入 DOM）
+    if (dashGroup && durlList.length === 0) {
+      // DASH（1080P 高清仅有此形态）：先挂载元素再装载（MediaSource 对 detached 元素行为不稳，实测必须先入 DOM）
       stage.appendChild(video);
+      // 装载期间提示缓冲（低速中转链路起播需数十秒，避免"正在播放"误导黑屏等待）
+      const bufferTip = box.querySelector("[data-tip]");
+      if (bufferTip) {
+        bufferTip.textContent = "正在缓冲 " + fmtDesc(targetQn) + "…（首次缓冲可能需要一点时间）";
+      }
+      video.addEventListener("playing", () => {
+        const t = box.querySelector("[data-tip]");
+        if (t) {
+          t.textContent = pendingPlayTip;
+        }
+      }, { once: true });
+      let degraded = false;
       const controller = playDash(video, dashGroup, targetQn, proxyStreamURL, (msg) => {
         const t = box.querySelector("[data-tip]");
+        // 1080P MSE 解码失败时自动降级 720P（浏览器直连 durl，体验兜底不黑屏）
+        if (!degraded && targetQn === 80) {
+          degraded = true;
+          if (t) {
+            t.textContent = msg + "，自动切换 720P…";
+          }
+          selectedQn = 64;
+          renderMenu();
+          playQn(64);
+          return;
+        }
         if (t) {
           t.textContent = msg;
         }
@@ -141,23 +177,39 @@ export default function register(ctx) {
         }
       });
     } else {
-      // mp4 durl：同源流代理直连 + 多段顺序播放
+      // mp4 durl：浏览器直连 B 站 CDN（no-referrer 绕防盗链；<video> 媒体元素
+      // 不受 CORS 限制）——视频流量不经站长安服务器中转；直连被拦时回落同源代理
+      const playSeg = (seg, viaProxy) => {
+        video.referrerPolicy = "no-referrer";
+        video.src = viaProxy ? proxyStreamURL(seg.url) : seg.url;
+        video.play().catch(() => {}); // autoplay 被策略阻止时用户经原生控件播放
+        return viaProxy;
+      };
+      let viaProxy = false;
       video.autoplay = true;
-      video.src = proxyStreamURL(durlList[segIndex].url);
+      playSeg(durlList[segIndex], false);
       video.addEventListener("ended", () => {
         segIndex++;
         if (segIndex < durlList.length) {
-          video.src = proxyStreamURL(durlList[segIndex].url);
-          video.play().catch(() => {});
+          playSeg(durlList[segIndex], viaProxy);
         }
       });
       video.addEventListener("error", () => {
+        // 直连被 CDN/旧页面 CSP 拦截时一次性回落服务器代理重试（自愈，无需刷新）
+        if (!viaProxy) {
+          viaProxy = true;
+          const t = box.querySelector("[data-tip]");
+          if (t) {
+            t.textContent = "直连受限，已切换服务器代理通道…";
+          }
+          playSeg(durlList[segIndex], true);
+          return;
+        }
         const t = box.querySelector("[data-tip]");
         if (t) {
           t.textContent = "播放失败（地址可能过期），请切换清晰度重试";
         }
       });
-      video.play().catch(() => {}); // autoplay 被策略阻止时用户经原生控件播放
       stage.appendChild(video);
     }
   };

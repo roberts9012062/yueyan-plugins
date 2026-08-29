@@ -94,8 +94,8 @@ func (c *Client) View(bvid string) (*VideoInfo, error) {
 }
 
 // PlayURL 解析播放地址（qn 目标清晰度；extraCookies 为空时用站长会话，非空则优先用之）。
-// 走 html5 平台端点 + fnval=16（DASH）：免 WBI 签名；匿名可达 720P，登录可达 1080P
-// （实测 mp4/durl 路径上限 720P，1080P 仅有 DASH 形态）；B 站在身份不满足目标
+// 走 pc 平台端点 + fnval=16（DASH）：免 WBI 签名；匿名可达 480P，登录可达 1080P
+// （html5 平台只回 mp4 durl 上限 720P 且忽略 fnval 不回 DASH；1080P 仅 DASH 形态）；B 站在身份不满足目标
 // 清晰度时自动降级（quality 字段为实际档位）。
 func (c *Client) PlayURL(bvid string, cid int64, qn int, extraCookies []*http.Cookie) (*PlayInfo, error) {
 	cookies := extraCookies
@@ -107,7 +107,7 @@ func (c *Client) PlayURL(bvid string, cid int64, qn int, extraCookies []*http.Co
 	params.Set("cid", strconv.FormatInt(cid, 10))
 	params.Set("qn", strconv.Itoa(qn))
 	params.Set("fnval", "16") // DASH（音视频分离 m4s，经前端 MSE 播放）
-	params.Set("platform", "html5")
+	params.Set("platform", "pc")
 	params.Set("high_quality", "1")
 	raw, err := c.getJSON(apiBase+"/x/player/playurl?"+params.Encode(), cookies)
 	if err != nil {
