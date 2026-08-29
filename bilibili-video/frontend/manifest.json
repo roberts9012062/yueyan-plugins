@@ -9,7 +9,7 @@
   "blocks": [
     {
       "type": "bilibili",
-      "entry": "player.js?v=3"
+      "entry": "player.js?v=7"
     }
   ]
 }

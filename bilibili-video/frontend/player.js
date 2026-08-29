@@ -107,14 +107,57 @@ export default function register(ctx) {
       'style="display:block;width:100%;aspect-ratio:16/9;border:none" title="B站视频"></iframe>';
   };
 
-  // 官方嵌入模式（/url 下发 + 会话记忆）：直接 iframe，不走封面点击/解析流程。
-  if (readMode() === "official") {
-    renderOfficial();
-    return () => {
-      box.remove();
-    };
-  }
+  // renderShell 初始渲染（封面卡片 + 信息栏 + 菜单 + 弹层骨架 + 挂载校验）：
+  // 独立成函数——官方模式记忆验证失败（后台已切回 custom）时需重建整套封面流程。
+  const renderShell = () => {
+    // 重置播放态（官方分支可能已置 playing=true——恢复封面后点击需可重新触发解析）
+    playing = false;
+    // 初始渲染：封面卡片 + 信息栏 + 菜单 + 弹层骨架。
+    box.innerHTML =
+      '<div data-stage style="position:relative;cursor:pointer">' +
+      '<img src="' + escapeHtml(proxyImageURL(props.cover)) + '" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000">' +
+      '<span style="position:absolute;right:8px;bottom:8px;padding:2px 8px;border-radius:6px;font-size:12px;color:#fff;background:rgba(0,0,0,.6)">' + escapeHtml(formatDuration(props.duration)) + "</span>" +
+      '<span data-play-btn style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:rgba(255,255,255,.92);background:rgba(0,0,0,.18);transition:background .2s">▶</span></div>' +
+      '<div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px">' +
+      '<div><p style="font-size:14px;font-weight:600;color:var(--yy-text,#e8ecf4);line-height:1.5">' + escapeHtml(String(props.title || bvid)) + "</p>" +
+      '<p style="margin-top:2px;font-size:12px;color:var(--yy-text-2,#9aa6bc)">UP：' + escapeHtml(String(props.author || "未知")) + " · 哔哩哔哩</p></div>" +
+      '<div data-menu></div>' +
+      '<p data-tip style="font-size:12px;color:var(--yy-text-3,#9aa6bc);min-height:16px"></p></div>' +
+      '<div data-qr-overlay style="display:none;position:absolute;inset:0;z-index:5;align-items:center;justify-content:center;background:rgba(10,14,22,.92)">' +
+      '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;border-radius:12px;background:var(--yy-card,#161c2b);border:1px solid var(--yy-border,#2a3348)">' +
+      '<div data-qr-img style="display:flex;align-items:center;justify-content:center;width:196px;height:196px;border-radius:8px;background:#fff"></div>' +
+      '<p data-qr-status style="font-size:12px;color:var(--yy-text-2,#9aa6bc)">请用「哔哩哔哩」App 扫码</p>' +
+      '<button type="button" data-qr-close style="height:30px;padding:0 14px;border-radius:999px;font-size:12px;color:var(--yy-text,#e8ecf4);background:transparent;border:1px solid var(--yy-border,#2a3348);cursor:pointer">关闭</button>' +
+      "</div></div>";
 
+    box.style.position = "relative"; // 弹层定位基准
+    box.querySelector("[data-play-btn]").addEventListener("click", () => {
+      if (!playing) {
+        playQn(selectedQn);
+      }
+    });
+    box.querySelector("[data-qr-close]").addEventListener("click", () => {
+      if (pollTimer) {
+        clearInterval(pollTimer);
+        pollTimer = null;
+      }
+      box.querySelector("[data-qr-overlay]").style.display = "none";
+    });
+    renderMenu();
+
+    // 挂载时有 token 先校验有效性（失效静默清除，菜单回退「需登录」标注）。
+    if (guestToken) {
+      bridgeCall("/guest-status", { guest_token: guestToken }).then((r) => {
+        if (!r || r.valid === false) {
+          guestToken = "";
+          guestName = "";
+          localStorage.removeItem(TOKEN_KEY);
+          localStorage.removeItem(NAME_KEY);
+          renderMenu();
+        }
+      }).catch(() => {});
+    }
+  };
   // playQn 解析并播放指定清晰度。
   const playQn = async (qn) => {
     const stage = box.querySelector("[data-stage]");
@@ -356,51 +399,25 @@ export default function register(ctx) {
     }
   };
 
-  // 初始渲染：封面卡片 + 信息栏 + 菜单 + 弹层骨架。
-  box.innerHTML =
-    '<div data-stage style="position:relative;cursor:pointer">' +
-    '<img src="' + escapeHtml(proxyImageURL(props.cover)) + '" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000">' +
-    '<span style="position:absolute;right:8px;bottom:8px;padding:2px 8px;border-radius:6px;font-size:12px;color:#fff;background:rgba(0,0,0,.6)">' + escapeHtml(formatDuration(props.duration)) + "</span>" +
-    '<span data-play-btn style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:rgba(255,255,255,.92);background:rgba(0,0,0,.18);transition:background .2s">▶</span></div>' +
-    '<div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px">' +
-    '<div><p style="font-size:14px;font-weight:600;color:var(--yy-text,#e8ecf4);line-height:1.5">' + escapeHtml(String(props.title || bvid)) + "</p>" +
-    '<p style="margin-top:2px;font-size:12px;color:var(--yy-text-2,#9aa6bc)">UP：' + escapeHtml(String(props.author || "未知")) + " · 哔哩哔哩</p></div>" +
-    '<div data-menu></div>' +
-    '<p data-tip style="font-size:12px;color:var(--yy-text-3,#9aa6bc);min-height:16px"></p></div>' +
-    '<div data-qr-overlay style="display:none;position:absolute;inset:0;z-index:5;align-items:center;justify-content:center;background:rgba(10,14,22,.92)">' +
-    '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;border-radius:12px;background:var(--yy-card,#161c2b);border:1px solid var(--yy-border,#2a3348)">' +
-    '<div data-qr-img style="display:flex;align-items:center;justify-content:center;width:196px;height:196px;border-radius:8px;background:#fff"></div>' +
-    '<p data-qr-status style="font-size:12px;color:var(--yy-text-2,#9aa6bc)">请用「哔哩哔哩」App 扫码</p>' +
-    '<button type="button" data-qr-close style="height:30px;padding:0 14px;border-radius:999px;font-size:12px;color:var(--yy-text,#e8ecf4);background:transparent;border:1px solid var(--yy-border,#2a3348);cursor:pointer">关闭</button>' +
-    "</div></div>";
-
-  box.style.position = "relative"; // 弹层定位基准
-  box.querySelector("[data-play-btn]").addEventListener("click", () => {
-    if (!playing) {
-      playQn(selectedQn);
-    }
-  });
-  box.querySelector("[data-qr-close]").addEventListener("click", () => {
-    if (pollTimer) {
-      clearInterval(pollTimer);
-      pollTimer = null;
-    }
-    box.querySelector("[data-qr-overlay]").style.display = "none";
-  });
-  renderMenu();
-
-  // 挂载时有 token 先校验有效性（失效静默清除，菜单回退「需登录」标注）。
-  if (guestToken) {
-    bridgeCall("/guest-status", { guest_token: guestToken }).then((r) => {
-      if (!r || r.valid === false) {
-        guestToken = "";
-        guestName = "";
-        localStorage.removeItem(TOKEN_KEY);
-        localStorage.removeItem(NAME_KEY);
-        renderMenu();
+  // 官方嵌入模式（会话记忆 + 挂载验证）：先按记忆渲染 iframe，同时轻量 /url
+  // 验证设置是否仍为 official（official 模式下该请求短路返回、不调 B 站，零成本）；
+  // 已切回 custom 时清除记忆并重建封面流程——后台切换刷新即生效，不受记忆 TTL 延迟。
+  if (readMode() === "official") {
+    renderOfficial();
+    bridgeCall("/url", { bvid: bvid, cid: cid, qn: 32 }).then((r) => {
+      if (r && r.player_mode === "official") {
+        return;
       }
+      sessionStorage.removeItem(MODE_KEY);
+      renderShell();
     }).catch(() => {});
+    return () => {
+      box.remove();
+    };
   }
+
+
+  renderShell();
 
   // 清理函数（停轮询与 DASH 装载；video 随 box 移除）。
   return () => {
