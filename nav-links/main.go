@@ -39,7 +39,7 @@ func (p *NavLinksPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "精品导航",
-		Version:     "1.3.6",
+		Version:     "1.3.7",
 		Author:      "月言官方",
 		Description: "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动图标），前台精美导航页，开放接口供浏览器插件同步。",
 		Capabilities: []string{"api", "frontend", "settings", "data.read", "admin.page", "site.page"},
@@ -125,13 +125,13 @@ func (p *NavLinksPlugin) RegisterAPI(api *sdk.APIMux) {
 		return 200, jsonResp(map[string]any{"ok": true, "plugin": pluginID, "count": count}), nil
 	})
 
-	// 全量列表（管理页一次拉取：链接 + 聚合分类 + 聚合标签）
+	// 全量列表（管理页一次拉取：链接 + 管理口径分类/标签——手动列表 ∪ 条目聚合）
 	api.Handle("GET", "/links", func(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
 		st := p.storeSafe()
 		if st == nil {
 			return 500, jsonResp(map[string]any{"error": "插件未激活"}), nil
 		}
-		return 200, jsonResp(map[string]any{"links": st.List(), "categories": st.Categories(), "tags": st.AllTags()}), nil
+		return 200, jsonResp(map[string]any{"links": st.List(), "categories": st.CategoryList(), "tags": st.TagList()}), nil
 	})
 
 	// 新增站点（body: {url,name,category,tags,description,icon}）
@@ -276,6 +276,9 @@ func (p *NavLinksPlugin) RegisterAPI(api *sdk.APIMux) {
 		}
 		return 200, jsonResp(result), nil
 	})
+
+	// 分类/标签独立管理（增/重命名/删除级联）
+	registerTaxonomyAPI(api, p)
 }
 
 // main 插件进程入口。
