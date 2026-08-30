@@ -285,7 +285,66 @@ func (s *LinkStore) Reorder(ids []int64) {
 	_ = s.saveLocked()
 }
 
-// normalizeURL 规范化地址：无 scheme 时补 https://，去除首尾空白（纯函数）。
+// ImportLinks 批量导入站点（浏览器插件「导航同步写入」通道；纯函数式 upsert）。
+// 按 URL（规范化后）匹配：已存在则更新内容字段（已有图标不被空图标覆盖），不存在则追加。
+// 返回：新增数、更新数；任一条目校验失败即中止（调用方先整批校验以保证原子性提示）。
+func (s *LinkStore) ImportLinks(items []LinkInput) (int, int, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	added := 0
+	updated := 0
+	maxSort := 0
+	for _, l := range s.links {
+		if l.Sort > maxSort {
+			maxSort = l.Sort
+		}
+	}
+	for _, raw := range items {
+		in, err := validateLinkInput(raw)
+		if err != nil {
+			return added, updated, err
+		}
+		idx := -1
+		for i, l := range s.links {
+			if strings.EqualFold(l.URL, in.URL) {
+				idx = i
+				break
+			}
+		}
+		if idx >= 0 {
+			s.links[idx].Name = in.Name
+			s.links[idx].Category = in.Category
+			s.links[idx].Tags = in.Tags
+			s.links[idx].Description = in.Description
+			if in.Icon != "" {
+				s.links[idx].Icon = in.Icon
+			}
+			updated++
+			continue
+		}
+		maxSort++
+		s.links = append(s.links, NavLink{
+			ID:          s.nextID,
+			URL:         in.URL,
+			Name:        in.Name,
+			Category:    in.Category,
+			Tags:        in.Tags,
+			Description: in.Description,
+			Icon:        in.Icon,
+			Sort:        maxSort,
+			CreatedAt:   time.Now().Format(time.RFC3339),
+		})
+		s.nextID++
+		added++
+	}
+	if err := s.saveLocked(); err != nil {
+		return added, updated, errors.New("保存失败：" + err.Error())
+	}
+	return added, updated, nil
+}
+
+// normalizeURL 规范化地址：无 scheme 时补 https://，去除首尾空白与末尾斜杠（纯函数）。
+// 末尾斜杠归一保证「https://a.com」与「https://a.com/」视为同一站点（查重与 upsert 匹配一致）。
 func normalizeURL(raw string) string {
 	u := strings.TrimSpace(raw)
 	if u == "" {
@@ -294,7 +353,7 @@ func normalizeURL(raw string) string {
 	if !strings.HasPrefix(u, "http://") && !strings.HasPrefix(u, "https://") {
 		u = "https://" + u
 	}
-	return u
+	return strings.TrimSuffix(u, "/")
 }
 
 // cleanTags 清洗标签列表：去空白、去空、去重、截长度、限数量（纯函数）。
