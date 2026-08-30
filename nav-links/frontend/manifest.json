@@ -1,0 +1,20 @@
+{
+  "extensionPoints": [],
+  "pages": [
+    {
+      "route": "admin",
+      "entry": "admin-page.js?v=1"
+    },
+    {
+      "route": "index",
+      "entry": "nav-page.js?v=1",
+      "scope": "site"
+    }
+  ],
+  "siteNav": [
+    {
+      "label": "精品导航",
+      "path": "/plugins/nav-links/index"
+    }
+  ]
+}
