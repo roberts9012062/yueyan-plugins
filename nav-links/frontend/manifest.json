@@ -7,7 +7,7 @@
     },
     {
       "route": "index",
-      "entry": "nav-page.js?v=2",
+      "entry": "nav-page.js?v=3",
       "scope": "site"
     }
   ],
