@@ -16,13 +16,14 @@ import (
 	"github.com/roberts9012062/boke/pkg/plugin-sdk"
 )
 
-// aiPromptTemplate 智能识别指令（约束 AI 只输出 JSON，便于稳定解析）。
+// aiPromptTemplate 智能识别指令（约束 AI 只输出紧凑 JSON，便于稳定解析与控制长度）。
 const aiPromptTemplate = "你是网站导航编辑。根据下面的网站信息，总结这个站点并生成收藏信息。" +
-	"网站名字：取页面标题的主体（去掉「 - 」「 | 」等分隔符后的站点名/品牌名），2-20 字；" +
-	"简介：一句话概括站点用途与特色，20-80 字；" +
-	"分类：2-6 个字（例如：开发工具、设计资源、学习教育、资讯媒体、技术博客、生活服务、娱乐休闲、购物电商、AI 工具、影视资源）；" +
-	"标签：3-6 个，每个 2-8 个字。若已提供「用户已填」的名称或简介且内容合理，沿用或轻微优化。" +
-	"只输出 JSON，格式 {\"name\":\"网站名字\",\"description\":\"简介\",\"category\":\"分类\",\"tags\":[\"标签1\",\"标签2\"]}，不要输出任何其他文字。网站信息："
+	"网站名字：取页面标题主体（去掉「 - 」「 | 」等分隔符后缀），2-20 字；" +
+	"简介：一句话概括站点用途与特色，20-60 字，必填；" +
+	"分类：2-6 个字（如：开发工具、设计资源、学习教育、资讯媒体、技术博客、生活服务、AI 工具）；" +
+	"标签：3-5 个，每个 2-8 字。" +
+	"四个字段一个都不能少。只输出一行紧凑 JSON（键名与示例一致，不加换行、空格与代码围栏）：" +
+	"{\"name\":\"名字\",\"description\":\"简介\",\"category\":\"分类\",\"tags\":[\"标签\"]}。网站信息："
 
 // aiSuggestResult AI 识别结果（响应直出）。
 type aiSuggestResult struct {
@@ -126,6 +127,7 @@ func parseAISuggest(text string) (aiSuggestResult, error) {
 
 // suggestViaAI 调用主进程 AI 生成站点识别结果（连接器：经数据服务路由，用量计入站点统计）。
 // 页面抓取失败不阻断——降级为仅凭 URL 与已填字段生成（SPA 站点等场景）。
+// AI 漏输出 name/description 时用页面元信息兜底（模型对多字段遵循度不一）。
 func suggestViaAI(ctx context.Context, svc sdk.DataService, model string, in LinkInput) (aiSuggestResult, error) {
 	meta, err := fetchPageMeta(in.URL)
 	if err != nil {
@@ -137,5 +139,15 @@ func suggestViaAI(ctx context.Context, svc sdk.DataService, model string, in Lin
 	if err != nil {
 		return aiSuggestResult{}, errors.New("AI 生成失败：" + err.Error())
 	}
-	return parseAISuggest(text)
+	result, err := parseAISuggest(text)
+	if err != nil {
+		return aiSuggestResult{}, err
+	}
+	if result.Name == "" && meta.Title != "" {
+		result.Name = truncateRunes(meta.Title, linkNameMaxLen)
+	}
+	if result.Description == "" && meta.Description != "" {
+		result.Description = truncateRunes(meta.Description, linkDescMaxLen)
+	}
+	return result, nil
 }
