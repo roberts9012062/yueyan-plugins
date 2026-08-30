@@ -4,8 +4,8 @@
 // ctx: { container, api, user, params: {pluginId, page} }
 // 表单（添加/编辑 + AI 智能分类 + 自动图标）拆分在 link-form.js（保持单文件精简）。
 import { escapeHtml } from "/plugin-sdk/shared.js";
-import { openLinkForm } from "./link-form.js?v=1";
-import { openTaxonomyManager } from "./manage-list.js?v=1";
+import { openLinkForm } from "./link-form.js?v=2"; // 版本参数：绕模块图缓存（升级必改）
+import { openTaxonomyManager } from "./manage-list.js?v=2";
 
 // 样式片段（与宿主后台 --yy-* 设计变量对齐，兜底值保证明暗主题可用）。
 const colorText = "color:var(--yy-text,#e8ecf4)";
