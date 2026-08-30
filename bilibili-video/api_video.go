@@ -9,6 +9,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"regexp"
 	"strings"
 
@@ -64,12 +65,6 @@ func (p *BilibiliPlugin) registerVideoAPI(api *sdk.APIMux) {
 		if err := json.Unmarshal(body, &req); err != nil || req.Bvid == "" || req.Cid == 0 {
 			return 400, jsonResp(map[string]any{"error": "缺少 bvid / cid"}), nil
 		}
-		// 官方嵌入模式（全站设置 player_mode=official）：短路返回模式标记，不解析
-		// 真实流地址——前端据此换 B 站官方 iframe 播放器（浏览器直连 B 站 CDN，
-		// 国内速度快；清晰度由 B 站播放器控制，浏览器 B 站登录态可用）
-		if sdk.Config(ctx)["player_mode"] == "official" {
-			return 200, jsonResp(map[string]any{"player_mode": "official"}), nil
-		}
 		if req.Qn != bilibili.QN360 && req.Qn != bilibili.QN480 && req.Qn != bilibili.QN720 && req.Qn != bilibili.QN1080 {
 			req.Qn = bilibili.QN480
 		}
@@ -77,11 +72,17 @@ func (p *BilibiliPlugin) registerVideoAPI(api *sdk.APIMux) {
 		if err != nil {
 			return 200, jsonResp(map[string]any{"error": err.Error()}), nil
 		}
+		// ≤720P 时补拉 MP4 直链（durl）：前端浏览器直连播放，视频流量不经宿主中转
+		// （1080P 仅有 DASH 形态，继续走 MSE 代理通道）
+		if info.Quality <= bilibili.QN720 && info.Durl == nil {
+			if direct, derr := p.resolveDirect(c, ctx, req.Bvid, req.Cid, info.Quality, req.GuestToken); derr == nil && len(direct.Durl) > 0 {
+				info.Durl = direct.Durl
+			}
+		}
 		return 200, jsonResp(map[string]any{
 			"quality": info.Quality, "quality_desc": bilibili.QualityDesc(info.Quality),
 			"durl": info.Durl, "dash": info.Dash, "timelength": info.Timelength, "source": source,
-			// qualities 全档位表：老文章块 props 未存清晰度表时前端据此补全菜单
-			"qualities": qualityTable(),
+			"qualities": qualityTable(), // 清晰度菜单表（嵌入块缺 qualities 的帖子据此补全）
 		}), nil
 	})
 
@@ -215,4 +216,19 @@ func extractFirstURL(text string) string {
 		return rest[:end]
 	}
 	return rest
+}
+
+// resolveDirect 拉 MP4 直链（cookie 降级语义与 resolvePlay 一致：游客 > 站长 > 匿名）。
+func (p *BilibiliPlugin) resolveDirect(c *bilibili.Client, ctx context.Context, bvid string, cid int64, qn int, guestToken string) (*bilibili.PlayInfo, error) {
+	if guestToken != "" {
+		if cookies, _, err := bilibili.OpenGuestToken(guestToken); err == nil {
+			if info, err := c.PlayURLDirect(bvid, cid, qn, cookies); err == nil {
+				return info, nil
+			}
+		}
+	}
+	if info, err := c.PlayURLDirect(bvid, cid, qn, nil); err == nil {
+		return info, nil
+	}
+	return nil, fmt.Errorf("durl 解析失败")
 }
