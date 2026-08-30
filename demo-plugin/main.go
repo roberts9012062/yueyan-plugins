@@ -179,10 +179,17 @@ func (p *DemoPlugin) RegisterAPI(api *sdk.APIMux) {
 				return 200, []byte(fmt.Sprintf(`{"authorized":true,"error":%q}`, err.Error())), nil
 			}
 			settings, _ := svc.GetSettings(ctx)
-			logf("数据服务查询：user=%s role=%s settings=%d 键", user.Nickname, user.Role, len(settings))
+			// 开放接口 API Key 清单（浏览器插件联动：读取 Key 远传验证重要接口）
+			openKeys, keyErr := svc.GetOpenAPIKeys(ctx)
+			keySummary := fmt.Sprintf(`{"error":%q}`, keyErr)
+			if keyErr == nil {
+				raw, _ := json.Marshal(openKeys)
+				keySummary = string(raw)
+			}
+			logf("数据服务查询：user=%s role=%s settings=%d 键 openapi_keys=%d 个", user.Nickname, user.Role, len(settings), len(openKeys))
 			return 200, []byte(fmt.Sprintf(
-				`{"authorized":true,"user":{"id":%d,"nickname":%q,"role":%q},"settings_keys":%d}`,
-				user.ID, user.Nickname, user.Role, len(settings))), nil
+				`{"authorized":true,"user":{"id":%d,"nickname":%q,"role":%q},"settings_keys":%d,"openapi_keys":%s}`,
+				user.ID, user.Nickname, user.Role, len(settings), keySummary)), nil
 		})
 }
 
