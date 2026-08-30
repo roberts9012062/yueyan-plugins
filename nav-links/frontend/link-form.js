@@ -38,8 +38,8 @@ export function openLinkForm(opts) {
     // 图标预览行
     '<div style="margin-top:14px;display:flex;align-items:center;gap:12px">' +
     '<span data-icon-box style="width:48px;height:48px;border-radius:10px;flex:none;display:inline-flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;background:var(--yy-accent,#6366f1);overflow:hidden">' + (form.name ? escapeHtml(form.name.charAt(0)) : "？") + "</span>" +
-    '<div style="flex:1"><p style="font-size:12px;' + colorText2 + '">填写地址后自动抓取站点图标（内嵌存储，前台展示不依赖外部资源）</p>' +
-    '<button type="button" data-refetch style="margin-top:4px;height:26px;padding:0 10px;border-radius:999px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:12px;' + colorText + ';cursor:pointer">重新抓取</button></div></div>' +
+    '<div style="flex:1"><p style="font-size:12px;' + colorText2 + '">填写地址后自动抓取图标 + AI 识别名称/分类/标签/简介（内嵌存储，前台展示不依赖外部资源）</p>' +
+    '<button type="button" data-refetch style="margin-top:4px;height:26px;padding:0 10px;border-radius:999px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:12px;' + colorText + ';cursor:pointer">重新抓取图标</button></div></div>' +
     // 字段
     '<div style="margin-top:12px"><label style="' + labelStyle + '">站点地址 *</label>' +
     '<input data-f-url type="text" placeholder="example.com 或 https://example.com" style="' + inputStyle + '"></div>' +
@@ -58,7 +58,7 @@ export function openLinkForm(opts) {
     '<div style="display:flex;align-items:center;gap:8px">' +
     '<span style="font-size:12px;' + colorText2 + '">AI 智能</span>' +
     '<select data-ai-model style="' + inputStyle + ';flex:1;height:30px" disabled><option value="">（未配置 AI）</option></select>' +
-    '<button type="button" data-ai-btn style="height:30px;padding:0 12px;border-radius:999px;border:none;background:var(--yy-accent,#6366f1);color:#fff;font-size:12px;font-weight:600;cursor:pointer">✨ 分类+标签</button></div>' +
+    '<button type="button" data-ai-btn style="height:30px;padding:0 12px;border-radius:999px;border:none;background:var(--yy-accent,#6366f1);color:#fff;font-size:12px;font-weight:600;cursor:pointer">✨ AI 识别</button></div>' +
     '<p data-ai-status style="margin-top:6px;font-size:11px;' + colorText2 + '"></p></div>' +
     // 底部按钮
     '<div style="margin-top:16px;display:flex;justify-content:flex-end;gap:8px">' +
@@ -116,17 +116,11 @@ export function openLinkForm(opts) {
   const onURLBlur = async () => {
     const url = urlEl.value.trim();
     if (!url) return;
-    // 名称未填时用域名作建议值（可改）
-    if (!nameEl.value.trim()) {
-      try {
-        const host = new URL(url.startsWith("http") ? url : "https://" + url).hostname;
-        nameEl.value = host.replace(/^www\./, "");
-        form.name = nameEl.value;
-      } catch (e) {
-        /* 地址暂不合法：跳过建议 */
-      }
+    fetchIcon(true); // 图标静默抓取（状态经 AI 区统一反馈）
+    // AI 可用（模型已就绪）时自动识别四项——只放 URL 即可完成全部填写
+    if (!aiModelEl.disabled && aiModelEl.value) {
+      runSuggest(true);
     }
-    fetchIcon(false);
   };
   urlEl.addEventListener("blur", onURLBlur);
   $("[data-refetch]").addEventListener("click", () => fetchIcon(false));
@@ -188,23 +182,24 @@ export function openLinkForm(opts) {
       }
       aiModelEl.disabled = false;
       aiModelEl.innerHTML = opts.join("");
-      aiStatus.textContent = "填写地址/名称/简介后，一键生成分类与标签";
+      aiStatus.textContent = "填写地址后自动 AI 识别名称/分类/标签/简介（也可点按钮重跑）";
     })
     .catch(() => {
       aiStatus.textContent = "AI 服务暂不可用";
     });
 
-  aiBtn.addEventListener("click", async () => {
+  // runSuggest 调 AI 识别并回填四项（auto=true 为失焦自动触发，仅状态文案不同）。
+  const runSuggest = async (auto) => {
     const model = aiModelEl.value;
     if (!model) {
-      aiStatus.textContent = "请先选择 AI 模型";
+      if (!auto) aiStatus.textContent = "请先选择 AI 模型";
       return;
     }
-    if (!urlEl.value.trim() && !nameEl.value.trim()) {
-      aiStatus.textContent = "请先填写站点地址或网站名字";
+    if (!urlEl.value.trim()) {
+      if (!auto) aiStatus.textContent = "请先填写站点地址";
       return;
     }
-    aiStatus.textContent = "AI 生成中…";
+    aiStatus.textContent = "AI 识别中（抓取页面 + 生成）…";
     try {
       const r = await api.post("/ai/suggest", {
         model,
@@ -216,6 +211,15 @@ export function openLinkForm(opts) {
         aiStatus.textContent = r.error;
         return;
       }
+      if (r.name) {
+        nameEl.value = r.name;
+        form.name = r.name;
+        if (!form.icon) renderIcon();
+      }
+      if (r.description) {
+        descEl.value = r.description;
+        form.description = r.description;
+      }
       if (r.category) {
         catEl.value = r.category;
         form.category = r.category;
@@ -224,11 +228,13 @@ export function openLinkForm(opts) {
         if (!form.tags.includes(t) && form.tags.length < 10) form.tags.push(t);
       }
       renderTags();
-      aiStatus.textContent = "AI 已填充分类与标签，可手动调整";
+      aiStatus.textContent = auto ? "AI 已自动识别并填充，可手动调整" : "AI 已填充，可手动调整";
     } catch (e) {
       aiStatus.textContent = "AI 请求失败，请稍后重试";
     }
-  });
+  };
+
+  aiBtn.addEventListener("click", () => runSuggest(false));
 
   // ---------- 保存 ----------
   $("[data-cancel]").addEventListener("click", close);
