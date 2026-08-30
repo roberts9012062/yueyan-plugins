@@ -156,7 +156,7 @@ export default function registerPage(ctx) {
   const gridCardHTML = (l) => {
     const tip = l.name + (l.description ? " · " + l.description : "") + ((l.tags || []).length ? " · " + l.tags.join(" / ") : "");
     return (
-      '<a ' + cardAttr(l) + ' class="nl-card nl-card-grid" title="' + escapeHtml(tip) + '">' + +
+      '<a ' + cardAttr(l) + ' class="nl-card nl-card-grid" title="' + escapeHtml(tip) + '">' +
       iconHTML(l, 52) +
       '<span class="nl-g-name">' + escapeHtml(l.name) + "</span>" +
       '<span class="nl-g-cat">' + escapeHtml(l.category || "未分类") + "</span></a>"
