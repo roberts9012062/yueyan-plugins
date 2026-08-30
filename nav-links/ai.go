@@ -1,37 +1,44 @@
 // nav-links/ai.go
-// AI 智能分类+标签：经数据服务（data.read）调用主进程 AI，按站点地址/名称/简介
-// 生成分类与标签建议（模式对齐 seo-optimizer：模型列表 GetAIModels + 生成 GenerateAI）。
+// AI 智能识别：只给一个 URL，AI 总结站点名称、分类、标签、简介。
+// 流程：抓取页面元信息（pagemeta.go）→ 连同 URL 喂给主进程 AI（data.read 数据服务）
+// → 解析 JSON 输出回填表单。抓取失败时降级为仅凭 URL 与已填字段生成。
 package main
 
 import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"os"
 	"strings"
 	"unicode/utf8"
 
 	"github.com/roberts9012062/boke/pkg/plugin-sdk"
 )
 
-// aiPromptTemplate 分类标签生成指令（约束 AI 只输出 JSON，便于稳定解析）。
-const aiPromptTemplate = "你是网站导航编辑。根据下面的网站信息判断它最合适的分类与标签。" +
-	"分类用 2-6 个字（例如：开发工具、设计资源、学习教育、资讯媒体、技术博客、生活服务、娱乐休闲、购物电商）；" +
-	"标签给 3-6 个，每个 2-8 个字。只输出 JSON，格式 {\"category\":\"分类\",\"tags\":[\"标签1\",\"标签2\"]}，不要输出任何其他文字。网站信息："
+// aiPromptTemplate 智能识别指令（约束 AI 只输出 JSON，便于稳定解析）。
+const aiPromptTemplate = "你是网站导航编辑。根据下面的网站信息，总结这个站点并生成收藏信息。" +
+	"网站名字：取页面标题的主体（去掉「 - 」「 | 」等分隔符后的站点名/品牌名），2-20 字；" +
+	"简介：一句话概括站点用途与特色，20-80 字；" +
+	"分类：2-6 个字（例如：开发工具、设计资源、学习教育、资讯媒体、技术博客、生活服务、娱乐休闲、购物电商、AI 工具、影视资源）；" +
+	"标签：3-6 个，每个 2-8 个字。若已提供「用户已填」的名称或简介且内容合理，沿用或轻微优化。" +
+	"只输出 JSON，格式 {\"name\":\"网站名字\",\"description\":\"简介\",\"category\":\"分类\",\"tags\":[\"标签1\",\"标签2\"]}，不要输出任何其他文字。网站信息："
 
-// aiSuggestResult AI 建议结果（响应直出）。
+// aiSuggestResult AI 识别结果（响应直出）。
 type aiSuggestResult struct {
-	Category string   `json:"category"`
-	Tags     []string `json:"tags"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Category    string   `json:"category"`
+	Tags        []string `json:"tags"`
 }
 
-// parseAISuggestInput 解析 AI 建议请求 body（纯函数）。
+// parseAISuggestInput 解析 AI 识别请求 body（url 必填；name/description 为用户已填参考；纯函数）。
 func parseAISuggestInput(body []byte) (string, LinkInput, error) {
 	var req struct {
 		Model       string   `json:"model"`
 		URL         string   `json:"url"`
 		Name        string   `json:"name"`
 		Description string   `json:"description"`
-		Tags        []string `json:"tags"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		return "", LinkInput{}, errors.New("请求体需为 JSON 对象")
@@ -39,30 +46,36 @@ func parseAISuggestInput(body []byte) (string, LinkInput, error) {
 	if req.Model == "" {
 		return "", LinkInput{}, errors.New("请先选择 AI 模型")
 	}
-	if strings.TrimSpace(req.URL) == "" && strings.TrimSpace(req.Name) == "" {
-		return "", LinkInput{}, errors.New("请先填写站点地址或网站名字")
+	if strings.TrimSpace(req.URL) == "" {
+		return "", LinkInput{}, errors.New("请先填写站点地址")
 	}
 	return req.Model, LinkInput{
 		URL:         strings.TrimSpace(req.URL),
 		Name:        strings.TrimSpace(req.Name),
 		Description: strings.TrimSpace(req.Description),
-		Tags:        req.Tags,
 	}, nil
 }
 
-// buildAIContent 组装 AI 输入内容（纯函数）。
-func buildAIContent(in LinkInput) string {
-	parts := make([]string, 0, 3)
-	if in.URL != "" {
-		parts = append(parts, "地址："+normalizeURL(in.URL))
+// buildAIContent 组装 AI 输入内容：页面元信息 + 用户已填字段（纯函数）。
+func buildAIContent(in LinkInput, meta pageMeta) string {
+	var b strings.Builder
+	b.WriteString("地址：" + normalizeURL(in.URL))
+	if meta.Title != "" {
+		b.WriteString("\n页面标题：" + meta.Title)
+	}
+	if meta.Description != "" {
+		b.WriteString("\n页面描述：" + meta.Description)
+	}
+	if meta.TextDigest != "" {
+		b.WriteString("\n正文摘要：" + meta.TextDigest)
 	}
 	if in.Name != "" {
-		parts = append(parts, "名称："+in.Name)
+		b.WriteString("\n用户已填名称：" + in.Name)
 	}
 	if in.Description != "" {
-		parts = append(parts, "简介："+in.Description)
+		b.WriteString("\n用户已填简介：" + in.Description)
 	}
-	return strings.Join(parts, "；")
+	return b.String()
 }
 
 // extractJSONObject 从 AI 输出中截取首个 { 到最后一个 } 的子串（容错代码围栏与前后杂文；纯函数）。
@@ -75,6 +88,14 @@ func extractJSONObject(text string) (string, bool) {
 	return text[start : end+1], true
 }
 
+// truncateRunes 按 rune 截断字符串（纯函数）。
+func truncateRunes(s string, max int) string {
+	if utf8.RuneCountInString(s) <= max {
+		return s
+	}
+	return string([]rune(s)[:max])
+}
+
 // parseAISuggest 解析并清洗 AI 输出（纯函数；长度与数量收敛到存储约束内）。
 func parseAISuggest(text string) (aiSuggestResult, error) {
 	obj, ok := extractJSONObject(strings.TrimSpace(text))
@@ -85,27 +106,34 @@ func parseAISuggest(text string) (aiSuggestResult, error) {
 	if err := json.Unmarshal([]byte(obj), &parsed); err != nil {
 		return aiSuggestResult{}, errors.New("AI 返回解析失败，请重试")
 	}
+	name := strings.TrimSpace(parsed.Name)
 	category := strings.TrimSpace(parsed.Category)
-	if category == "" {
-		return aiSuggestResult{}, errors.New("AI 未给出分类，请补充站点信息后重试")
+	description := strings.TrimSpace(parsed.Description)
+	if category == "" && name == "" {
+		return aiSuggestResult{}, errors.New("AI 未给出有效结果，请补充信息后重试")
 	}
-	if utf8.RuneCountInString(category) > linkCatMaxLen {
-		category = string([]rune(category)[:linkCatMaxLen])
+	result := aiSuggestResult{
+		Name:        truncateRunes(name, linkNameMaxLen),
+		Category:    truncateRunes(category, linkCatMaxLen),
+		Description: truncateRunes(description, linkDescMaxLen),
+		Tags:        cleanTags(parsed.Tags),
 	}
-	tags := cleanTags(parsed.Tags)
-	if len(tags) == 0 {
-		tags = []string{}
+	if result.Tags == nil {
+		result.Tags = []string{}
 	}
-	return aiSuggestResult{Category: category, Tags: tags}, nil
+	return result, nil
 }
 
-// suggestViaAI 调用主进程 AI 生成分类标签建议（连接器：经数据服务路由，用量计入站点统计）。
+// suggestViaAI 调用主进程 AI 生成站点识别结果（连接器：经数据服务路由，用量计入站点统计）。
+// 页面抓取失败不阻断——降级为仅凭 URL 与已填字段生成（SPA 站点等场景）。
 func suggestViaAI(ctx context.Context, svc sdk.DataService, model string, in LinkInput) (aiSuggestResult, error) {
-	content := buildAIContent(in)
-	if content == "" {
-		return aiSuggestResult{}, errors.New("站点信息为空")
+	meta, err := fetchPageMeta(in.URL)
+	if err != nil {
+		// 降级：无页面内容时把抓取失败原因留给日志，AI 仍可按 URL 字面推断
+		fmt.Fprintln(os.Stderr, "[nav-links] 页面抓取降级:", err.Error())
+		meta = pageMeta{}
 	}
-	text, err := svc.GenerateAI(ctx, model, aiPromptTemplate, content)
+	text, err := svc.GenerateAI(ctx, model, aiPromptTemplate, buildAIContent(in, meta))
 	if err != nil {
 		return aiSuggestResult{}, errors.New("AI 生成失败：" + err.Error())
 	}
