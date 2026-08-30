@@ -3,11 +3,11 @@
   "pages": [
     {
       "route": "admin",
-      "entry": "admin-page.js?v=1"
+      "entry": "admin-page.js?v=2"
     },
     {
       "route": "index",
-      "entry": "nav-page.js?v=1",
+      "entry": "nav-page.js?v=2",
       "scope": "site"
     }
   ],
