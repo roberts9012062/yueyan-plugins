@@ -10,4 +10,6 @@ require (
 
 require golang.org/x/image v0.45.0
 
+require golang.org/x/text v0.41.0
+
 replace github.com/roberts9012062/boke => ../
