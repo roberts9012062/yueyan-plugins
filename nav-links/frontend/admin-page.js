@@ -5,6 +5,7 @@
 // 表单（添加/编辑 + AI 智能分类 + 自动图标）拆分在 link-form.js（保持单文件精简）。
 import { escapeHtml } from "/plugin-sdk/shared.js";
 import { openLinkForm } from "./link-form.js?v=1";
+import { openTaxonomyManager } from "./manage-list.js?v=1";
 
 // 样式片段（与宿主后台 --yy-* 设计变量对齐，兜底值保证明暗主题可用）。
 const colorText = "color:var(--yy-text,#e8ecf4)";
@@ -33,7 +34,10 @@ export default function registerPage(ctx) {
     '<input data-kw type="text" placeholder="搜索名称 / 地址 / 简介 / 标签…" style="' + inputStyle + ';flex:1;min-width:200px">' +
     '<select data-fcat style="' + inputStyle + '"><option value="">全部分类</option></select>' +
     '<select data-ftag style="' + inputStyle + '"><option value="">全部标签</option></select>' +
-    '<span data-count style="font-size:12px;' + colorText2 + '"></span></div>' +
+    '<span data-count style="font-size:12px;' + colorText2 + '"></span>' +
+    '<span style="flex:1"></span>' +
+    '<button type="button" data-mgmt-cat style="height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:12px;' + colorText + ';cursor:pointer">管理分类</button>' +
+    '<button type="button" data-mgmt-tag style="height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:12px;' + colorText + ';cursor:pointer">管理标签</button></div>' +
     // 列表区
     '<div data-list style="margin-top:12px;display:flex;flex-direction:column;gap:8px"></div>' +
     '<p data-empty style="display:none;margin-top:24px;text-align:center;font-size:13px;' + colorText2 + '"></p>';
@@ -154,6 +158,30 @@ export default function registerPage(ctx) {
   // ---------- 事件绑定 ----------
   box.querySelector("[data-add]").addEventListener("click", () =>
     openLinkForm({ api: ctx.api, initial: null, categories: state.categories, onSaved: load })
+  );
+  // 分类管理弹层（增/重命名/删除级联条目）
+  box.querySelector("[data-mgmt-cat]").addEventListener("click", () =>
+    openTaxonomyManager({
+      title: "分类管理",
+      unitLabel: "分类",
+      items: state.categories.map((c) => ({ name: c, count: state.links.filter((l) => l.category === c).length })),
+      add: (name) => ctx.api.post("/categories", { name }),
+      rename: (from, to) => ctx.api.post("/categories/rename", { from, to }),
+      remove: (name) => ctx.api.post("/categories/delete", { name }),
+      onChanged: load,
+    })
+  );
+  // 标签管理弹层
+  box.querySelector("[data-mgmt-tag]").addEventListener("click", () =>
+    openTaxonomyManager({
+      title: "标签管理",
+      unitLabel: "标签",
+      items: state.tags.map((t) => ({ name: t, count: state.links.filter((l) => (l.tags || []).includes(t)).length })),
+      add: (name) => ctx.api.post("/tags", { name }),
+      rename: (from, to) => ctx.api.post("/tags/rename", { from, to }),
+      remove: (name) => ctx.api.post("/tags/delete", { name }),
+      onChanged: load,
+    })
   );
   kwEl.addEventListener("input", () => {
     state.keyword = kwEl.value.trim();
