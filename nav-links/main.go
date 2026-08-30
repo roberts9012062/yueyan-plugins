@@ -39,7 +39,7 @@ func (p *NavLinksPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "精品导航",
-		Version:     "1.3.8",
+		Version:     "1.3.9",
 		Author:      "月言官方",
 		Description: "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动图标），前台精美导航页，开放接口供浏览器插件同步。",
 		Capabilities: []string{"api", "frontend", "settings", "data.read", "admin.page", "site.page"},
