@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 
 	"github.com/roberts9012062/boke/pkg/plugin-sdk"
@@ -39,7 +40,7 @@ func (p *NavLinksPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "精品导航",
-		Version:     "1.3.10",
+		Version:     "1.3.11",
 		Author:      "月言官方",
 		Description: "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动图标），前台精美导航页，开放接口供浏览器插件同步。",
 		Capabilities: []string{"api", "frontend", "settings", "data.read", "admin.page", "site.page"},
@@ -277,8 +278,53 @@ func (p *NavLinksPlugin) RegisterAPI(api *sdk.APIMux) {
 		return 200, jsonResp(result), nil
 	})
 
+	// 导航同步写入（宿主开放网关 navlinks.save 桥接调用，系统身份）：
+	// 浏览器插件凭 Key 批量同步收藏；按地址 upsert，返回 {added, updated}。
+	api.Handle("POST", "/links/import", func(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
+		if !sdk.TrustedCaller(ctx) {
+			return 403, jsonResp(map[string]any{"error": "仅系统桥接或管理员可调用"}), nil
+		}
+		st := p.storeSafe()
+		if st == nil {
+			return 500, jsonResp(map[string]any{"error": "插件未激活"}), nil
+		}
+		var req struct {
+			Links []LinkInput `json:"links"`
+		}
+		if err := json.Unmarshal(body, &req); err != nil || len(req.Links) == 0 {
+			return 400, jsonResp(map[string]any{"error": "请求体需为 {\"links\":[{url,name,category,...}]} 且至少一条"}), nil
+		}
+		if len(req.Links) > 200 {
+			return 400, jsonResp(map[string]any{"error": "单次最多导入 200 条"}), nil
+		}
+		items := make([]LinkInput, len(req.Links))
+		for i, raw := range req.Links {
+			raw.Icon = resolveImportIcon(raw.Icon)
+			items[i] = raw
+		}
+		added, updated, err := st.ImportLinks(items)
+		if err != nil {
+			return 400, jsonResp(map[string]any{"error": err.Error(), "added": added, "updated": updated}), nil
+		}
+		return 200, jsonResp(map[string]any{"added": added, "updated": updated}), nil
+	})
+
 	// 分类/标签独立管理（增/重命名/删除级联）
 	registerTaxonomyAPI(api, p)
+}
+
+// resolveImportIcon 导入条目的图标字段转换（纯流程函数）：
+// http(s) 地址现场抓取转 dataURL（失败降级为空，前台首字母色块兜底）；
+// dataURL 原样返回；空串原样返回。
+func resolveImportIcon(icon string) string {
+	icon = strings.TrimSpace(icon)
+	if strings.HasPrefix(icon, "http://") || strings.HasPrefix(icon, "https://") {
+		if dataURL, ok := downloadIconAsDataURL(icon); ok {
+			return dataURL
+		}
+		return ""
+	}
+	return icon
 }
 
 // main 插件进程入口。
