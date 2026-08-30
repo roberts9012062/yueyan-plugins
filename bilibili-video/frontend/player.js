@@ -6,27 +6,12 @@
 // ctx: { slot: "block:bilibili", el, api, user, props: {bvid,cid,title,cover,author,duration,quality,qualities} }
 // 说明：播放/扫码走宿主公开桥接（匿名访客可用），不经 ctx.api（其需宿主登录）。
 import { escapeHtml } from "/plugin-sdk/shared.js";
-import { playDash } from "./dash-player.js?v=6"; // 版本参数：绕模块图缓存（升级必改）
+import { playDash } from "./dash-player.js?v=4"; // 版本参数：绕模块图缓存（升级必改）
 
 // 公开桥接前缀与游客 token 存储键。
 const BRIDGE = "/api/v1/video/bilibili";
 const TOKEN_KEY = "yueyan-bilibili-guest-token";
 const NAME_KEY = "yueyan-bilibili-guest-name";
-const MODE_KEY = "yueyan-bilibili-player-mode";
-const MODE_TTL = 30 * 60 * 1000; // 官方模式记忆有效期（ms）：过期后重新经 /url 校验设置，站长切回 custom 能自动恢复
-
-// readMode 读取播放器模式记忆（会话级；TTL 内免 /url 直接官方嵌入，过期回退自研流程）。
-function readMode() {
-  try {
-    const raw = JSON.parse(sessionStorage.getItem(MODE_KEY) || "null");
-    if (raw && raw.mode === "official" && Date.now() - Number(raw.ts) < MODE_TTL) {
-      return "official";
-    }
-  } catch (e) {
-    /* 解析异常按无记忆处理 */
-  }
-  return "custom";
-}
 
 // bridgeCall 调用宿主公开桥接端点（POST JSON；返回解析后的 JSON）。
 async function bridgeCall(path, body) {
@@ -77,7 +62,6 @@ export default function register(ctx) {
   let dashGroup = null;
   let dashStop = null; // DASH 播放控制器（中断/清理）
   let segIndex = 0;
-  let pendingPlayTip = ""; // MSE 装载完成（真正出图）后的提示条文案
   let pollTimer = null;
 
   const box = document.createElement("div");
@@ -97,73 +81,6 @@ export default function register(ctx) {
     return Boolean(q && q.need_login);
   };
 
-  // renderOfficial B 站官方嵌入播放器（iframe）：浏览器直连 B 站 CDN，国内速度快；
-  // 清晰度由 B 站播放器内选择（浏览器已登录 B 站则可用登录态看高清）。
-  const renderOfficial = () => {
-    playing = true;
-    // has_head=0 隐藏 B 站自带头部（其标题配色在跨域 iframe 内不受本站控制，
-    // 深色站点下观感差）——标题条改为本站自绘：白色标题 + 浅灰副题，配色可控
-    box.innerHTML =
-      '<iframe src="https://player.bilibili.com/player.html?bvid=' + escapeHtml(bvid) +
-      '&page=1&high_quality=1&danmaku=0&autoplay=0&has_head=0" scrolling="no" frameborder="no" framespacing="0" allowfullscreen="true" ' +
-      'style="display:block;width:100%;aspect-ratio:16/9;border:none" title="B站视频"></iframe>' +
-      '<div style="padding:10px 14px;display:flex;flex-direction:column;gap:2px;background:var(--yy-card,#161c2b)">' +
-      '<p style="margin:0;font-size:14px;font-weight:600;color:#ffffff;line-height:1.5">' + escapeHtml(String(props.title || bvid)) + '</p>' +
-      '<p style="margin:0;font-size:12px;color:#c9d3e6">UP：' + escapeHtml(String(props.author || "未知")) + ' · 哔哩哔哩</p>' +
-      "</div>";
-  };
-
-  // renderShell 初始渲染（封面卡片 + 信息栏 + 菜单 + 弹层骨架 + 挂载校验）：
-  // 独立成函数——官方模式记忆验证失败（后台已切回 custom）时需重建整套封面流程。
-  const renderShell = () => {
-    // 重置播放态（官方分支可能已置 playing=true——恢复封面后点击需可重新触发解析）
-    playing = false;
-    // 初始渲染：封面卡片 + 信息栏 + 菜单 + 弹层骨架。
-    box.innerHTML =
-      '<div data-stage style="position:relative;cursor:pointer">' +
-      '<img src="' + escapeHtml(proxyImageURL(props.cover)) + '" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000">' +
-      '<span style="position:absolute;right:8px;bottom:8px;padding:2px 8px;border-radius:6px;font-size:12px;color:#fff;background:rgba(0,0,0,.6)">' + escapeHtml(formatDuration(props.duration)) + "</span>" +
-      '<span data-play-btn style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:rgba(255,255,255,.92);background:rgba(0,0,0,.18);transition:background .2s">▶</span></div>' +
-      '<div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px">' +
-      '<div><p style="font-size:14px;font-weight:600;color:var(--yy-text,#e8ecf4);line-height:1.5">' + escapeHtml(String(props.title || bvid)) + "</p>" +
-      '<p style="margin-top:2px;font-size:12px;color:var(--yy-text-2,#9aa6bc)">UP：' + escapeHtml(String(props.author || "未知")) + " · 哔哩哔哩</p></div>" +
-      '<div data-menu></div>' +
-      '<p data-tip style="font-size:12px;color:var(--yy-text-3,#9aa6bc);min-height:16px"></p></div>' +
-      '<div data-qr-overlay style="display:none;position:absolute;inset:0;z-index:5;align-items:center;justify-content:center;background:rgba(10,14,22,.92)">' +
-      '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;border-radius:12px;background:var(--yy-card,#161c2b);border:1px solid var(--yy-border,#2a3348)">' +
-      '<div data-qr-img style="display:flex;align-items:center;justify-content:center;width:196px;height:196px;border-radius:8px;background:#fff"></div>' +
-      '<p data-qr-status style="font-size:12px;color:var(--yy-text-2,#9aa6bc)">请用「哔哩哔哩」App 扫码</p>' +
-      '<button type="button" data-qr-close style="height:30px;padding:0 14px;border-radius:999px;font-size:12px;color:var(--yy-text,#e8ecf4);background:transparent;border:1px solid var(--yy-border,#2a3348);cursor:pointer">关闭</button>' +
-      "</div></div>";
-
-    box.style.position = "relative"; // 弹层定位基准
-    box.querySelector("[data-play-btn]").addEventListener("click", () => {
-      if (!playing) {
-        playQn(selectedQn);
-      }
-    });
-    box.querySelector("[data-qr-close]").addEventListener("click", () => {
-      if (pollTimer) {
-        clearInterval(pollTimer);
-        pollTimer = null;
-      }
-      box.querySelector("[data-qr-overlay]").style.display = "none";
-    });
-    renderMenu();
-
-    // 挂载时有 token 先校验有效性（失效静默清除，菜单回退「需登录」标注）。
-    if (guestToken) {
-      bridgeCall("/guest-status", { guest_token: guestToken }).then((r) => {
-        if (!r || r.valid === false) {
-          guestToken = "";
-          guestName = "";
-          localStorage.removeItem(TOKEN_KEY);
-          localStorage.removeItem(NAME_KEY);
-          renderMenu();
-        }
-      }).catch(() => {});
-    }
-  };
   // playQn 解析并播放指定清晰度。
   const playQn = async (qn) => {
     const stage = box.querySelector("[data-stage]");
@@ -178,24 +95,12 @@ export default function register(ctx) {
         tip.textContent = r.error;
         return;
       }
-      // 官方嵌入模式（全站设置下发）：记忆后换 iframe（本次解析结果弃用）
-      if (r.player_mode === "official") {
-        sessionStorage.setItem(MODE_KEY, JSON.stringify({ mode: "official", ts: Date.now() }));
-        renderOfficial();
-        return;
-      }
       currentQn = Number(r.quality) || qn;
       durlList = Array.isArray(r.durl) ? r.durl : [];
       dashGroup = r.dash || null;
       segIndex = 0;
-      // 菜单档位补全：老文章块 props 未存清晰度表（或存的是旧版低档表）时，
-      // 以 /url 响应的全档位表合并补充（按 qn 去重，保留 need_login 标注）
-      if (Array.isArray(r.qualities) && r.qualities.length > 0) {
-        for (const q of r.qualities) {
-          if (!qualities.some((it) => Number(it.qn) === Number(q.qn))) {
-            qualities.push(q);
-          }
-        }
+      if (menuPending && Array.isArray(r.qualities) && r.qualities.length > 0) {
+        qualities.push(...r.qualities);
         menuPending = false;
       }
       renderMenu();
@@ -203,12 +108,7 @@ export default function register(ctx) {
       // 提示条报实际播放档位；与所选不一致时说明降级原因
       const srcNote = r.source === "guest" ? "（你的 B 站账号）" : r.source === "admin" ? "" : "（未登录 B 站）";
       const downgrade = currentQn !== qn ? "，已自动降级" : "";
-      pendingPlayTip = "正在播放 " + String(r.quality_desc || fmtDesc(currentQn)) + downgrade + " " + srcNote;
-      // DASH 走 MSE 渐进装载：装载期间提示「正在缓冲」，画面出图（playing）后切换文案；
-      // durl 直连即点即播，直接展示最终文案
-      if (!dashGroup) {
-        tip.textContent = pendingPlayTip;
-      }
+      tip.textContent = "正在播放 " + escapeHtml(String(r.quality_desc || fmtDesc(currentQn))) + downgrade + " " + srcNote;
       renderMenu();
     } catch (e) {
       tip.textContent = "解析失败：" + String(e);
@@ -233,17 +133,6 @@ export default function register(ctx) {
     if (dashGroup && durlList.length === 0) {
       // DASH（1080P 高清仅有此形态）：先挂载元素再装载（MediaSource 对 detached 元素行为不稳，实测必须先入 DOM）
       stage.appendChild(video);
-      // 装载期间提示缓冲（低速中转链路起播需数十秒，避免"正在播放"误导黑屏等待）
-      const bufferTip = box.querySelector("[data-tip]");
-      if (bufferTip) {
-        bufferTip.textContent = "正在缓冲 " + fmtDesc(targetQn) + "…（首次缓冲可能需要一点时间）";
-      }
-      video.addEventListener("playing", () => {
-        const t = box.querySelector("[data-tip]");
-        if (t) {
-          t.textContent = pendingPlayTip;
-        }
-      }, { once: true });
       let degraded = false;
       const controller = playDash(video, dashGroup, targetQn, proxyStreamURL, (msg) => {
         const t = box.querySelector("[data-tip]");
@@ -405,25 +294,51 @@ export default function register(ctx) {
     }
   };
 
-  // 官方嵌入模式（会话记忆 + 挂载验证）：先按记忆渲染 iframe，同时轻量 /url
-  // 验证设置是否仍为 official（official 模式下该请求短路返回、不调 B 站，零成本）；
-  // 已切回 custom 时清除记忆并重建封面流程——后台切换刷新即生效，不受记忆 TTL 延迟。
-  if (readMode() === "official") {
-    renderOfficial();
-    bridgeCall("/url", { bvid: bvid, cid: cid, qn: 32 }).then((r) => {
-      if (r && r.player_mode === "official") {
-        return;
+  // 初始渲染：封面卡片 + 信息栏 + 菜单 + 弹层骨架。
+  box.innerHTML =
+    '<div data-stage style="position:relative;cursor:pointer">' +
+    '<img src="' + escapeHtml(proxyImageURL(props.cover)) + '" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000">' +
+    '<span style="position:absolute;right:8px;bottom:8px;padding:2px 8px;border-radius:6px;font-size:12px;color:#fff;background:rgba(0,0,0,.6)">' + escapeHtml(formatDuration(props.duration)) + "</span>" +
+    '<span data-play-btn style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;color:rgba(255,255,255,.92);background:rgba(0,0,0,.18);transition:background .2s">▶</span></div>' +
+    '<div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px">' +
+    '<div><p style="font-size:14px;font-weight:600;color:var(--yy-text,#e8ecf4);line-height:1.5">' + escapeHtml(String(props.title || bvid)) + "</p>" +
+    '<p style="margin-top:2px;font-size:12px;color:var(--yy-text-2,#9aa6bc)">UP：' + escapeHtml(String(props.author || "未知")) + " · 哔哩哔哩</p></div>" +
+    '<div data-menu></div>' +
+    '<p data-tip style="font-size:12px;color:var(--yy-text-3,#9aa6bc);min-height:16px"></p></div>' +
+    '<div data-qr-overlay style="display:none;position:absolute;inset:0;z-index:5;align-items:center;justify-content:center;background:rgba(10,14,22,.92)">' +
+    '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;border-radius:12px;background:var(--yy-card,#161c2b);border:1px solid var(--yy-border,#2a3348)">' +
+    '<div data-qr-img style="display:flex;align-items:center;justify-content:center;width:196px;height:196px;border-radius:8px;background:#fff"></div>' +
+    '<p data-qr-status style="font-size:12px;color:var(--yy-text-2,#9aa6bc)">请用「哔哩哔哩」App 扫码</p>' +
+    '<button type="button" data-qr-close style="height:30px;padding:0 14px;border-radius:999px;font-size:12px;color:var(--yy-text,#e8ecf4);background:transparent;border:1px solid var(--yy-border,#2a3348);cursor:pointer">关闭</button>' +
+    "</div></div>";
+
+  box.style.position = "relative"; // 弹层定位基准
+  box.querySelector("[data-play-btn]").addEventListener("click", () => {
+    if (!playing) {
+      playQn(selectedQn);
+    }
+  });
+  box.querySelector("[data-qr-close]").addEventListener("click", () => {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+    box.querySelector("[data-qr-overlay]").style.display = "none";
+  });
+  renderMenu();
+
+  // 挂载时有 token 先校验有效性（失效静默清除，菜单回退「需登录」标注）。
+  if (guestToken) {
+    bridgeCall("/guest-status", { guest_token: guestToken }).then((r) => {
+      if (!r || r.valid === false) {
+        guestToken = "";
+        guestName = "";
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(NAME_KEY);
+        renderMenu();
       }
-      sessionStorage.removeItem(MODE_KEY);
-      renderShell();
     }).catch(() => {});
-    return () => {
-      box.remove();
-    };
   }
-
-
-  renderShell();
 
   // 清理函数（停轮询与 DASH 装载；video 随 box 移除）。
   return () => {
