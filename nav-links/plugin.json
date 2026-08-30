@@ -1,0 +1,53 @@
+{
+  "id": "nav-links",
+  "name": "精品导航",
+  "version": "1.3.5",
+  "category": "enhancement",
+  "price": 0,
+  "installs": 0,
+  "official": true,
+  "description": "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动抓取图标），前台精美导航页展示，开放接口供浏览器插件凭 Key 同步。",
+  "capabilities": [
+    "api",
+    "frontend",
+    "settings",
+    "data.read",
+    "admin.page",
+    "site.page"
+  ],
+  "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugin-pages/nav-links/admin",
+    "label": "精品导航",
+    "icon": "link"
+  },
+  "settings_schema": [
+    {
+      "key": "page_title",
+      "label": "前台页面标题",
+      "type": "text",
+      "default": "精品导航"
+    },
+    {
+      "key": "page_subtitle",
+      "label": "前台页面副标题",
+      "type": "text",
+      "default": "收藏的优质站点"
+    },
+    {
+      "key": "open_new_tab",
+      "label": "新窗口打开站点",
+      "type": "switch",
+      "default": "on"
+    }
+  ],
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256": "09f08514cbae9b18ead3da8ae13e95cd4d0e9555cb37cdecb16213c019b0ffa4",
+    "sha256_by_platform": {
+      "windows-amd64": "09f08514cbae9b18ead3da8ae13e95cd4d0e9555cb37cdecb16213c019b0ffa4",
+      "linux-arm64": "fcb1206387e9fce359fa68f05e516800856618e01b487b6eda6d4da14ccf7373"
+    }
+  }
+}
