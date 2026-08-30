@@ -51,18 +51,34 @@ type LinkInput struct {
 
 // LinkStore JSON 文件存储（文件系统连接器：互斥锁保护，临时文件 + rename 原子写）。
 type LinkStore struct {
-	mu     sync.Mutex
-	path   string    // links.json 绝对路径
-	links  []NavLink // 全量条目
-	nextID int64     // 下一个自增 ID
+	mu         sync.Mutex
+	path       string    // links.json 绝对路径
+	links      []NavLink // 全量条目
+	categories []string  // 手动管理的分类列表（与条目聚合取并集对外呈现）
+	tags       []string  // 手动管理的标签列表（同上）
+	nextID     int64     // 下一个自增 ID
+}
+
+// storeData 落盘格式（v1.3.7 起：对象；旧版为裸数组，Load 时自动迁移）。
+type storeData struct {
+	Links      []NavLink `json:"links"`
+	Categories []string  `json:"categories"`
+	Tags       []string  `json:"tags"`
 }
 
 // NewLinkStore 创建存储（dir 为插件数据目录；Load 前为空存储）。
 func NewLinkStore(dir string) *LinkStore {
-	return &LinkStore{path: filepath.Join(dir, "links.json"), links: make([]NavLink, 0), nextID: 1}
+	return &LinkStore{
+		path:       filepath.Join(dir, "links.json"),
+		links:      make([]NavLink, 0),
+		categories: make([]string, 0),
+		tags:       make([]string, 0),
+		nextID:     1,
+	}
 }
 
 // Load 从磁盘加载（文件不存在视为空存储；数据损坏返回错误阻断激活，避免静默覆盖）。
+// 兼容 v1.3.5/1.3.6 的裸数组格式：识别后迁移为对象格式并把分类/标签聚合进管理列表。
 func (s *LinkStore) Load() error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -73,16 +89,37 @@ func (s *LinkStore) Load() error {
 		}
 		return err
 	}
-	var links []NavLink
-	if err := json.Unmarshal(raw, &links); err != nil {
-		return errors.New("links.json 数据损坏：" + err.Error())
+	// 探测格式：对象格式首字符为 {（含 links/categories/tags 键），旧数组格式为 [
+		var data storeData
+	trimmed := strings.TrimSpace(string(raw))
+	if strings.HasPrefix(trimmed, "{") {
+		if err := json.Unmarshal(raw, &data); err != nil {
+			return errors.New("links.json 数据损坏：" + err.Error())
+		}
+	} else {
+		var legacy []NavLink
+		if err := json.Unmarshal(raw, &legacy); err != nil {
+			return errors.New("links.json 数据损坏：" + err.Error())
+		}
+		data.Links = legacy
+		// 旧格式迁移：条目中的分类/标签全部升格为管理列表（聚合去重保序）
+		data.Categories = aggregateCategories(legacy)
+		data.Tags = aggregateTags(legacy)
 	}
-	if links == nil {
-		links = make([]NavLink, 0)
+	if data.Links == nil {
+		data.Links = make([]NavLink, 0)
 	}
-	s.links = links
+	if data.Categories == nil {
+		data.Categories = make([]string, 0)
+	}
+	if data.Tags == nil {
+		data.Tags = make([]string, 0)
+	}
+	s.links = data.Links
+	s.categories = data.Categories
+	s.tags = data.Tags
 	s.nextID = 1
-	for _, l := range links {
+	for _, l := range s.links {
 		if l.ID >= s.nextID {
 			s.nextID = l.ID + 1
 		}
@@ -92,7 +129,7 @@ func (s *LinkStore) Load() error {
 
 // saveLocked 落盘（调用方须已持锁；写临时文件后原子替换）。
 func (s *LinkStore) saveLocked() error {
-	raw, err := json.MarshalIndent(s.links, "", "  ")
+	raw, err := json.MarshalIndent(storeData{Links: s.links, Categories: s.categories, Tags: s.tags}, "", "  ")
 	if err != nil {
 		return err
 	}
@@ -121,38 +158,22 @@ func (s *LinkStore) List() []NavLink {
 	return out
 }
 
-// Categories 聚合全部分类（去重，保持首次出现顺序；纯读）。
+// Categories 前台展示用分类：条目聚合（只含有站点使用的分类；纯读）。
 func (s *LinkStore) Categories() []string {
 	s.mu.Lock()
-	defer s.mu.Unlock()
-	seen := make(map[string]bool)
-	out := make([]string, 0)
-	for _, l := range s.links {
-		if l.Category == "" || seen[l.Category] {
-			continue
-		}
-		seen[l.Category] = true
-		out = append(out, l.Category)
-	}
-	return out
+	links := make([]NavLink, len(s.links))
+	copy(links, s.links)
+	s.mu.Unlock()
+	return aggregateCategories(links)
 }
 
-// AllTags 聚合全部标签（去重，保持首次出现顺序；纯读）。
+// AllTags 前台展示用标签：条目聚合（只含有站点使用的标签；纯读）。
 func (s *LinkStore) AllTags() []string {
 	s.mu.Lock()
-	defer s.mu.Unlock()
-	seen := make(map[string]bool)
-	out := make([]string, 0)
-	for _, l := range s.links {
-		for _, t := range l.Tags {
-			if t == "" || seen[t] {
-				continue
-			}
-			seen[t] = true
-			out = append(out, t)
-		}
-	}
-	return out
+	links := make([]NavLink, len(s.links))
+	copy(links, s.links)
+	s.mu.Unlock()
+	return aggregateTags(links)
 }
 
 // Add 新增站点（校验入参 + URL 查重；Sort 取当前最大值 +1）。
