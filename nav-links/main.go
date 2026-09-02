@@ -1,16 +1,19 @@
 // nav-links/main.go
-// 精品导航插件（进程外）：后台收藏站点管理 + 前台公开导航页 + 开放接口。
+// 精品导航插件（进程外）：后台收藏站点管理 + 前台公开/私有导航页 + 开放接口。
 //
 // 功能面：
-//   - 后台管理页 /admin/plugin-pages/nav-links/admin：站点增删改查、分类/标签筛选、
-//     AI 智能分类+标签（data.read 经数据服务调主进程 AI）、自动抓取站点图标；
+//   - 后台管理页 /admin/plugin-pages/nav-links/admin：站点增删改查（含开放/私有可见性）、
+//     分类/标签筛选、AI 智能分类+标签（data.read 经数据服务调主进程 AI）、自动抓取站点图标、
+//     私有导航访问设置（仅自己可见 / 密码访问）；
 //   - 前台公开页 /plugins/nav-links/index（site.page）：分类 Tab + 标签筛选 + 搜索，
-//     卡片网格展示收藏站点；经宿主公开桥接 GET /api/v1/nav/links 读数据（访客可用）；
-//   - 开放网关 GET /api/v1/open/nav/links（接口标识 navlinks.list）：浏览器插件凭
-//     X-Api-Key 同步导航数据（后台「接口开放」页可在 Key 上勾选授权）。
+//     卡片网格展示开放收藏站点；经宿主公开桥接 GET /api/v1/nav/links 读数据（访客可用）；
+//   - 前台私有页 /plugins/nav-links/private（site.page）：私有收藏站点展示，
+//     门禁经宿主桥接 /api/v1/nav/private/**（self=站长登录态；password=访问密码解锁 token）；
+//   - 开放网关 GET/POST /api/v1/open/nav/links（navlinks.list / navlinks.save）：
+//     浏览器插件凭 X-Api-Key 同步导航数据（默认开放口径）。
 //
 // 能力：api + frontend + settings + data.read + admin.page + site.page（不用钩子）。
-// 存储：插件数据目录 data/plugins/nav-links/links.json（JSON 文件，原子写）。
+// 存储：插件数据目录 data/plugins/nav-links/links.json + private.json（JSON 文件，原子写）。
 package main
 
 import (
@@ -32,7 +35,8 @@ const pluginID = "nav-links"
 // NavLinksPlugin 精品导航插件实现（进程外）。
 type NavLinksPlugin struct {
 	mu    sync.Mutex
-	store *LinkStore // 链接存储（激活时创建）
+	store *LinkStore    // 链接存储（激活时创建）
+	priv  *PrivateStore // 私有访问配置存储（激活时创建）
 }
 
 // Info 插件信息（与商城清单一致；能力 + 设置项）。
@@ -40,9 +44,9 @@ func (p *NavLinksPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "精品导航",
-		Version:     "1.3.13",
+		Version:     "1.3.14",
 		Author:      "月言官方",
-		Description: "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动图标），前台精美导航页，开放接口供浏览器插件同步。",
+		Description: "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动图标，开放/私有可见性），前台公开导航页 + 私有导航页（仅自己/密码访问），开放接口供浏览器插件同步。",
 		Capabilities: []string{"api", "frontend", "settings", "data.read", "admin.page", "site.page"},
 		Settings: []sdk.SettingField{
 			{Key: "page_title", Label: "前台页面标题", Type: "text", Default: "精品导航"},
@@ -66,8 +70,13 @@ func (p *NavLinksPlugin) OnActivate(ctx context.Context) error {
 	if err := store.Load(); err != nil {
 		return err
 	}
+	priv := NewPrivateStore(dir)
+	if err := priv.Load(); err != nil {
+		return err
+	}
 	p.mu.Lock()
 	p.store = store
+	p.priv = priv
 	p.mu.Unlock()
 	return nil
 }
@@ -76,6 +85,7 @@ func (p *NavLinksPlugin) OnActivate(ctx context.Context) error {
 func (p *NavLinksPlugin) OnDeactivate(ctx context.Context) error {
 	p.mu.Lock()
 	p.store = nil
+	p.priv = nil
 	p.mu.Unlock()
 	return nil
 }
@@ -83,11 +93,18 @@ func (p *NavLinksPlugin) OnDeactivate(ctx context.Context) error {
 // Hooks 订阅钩子（本插件无钩子需求，数据与展示均走自定义 API）。
 func (p *NavLinksPlugin) Hooks() []sdk.Hook { return nil }
 
-// storeSafe 取当前存储（未激活时返回 nil，调用方判空）。
+// storeSafe 取当前链接存储（未激活时返回 nil，调用方判空）。
 func (p *NavLinksPlugin) storeSafe() *LinkStore {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	return p.store
+}
+
+// privSafe 取当前私有访问配置存储（未激活时返回 nil，调用方判空）。
+func (p *NavLinksPlugin) privSafe() *PrivateStore {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	return p.priv
 }
 
 // jsonResp 便捷构造 JSON 响应（纯函数）。
@@ -219,16 +236,17 @@ func (p *NavLinksPlugin) RegisterAPI(api *sdk.APIMux) {
 	})
 
 	// 公开数据端点（宿主桥接以系统身份调用：前台导航页 / 开放网关共用；
-	// 数据为公开收藏列表，登录用户直接调亦无妨）
+	// 仅返回开放条目——私有条目只经 /private/links 门禁通道外发，聚合分类/标签同步只算开放条目）
 	api.Handle("POST", "/links/public", func(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
 		st := p.storeSafe()
 		if st == nil {
 			return 200, jsonResp(map[string]any{"links": []any{}, "categories": []string{}, "tags": []string{}, "settings": publicSettings(sdk.Config(ctx))}), nil
 		}
+		links := st.ListPublic()
 		return 200, jsonResp(map[string]any{
-			"links":      st.List(),
-			"categories": st.Categories(),
-			"tags":       st.AllTags(),
+			"links":      links,
+			"categories": aggregateCategories(links),
+			"tags":       aggregateTags(links),
 			"settings":   publicSettings(sdk.Config(ctx)),
 		}), nil
 	})
@@ -311,6 +329,9 @@ func (p *NavLinksPlugin) RegisterAPI(api *sdk.APIMux) {
 
 	// 分类/标签独立管理（增/重命名/删除级联）
 	registerTaxonomyAPI(api, p)
+
+	// 私有导航门禁（配置/元数据/解锁/私有数据）
+	registerPrivateAPI(api, p)
 }
 
 // resolveImportIcon 导入条目的图标字段转换（纯流程函数）：
