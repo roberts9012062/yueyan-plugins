@@ -1,5 +1,8 @@
 // nav-links/frontend/nav-page.js
 // 精品导航 · 前台公开页（site.page /plugins/nav-links/index，访客无需登录）。
+// 双主题：优先继承宿主 --yy-* 设计令牌（tokens.css 随 data-theme=cool-moon/mist
+// 切换，ThemeProvider 默认跟随系统，本页随之自动亮暗）；宿主变量缺失的兜底场景
+// 按 prefers-color-scheme 媒体查询给出一套自洽亮/暗配色（与主站令牌取值一致）。
 // 布局：顶部标题与搜索 → 三栏（左分类菜单 / 中导航卡片网格 / 右 3D 球形标签云）。
 // 中栏支持双视图：列表式（默认，图标左内容右）与九宫格（图标居中紧凑方格），
 // 选择记忆在 localStorage（同源，随浏览器持久）。
@@ -36,8 +39,10 @@ function readStoredView() {
 }
 
 // pageStyles 页面级样式（含响应式断点；随页面卸载移除）。
+// 主题变量映射：--nl-* ← 宿主 --yy-* 令牌；兜底值默认冷月（暗），亮色系统偏好下换薄雾（亮）。
 const pageStyles = `
-.nl-page{--nl-border:var(--yy-border,#2a3348);--nl-elev:var(--yy-elev,#fff);--nl-text:var(--yy-text,#e8ecf4);--nl-text2:var(--yy-text-2,#9aa6bc);--nl-accent:var(--yy-accent,#6366f1);--nl-soft:var(--yy-accent-soft,#6366f120);--nl-muted:var(--yy-muted,#161c2b)}
+.nl-page{--nl-border:var(--yy-border,#2a3348);--nl-elev:var(--yy-elevated,#121826);--nl-text:var(--yy-text,#e8ecf4);--nl-text2:var(--yy-text-2,#9aa6bc);--nl-accent:var(--yy-accent,#a8b8d8);--nl-soft:var(--yy-accent-soft,#a8b8d826);--nl-on-accent:var(--yy-on-accent,#0b0f1a)}
+@media (prefers-color-scheme: light){.nl-page{--nl-border:var(--yy-border,#d5dce8);--nl-elev:var(--yy-elevated,#ffffff);--nl-text:var(--yy-text,#1a2233);--nl-text2:var(--yy-text-2,#5c6b82);--nl-accent:var(--yy-accent,#3e5478);--nl-soft:var(--yy-accent-soft,#3e547818);--nl-on-accent:var(--yy-on-accent,#ffffff)}}
 .nl-layout{display:flex;gap:16px;align-items:flex-start;margin-top:14px}
 .nl-aside{flex:none;width:170px;border:1px solid var(--nl-border);border-radius:14px;background:var(--nl-elev);padding:12px;position:sticky;top:16px}
 .nl-aside h3{margin:2px 4px 8px;font-size:12px;font-weight:600;color:var(--nl-text2);letter-spacing:.5px}
@@ -66,7 +71,7 @@ const pageStyles = `
 .nav-sphere:active{cursor:grabbing}
 .nav-sphere-tag{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 10px;border-radius:999px;border:1px solid var(--nl-border);background:var(--nl-elev);font-size:12px;color:var(--nl-text2);cursor:pointer;white-space:nowrap;will-change:transform,opacity;user-select:none}
 .nav-sphere-tag:hover{color:var(--nl-text);border-color:var(--nl-accent)}
-.nav-sphere-tag-active{background:var(--nl-accent);border-color:var(--nl-accent);color:#fff;font-weight:600}
+.nav-sphere-tag-active{background:var(--nl-accent);border-color:var(--nl-accent);color:var(--nl-on-accent);font-weight:600}
 .nav-sphere-count{font-size:10px;opacity:.65}
 @media (max-width:900px){
  .nl-layout{flex-direction:column}
