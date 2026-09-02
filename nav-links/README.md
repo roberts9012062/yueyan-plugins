@@ -39,7 +39,12 @@
 
 | 接口标识 | 方法 | 路径 | 说明 |
 |---|---|---|---|
-| `navlinks.list` | GET | `/api/v1/open/nav/links` | 全部收藏站点（名称/地址/分类/标签/简介/图标 dataURL） |
+| `navlinks.list` | GET | `/api/v1/open/nav/links` | 全部**开放**收藏站点（名称/地址/分类/标签/简介/图标 dataURL） |
+| `navlinks.private.list` | GET | `/api/v1/open/nav/private/links` | 全部**私有**收藏站点（响应结构与 `navlinks.list` 一致，仅含私有条目） |
+| `navlinks.private.config` | GET | `/api/v1/open/nav/private/config` | 读取私有访问设置（`{mode, has_password, title, subtitle, count}`，不含密码材料） |
+| `navlinks.private.save` | POST | `/api/v1/open/nav/private/config` | 修改私有访问设置（body `{mode, password?, title?, subtitle?}`；password 留空=不改，修改后前台旧解锁失效） |
+
+**写入可见性**：`navlinks.save` 的每条链接支持可选 `visibility` 字段——不传或 `open`=开放（默认），`private`=私有（进入私有导航页）。
 
 调用示例：
 
@@ -57,3 +62,4 @@ const body = await res.json(); // {code, message, data}，code=0 成功
 - **访客能看到导航页吗？** 可以。前台页面与数据端点均公开，无需登录；管理操作仅管理员可用。
 - **私有站点会被泄露吗？** 不会。公开数据端点只输出开放条目（聚合分类/标签同样只算开放条目）；私有数据端点按「管理员登录态 / 解锁 token」鉴权且响应 `no-store`。
 - **浏览器插件同步的站点进哪个页面？** 同步默认按「开放」写入公开导航页；插件端同步通道预留 `visibility` 字段，传 `private` 即可入私有页。
+- **浏览器插件如何对接私有导航？** 在后台「接口开放」页面给 Key 勾选 `navlinks.private.list`（读私有数据）/ `navlinks.private.config`（读设置）/ `navlinks.private.save`（改设置）三个目录条目；同步到站点时链接带 `visibility: "private"` 即入私有页，读取私有分组走 `GET /api/v1/open/nav/private/links`。
