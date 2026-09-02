@@ -26,17 +26,24 @@ const (
 	linkIconMaxRunes  = 140 * 1024 // 图标 dataURL 字符上限（约 100KB 二进制，抓取侧另限 64KB）
 )
 
+// 可见性取值（v1.3.14 起）：空与 open 均为开放（旧数据无字段天然兼容），private 为私有。
+const (
+	visibilityOpen    = ""         // 开放（默认；省存储按空串存储）
+	visibilityPrivate = "private"  // 私有（仅私有导航页展示，公开页不出现）
+)
+
 // NavLink 导航条目（存储结构；Icon 为 dataURL 内嵌，前台展示不依赖外部网络资源）。
 type NavLink struct {
-	ID          int64    `json:"id"`          // 站点 ID（自增）
-	URL         string   `json:"url"`         // 站点地址（http/https）
-	Name        string   `json:"name"`        // 网站名字
-	Category    string   `json:"category"`    // 分类（必填）
-	Tags        []string `json:"tags"`        // 标签（可选，≤10 个）
-	Description string   `json:"description"` // 站点简介
-	Icon        string   `json:"icon"`        // 图标 dataURL（空=前端首字母色块占位）
-	Sort        int      `json:"sort"`        // 手动排序序号（小在前）
-	CreatedAt   string   `json:"created_at"`  // 收藏时间（RFC3339）
+	ID          int64    `json:"id"`                  // 站点 ID（自增）
+	URL         string   `json:"url"`                 // 站点地址（http/https）
+	Name        string   `json:"name"`                // 网站名字
+	Category    string   `json:"category"`            // 分类（必填）
+	Tags        []string `json:"tags"`                // 标签（可选，≤10 个）
+	Description string   `json:"description"`         // 站点简介
+	Icon        string   `json:"icon"`                // 图标 dataURL（空=前端首字母色块占位）
+	Visibility  string   `json:"visibility,omitempty"` // 可见性（空=开放；private=私有）
+	Sort        int      `json:"sort"`                // 手动排序序号（小在前）
+	CreatedAt   string   `json:"created_at"`          // 收藏时间（RFC3339）
 }
 
 // LinkInput 新增/更新入参（表单字段，校验前后的同构载体）。
@@ -47,6 +54,7 @@ type LinkInput struct {
 	Tags        []string `json:"tags"`
 	Description string   `json:"description"`
 	Icon        string   `json:"icon"`
+	Visibility  string   `json:"visibility"` // 空/open=开放（默认）；private=私有
 }
 
 // LinkStore JSON 文件存储（文件系统连接器：互斥锁保护，临时文件 + rename 原子写）。
@@ -158,6 +166,30 @@ func (s *LinkStore) List() []NavLink {
 	return out
 }
 
+// ListPublic 返回开放条目拷贝（前台公开页数据源：私有条目不外泄；排序规则同 List）。
+func (s *LinkStore) ListPublic() []NavLink {
+	all := s.List()
+	out := make([]NavLink, 0, len(all))
+	for _, l := range all {
+		if l.Visibility != visibilityPrivate {
+			out = append(out, l)
+		}
+	}
+	return out
+}
+
+// ListPrivate 返回私有条目拷贝（私有导航页数据源；排序规则同 List）。
+func (s *LinkStore) ListPrivate() []NavLink {
+	all := s.List()
+	out := make([]NavLink, 0, len(all))
+	for _, l := range all {
+		if l.Visibility == visibilityPrivate {
+			out = append(out, l)
+		}
+	}
+	return out
+}
+
 // Categories 前台展示用分类：条目聚合（只含有站点使用的分类；纯读）。
 func (s *LinkStore) Categories() []string {
 	s.mu.Lock()
@@ -199,6 +231,7 @@ func (s *LinkStore) Add(in LinkInput) (NavLink, error) {
 		Tags:        in.Tags,
 		Description: in.Description,
 		Icon:        in.Icon,
+		Visibility:  in.Visibility,
 		Sort:        maxSort + 1,
 		CreatedAt:   time.Now().Format(time.RFC3339),
 	}
@@ -235,6 +268,7 @@ func (s *LinkStore) Update(id int64, in LinkInput) (NavLink, bool, error) {
 	s.links[idx].Tags = in.Tags
 	s.links[idx].Description = in.Description
 	s.links[idx].Icon = in.Icon
+	s.links[idx].Visibility = in.Visibility
 	if err := s.saveLocked(); err != nil {
 		return NavLink{}, true, errors.New("保存失败：" + err.Error())
 	}
@@ -316,6 +350,11 @@ func (s *LinkStore) ImportLinks(items []LinkInput) (int, int, error) {
 			s.links[idx].Category = in.Category
 			s.links[idx].Tags = in.Tags
 			s.links[idx].Description = in.Description
+			// 可见性为空表示调用方未指定（浏览器插件同步默认开放口径）——
+			// 保留站点已有值，避免批量同步把站长手工标记的私有条目刷回开放
+			if in.Visibility != visibilityOpen {
+				s.links[idx].Visibility = in.Visibility
+			}
 			if in.Icon != "" {
 				s.links[idx].Icon = in.Icon
 			}
@@ -331,6 +370,7 @@ func (s *LinkStore) ImportLinks(items []LinkInput) (int, int, error) {
 			Tags:        in.Tags,
 			Description: in.Description,
 			Icon:        in.Icon,
+			Visibility:  in.Visibility,
 			Sort:        maxSort,
 			CreatedAt:   time.Now().Format(time.RFC3339),
 		})
@@ -387,6 +427,7 @@ func validateLinkInput(in LinkInput) (LinkInput, error) {
 		Tags:        cleanTags(in.Tags),
 		Description: strings.TrimSpace(in.Description),
 		Icon:        strings.TrimSpace(in.Icon),
+		Visibility:  normalizeVisibility(in.Visibility),
 	}
 	if out.URL == "" {
 		return LinkInput{}, errors.New("请填写站点地址")
@@ -416,6 +457,16 @@ func validateLinkInput(in LinkInput) (LinkInput, error) {
 	return out, nil
 }
 
+// normalizeVisibility 可见性归一（纯函数）：空/open → 空（开放）；private → private；
+// 其余非法值一律回退开放（保守拒绝而非报错——同步通道的宽容口径）。
+func normalizeVisibility(raw string) string {
+	v := strings.TrimSpace(raw)
+	if v == visibilityPrivate {
+		return visibilityPrivate
+	}
+	return visibilityOpen
+}
+
 // parseLinkInput 解析新增请求 body（纯函数）。
 func parseLinkInput(body []byte) (LinkInput, error) {
 	var in LinkInput
@@ -435,6 +486,7 @@ func parseLinkUpdateInput(body []byte) (int64, LinkInput, error) {
 		Tags        []string `json:"tags"`
 		Description string   `json:"description"`
 		Icon        string   `json:"icon"`
+		Visibility  string   `json:"visibility"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		return 0, LinkInput{}, errors.New("请求体需为 JSON 对象")
@@ -449,6 +501,7 @@ func parseLinkUpdateInput(body []byte) (int64, LinkInput, error) {
 		Tags:        req.Tags,
 		Description: req.Description,
 		Icon:        req.Icon,
+		Visibility:  req.Visibility,
 	})
 	if err != nil {
 		return 0, LinkInput{}, err
