@@ -4,8 +4,9 @@
 // ctx: { container, api, user, params: {pluginId, page} }
 // 表单（添加/编辑 + AI 智能分类 + 自动图标）拆分在 link-form.js（保持单文件精简）。
 import { escapeHtml } from "/plugin-sdk/shared.js";
-import { openLinkForm } from "./link-form.js?v=2"; // 版本参数：绕模块图缓存（升级必改）
+import { openLinkForm } from "./link-form.js?v=3"; // 版本参数：绕模块图缓存（升级必改）
 import { openTaxonomyManager } from "./manage-list.js?v=2";
+import { openPrivateSettings } from "./private-settings.js?v=1";
 
 // 样式片段（与宿主后台 --yy-* 设计变量对齐，兜底值保证明暗主题可用）。
 const colorText = "color:var(--yy-text,#e8ecf4)";
@@ -27,7 +28,8 @@ export default function registerPage(ctx) {
   box.innerHTML =
     '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">' +
     '<div style="flex:1"><h1 style="font-size:18px;font-weight:700;' + colorText + '">精品导航 · 收藏管理</h1>' +
-    '<p style="font-size:12px;' + colorText2 + '">收藏的站点将展示在前台「精品导航」页面，访客无需登录即可浏览。</p></div>' +
+    '<p style="font-size:12px;' + colorText2 + '">「开放」站点展示在前台导航页（访客可浏览）；「私有」站点进入私有导航页（访问方式见「私有设置」）。</p></div>' +
+    '<button type="button" data-private-settings style="height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:13px;' + colorText + ';cursor:pointer;margin-right:8px">🔒 私有设置</button>' +
     '<button type="button" data-add style="height:36px;padding:0 16px;border-radius:999px;border:none;background:var(--yy-accent,#6366f1);color:#fff;font-size:13px;font-weight:600;cursor:pointer">＋ 添加站点</button></div>' +
     // 筛选行
     '<div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">' +
@@ -95,6 +97,9 @@ export default function registerPage(ctx) {
     '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
     '<span style="font-size:14px;font-weight:600;' + colorText + '">' + escapeHtml(link.name) + "</span>" +
     '<span style="font-size:11px;padding:2px 8px;border-radius:999px;background:var(--yy-accent-soft,#6366f120);' + colorText2 + '">' + escapeHtml(link.category || "未分类") + "</span>" +
+    (link.visibility === "private"
+      ? '<span title="展示在前台「私有导航」页" style="font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid rgba(245,158,11,.5);color:#f59e0b">🔒 私有</span>'
+      : '<span title="展示在前台公开导航页" style="font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--yy-border,#2a3348);' + colorText2 + '">开放</span>') +
     (link.tags || []).map((t) => '<span style="font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--yy-border,#2a3348);' + colorText2 + '">' + escapeHtml(t) + "</span>").join("") +
     "</div>" +
     '<p style="margin-top:2px;font-size:12px;' + colorText2 + ';overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(link.url) + "</p>" +
@@ -159,6 +164,8 @@ export default function registerPage(ctx) {
   box.querySelector("[data-add]").addEventListener("click", () =>
     openLinkForm({ api: ctx.api, initial: null, categories: state.categories, onSaved: load })
   );
+  // 私有导航设置（访问方式 + 访问密码 + 私有页文案）
+  box.querySelector("[data-private-settings]").addEventListener("click", () => openPrivateSettings({ api: ctx.api }));
   // 分类管理弹层（增/重命名/删除级联条目）
   box.querySelector("[data-mgmt-cat]").addEventListener("click", () =>
     openTaxonomyManager({
