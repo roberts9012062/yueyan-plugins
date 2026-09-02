@@ -22,6 +22,7 @@ export function openLinkForm(opts) {
     tags: initial ? (initial.tags || []).slice() : [],
     description: initial ? initial.description || "" : "",
     icon: initial ? initial.icon || "" : "",
+    visibility: initial && initial.visibility === "private" ? "private" : "open", // 默认开放：私有条目只进私有导航页
   };
   let aiModels = [];
 
@@ -53,6 +54,11 @@ export function openLinkForm(opts) {
     '<input data-f-tag type="text" placeholder="输入标签后回车" style="' + inputStyle + '"></div>' +
     '<div style="margin-top:10px"><label style="' + labelStyle + '">站点简介（可选，≤200 字）</label>' +
     '<textarea data-f-desc rows="2" maxlength="200" placeholder="一句话介绍这个站点…" style="' + inputStyle + ';height:auto;padding:8px 12px;resize:none"></textarea></div>' +
+    // 可见性（默认开放；私有条目只出现在前台「私有导航」页）
+    '<div style="margin-top:10px"><label style="' + labelStyle + '">可见性（开放站点展示在前台导航页；私有站点进入私有导航页）</label>' +
+    '<div style="display:flex;gap:8px">' +
+    '<button type="button" data-vis="open" style="flex:1;height:36px;border-radius:8px;cursor:pointer;font-size:13px">🌐 开放</button>' +
+    '<button type="button" data-vis="private" style="flex:1;height:36px;border-radius:8px;cursor:pointer;font-size:13px">🔒 私有</button></div></div>' +
     // AI 区
     '<div style="margin-top:14px;border-radius:10px;padding:10px 12px;background:var(--yy-muted,#6366f110)">' +
     '<div style="display:flex;align-items:center;gap:8px">' +
@@ -165,6 +171,25 @@ export function openLinkForm(opts) {
   catEl.addEventListener("input", () => (form.category = catEl.value));
   descEl.addEventListener("input", () => (form.description = descEl.value));
 
+  // ---------- 可见性切换 ----------
+  // renderVis 高亮当前选中项（选中=实底强调；未选中=描边弱化）。
+  const renderVis = () => {
+    card.querySelectorAll("[data-vis]").forEach((btn) => {
+      const on = btn.dataset.vis === form.visibility;
+      btn.style.border = on ? "none" : "1px solid var(--yy-border,#2a3348)";
+      btn.style.background = on ? "var(--yy-accent,#6366f1)" : "transparent";
+      btn.style.color = on ? "#fff" : "var(--yy-text,#e8ecf4)";
+      btn.style.fontWeight = on ? "600" : "400";
+    });
+  };
+  card.querySelectorAll("[data-vis]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      form.visibility = btn.dataset.vis;
+      renderVis();
+    })
+  );
+  renderVis();
+
   // ---------- AI 智能分类 ----------
   api
     .get("/ai/models")
@@ -247,6 +272,7 @@ export function openLinkForm(opts) {
       tags: form.tags.slice(),
       description: descEl.value.trim(),
       icon: form.icon,
+      visibility: form.visibility,
     };
     try {
       const r = isEdit ? await api.post("/links/update", Object.assign({ id: initial.id }, payload)) : await api.post("/links", payload);
