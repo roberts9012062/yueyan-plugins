@@ -1,12 +1,12 @@
 {
   "id": "nav-links",
   "name": "精品导航",
-  "version": "1.3.13",
+  "version": "1.3.14",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
   "official": true,
-  "description": "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动抓取图标），前台精美导航页展示，开放接口供浏览器插件凭 Key 同步。",
+  "description": "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动抓取图标），前台公开导航页 + 私有导航页（仅自己可见/密码访问），开放接口供浏览器插件凭 Key 同步。",
   "capabilities": [
     "api",
     "frontend",
@@ -44,10 +44,10 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "60330391605732362bc3b9216fefb0eef599e07638eafb21a3c9dbb8f92aa119",
+    "sha256": "038682476a9ea27c035e391479c1263f067897167646bc93e1e066db9860b945",
     "sha256_by_platform": {
-      "windows-amd64": "60330391605732362bc3b9216fefb0eef599e07638eafb21a3c9dbb8f92aa119",
-      "linux-arm64": "25712c28808af17655b8a5fd67e59b74ba7629c73203a87d4751f6546a7c2b60"
+      "windows-amd64": "038682476a9ea27c035e391479c1263f067897167646bc93e1e066db9860b945",
+      "linux-arm64": "5e780b06b6d4a469ad3c101b296a768f27bd604ffb12b1cefd9e1679864ad179"
     }
   }
 }
