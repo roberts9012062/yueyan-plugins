@@ -7,12 +7,12 @@
     },
     {
       "route": "index",
-      "entry": "nav-page.js?v=7",
+      "entry": "nav-page.js?v=8",
       "scope": "site"
     },
     {
       "route": "private",
-      "entry": "private-page.js?v=1",
+      "entry": "private-page.js?v=2",
       "scope": "site"
     }
   ],
@@ -20,10 +20,6 @@
     {
       "label": "精品导航",
       "path": "/plugins/nav-links/index"
-    },
-    {
-      "label": "私有导航",
-      "path": "/plugins/nav-links/private"
     }
   ]
 }
