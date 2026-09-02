@@ -3,11 +3,16 @@
   "pages": [
     {
       "route": "admin",
-      "entry": "admin-page.js?v=2"
+      "entry": "admin-page.js?v=3"
     },
     {
       "route": "index",
-      "entry": "nav-page.js?v=6",
+      "entry": "nav-page.js?v=7",
+      "scope": "site"
+    },
+    {
+      "route": "private",
+      "entry": "private-page.js?v=1",
       "scope": "site"
     }
   ],
@@ -15,6 +20,10 @@
     {
       "label": "精品导航",
       "path": "/plugins/nav-links/index"
+    },
+    {
+      "label": "私有导航",
+      "path": "/plugins/nav-links/private"
     }
   ]
 }
