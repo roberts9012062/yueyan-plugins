@@ -12,3 +12,11 @@ compatibility_date = "2024-01-01"
 
 # 无需 R2/D1/KV 绑定——本 Worker 只做持 token 反代 + Cache API 缓存。
 # TG_BOT_TOKEN 经 secret 注入（不入库不入仓库）：wrangler secret put TG_BOT_TOKEN
+
+# 可选：自定义域名绑定（workers.dev 在部分网络被阻断，推荐绑自有域名）。
+# 域名须托管在同一 Cloudflare 账号；deploy 时自动创建子域 DNS 记录与证书。
+# 取消注释并替换为你的域名即可：
+#
+# routes = [
+#   { pattern = "tg.你的域名.com", custom_domain = true }
+# ]
