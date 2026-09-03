@@ -1,7 +1,7 @@
 {
   "id": "nav-links",
   "name": "精品导航",
-  "version": "1.3.17",
+  "version": "1.3.18",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
@@ -101,10 +101,10 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "695d52e617724af627bcd129f642020ed41dd821d0ade344e5067ad026edebb3",
+    "sha256": "ab9a00f4c7ec1c49abd1a4fe09b68f603a41af62f2e5affbaaad2fe9260e85b8",
     "sha256_by_platform": {
-      "windows-amd64": "695d52e617724af627bcd129f642020ed41dd821d0ade344e5067ad026edebb3",
-      "linux-arm64": "2041a5a6090fdcca9c57bad7ce50093cae06bb1731b346e8cb2e2bf355e455a1"
+      "windows-amd64": "ab9a00f4c7ec1c49abd1a4fe09b68f603a41af62f2e5affbaaad2fe9260e85b8",
+      "linux-arm64": "46e92dd69f89658e2404dad331904595a74df5f5bc44da9e824c51e7e32e419f"
     }
   }
 }
