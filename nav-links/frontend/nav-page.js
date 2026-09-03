@@ -4,7 +4,7 @@
 // password=访问密码解锁）后展示私有站点——私有导航不单独占据前台导航入口。
 // 看板渲染复用 board.js，门禁流程复用 private-gate.js。
 // ctx: { container, api, user, params: {pluginId, page} }
-import { createNavBoard } from "./board.js?v=1";
+import { createNavBoard } from "./board.js?v=2";
 import { loadPrivateView } from "./private-gate.js?v=1";
 
 // fetchPublicLinks 拉取公开导航数据（直通插件 JSON；仅开放条目）。
