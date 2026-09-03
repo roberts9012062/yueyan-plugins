@@ -3,7 +3,7 @@
   "pages": [
     {
       "route": "admin",
-      "entry": "admin-page.js?v=3"
+      "entry": "admin-page.js?v=4"
     },
     {
       "route": "index",
