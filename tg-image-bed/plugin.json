@@ -1,7 +1,7 @@
 {
   "id": "tg-image-bed",
   "name": "TG图床",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
@@ -11,6 +11,54 @@
     "settings",
     "api",
     "admin.page"
+  ],
+  "open_endpoints": [
+    {
+      "endpoint": "tg-image-bed.upload",
+      "method": "POST",
+      "path": "/api/v1/open/plugins/tg-image-bed/upload",
+      "name": "上传图片",
+      "description": "上传图片到 Telegram 频道图床（原图保真），返回公开访问 URL 与 Markdown。需安装并启用「TG图床」插件并完成 Bot 配对",
+      "params": [
+        {
+          "name": "filename",
+          "type": "string",
+          "location": "body",
+          "required": true,
+          "description": "原始文件名（含扩展名，仅支持 jpg/jpeg/png/gif/webp）"
+        },
+        {
+          "name": "mime",
+          "type": "string",
+          "location": "body",
+          "required": true,
+          "description": "MIME 类型（如 image/png）"
+        },
+        {
+          "name": "content_b64",
+          "type": "string",
+          "location": "body",
+          "required": true,
+          "description": "图片内容 base64（单图 ≤ 20MB）"
+        }
+      ]
+    },
+    {
+      "endpoint": "tg-image-bed.list",
+      "method": "POST",
+      "path": "/api/v1/open/plugins/tg-image-bed/list",
+      "name": "图库列表",
+      "description": "分页查询上传历史（新在前，每页 60 条，含公开 URL 与 Markdown）。需安装并启用「TG图床」插件",
+      "params": [
+        {
+          "name": "cursor",
+          "type": "string",
+          "location": "body",
+          "required": false,
+          "description": "分页游标（首页留空；响应 cursor 非空表示还有下一页）"
+        }
+      ]
+    }
   ],
   "storage_provider": true,
   "storage_raw_upload": true,
@@ -60,8 +108,8 @@
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
     "sha256_by_platform": {
-      "linux-arm64": "de90ea8cdfcff325948ab6cfcdedd0b60a0e68b13034df9fdb72ce5ef145aac5",
-      "windows-amd64": "756f6131c4cfdff9edd79861608dba0e0bbbb0f73f539086e400315dd13be798"
+      "linux-arm64": "aeea146884a24ed767f5fccf85624fcb4fa2366bac035c44ffbcd86352b036f0",
+      "windows-amd64": "fc7ff8d5679bd7ffe2a779cefa8e8e563db2d4e0af266d4342cccf5e9217bfac"
     }
   }
 }
