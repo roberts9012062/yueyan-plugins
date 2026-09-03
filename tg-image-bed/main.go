@@ -48,7 +48,7 @@ func (p *TGImageBedPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "TG图床",
-		Version:     "0.2.0",
+		Version:     "0.3.0",
 		Author:      "月言官方",
 		Description: "Telegram 频道图床：图片上传直达 TG（Bot API 保原图），自备反代 Worker 访问，后台图库管理与 Markdown 插图。",
 		Capabilities: []string{"settings", "api", "admin.page"},
@@ -92,12 +92,16 @@ func (p *TGImageBedPlugin) Hooks() []sdk.Hook { return nil }
 //	POST /manage/upload    图库直传 {filename,mime,content_b64}（登录用户——插图是常规发帖行为）
 //	POST /manage/list      上传历史 {cursor} → {objects,cursor}（登录用户：图库页数据源）
 //	POST /manage/delete    批量删除 {file_ids:[]}（管理员：尽力删频道消息 + 移除历史）
+//	POST /upload /list     开放网关别名（open_endpoints 声明：浏览器插件等外部应用凭
+//	                       API Key 经 /api/v1/open/plugins/tg-image-bed/* 调用，System 身份转发）
 func (p *TGImageBedPlugin) RegisterAPI(api *sdk.APIMux) {
 	api.Handle("GET", "/storage/health", p.handleHealth)
 	api.Handle("POST", "/storage/upload", p.handleUpload)
 	api.Handle("POST", "/manage/upload", p.handleUpload)
 	api.Handle("POST", "/manage/list", p.handleList)
 	api.Handle("POST", "/manage/delete", p.handleDelete)
+	api.Handle("POST", "/upload", p.handleUpload)
+	api.Handle("POST", "/list", p.handleList)
 }
 
 // handleHealth 配对探测：配置完整 → getMe/getChat 验 Bot 与频道 → 探测反代 Worker 存活。
