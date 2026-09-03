@@ -16,7 +16,7 @@ Telegram 频道图床：把博客图片存进 Telegram 频道（Bot API），访
 |---|---|---|
 | Telegram Bot | [@BotFather](https://t.me/BotFather) 创建，拿到 Token | 上传通道 |
 | Telegram 频道/群 | 把 Bot 拉入并设为**管理员** | 图片存储桶 |
-| 反代 Worker | 部署本插件 `worker/` 目录的参考实现（[部署说明](worker/README.md)） | 访客匿名读图（持 token 反代 + 缓存） |
+| 反代 Worker | **开源仓库部署：[tg-image-bed-worker](https://github.com/roberts9012062/tg-image-bed-worker)**（wrangler 三步部署 + Dashboard 零命令行两种教程） | 访客匿名读图（持 token 反代 + 缓存） |
 
 ## 安装与配置
 
