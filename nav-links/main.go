@@ -44,7 +44,7 @@ func (p *NavLinksPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "精品导航",
-		Version:     "1.3.17",
+		Version:     "1.3.18",
 		Author:      "月言官方",
 		Description: "精品站点导航：后台收藏管理（分类/标签/AI 智能分类/自动图标，开放/私有可见性），前台公开导航页 + 私有导航页（仅自己/密码访问），开放接口供浏览器插件同步。",
 		Capabilities: []string{"api", "frontend", "settings", "data.read", "admin.page", "site.page"},
@@ -265,6 +265,10 @@ func (p *NavLinksPlugin) RegisterAPI(api *sdk.APIMux) {
 		}
 		return 200, jsonResp(map[string]any{"icon": dataURL, "source": source}), nil
 	})
+
+	// 批量补抓图标（body: {ids:[…]}；实现拆分在 icons.go——并发抓取 + 单条 8s 预算，
+	// 适配宿主代理 10s 超时；管理页「批量补图标」分批循环调用）
+	registerIconsAPI(api, p)
 
 	// AI 模型列表（照抄 seo-optimizer 模式：无配置返回空，前端提示跳转配置）
 	api.Handle("GET", "/ai/models", func(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
