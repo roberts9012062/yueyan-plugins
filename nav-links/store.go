@@ -294,6 +294,30 @@ func (s *LinkStore) Delete(id int64) bool {
 	return true
 }
 
+// UpdateIcon 仅更新站点图标（批量补抓图标通道；不动其他字段，失败调用方不落盘）。
+// 返回是否找到并更新；icon 非空校验与 validateLinkInput 同口径（data:image/* 且 ≤100KB）。
+func (s *LinkStore) UpdateIcon(id int64, icon string) bool {
+	icon = strings.TrimSpace(icon)
+	if icon != "" && (!strings.HasPrefix(icon, "data:image/") || len(icon) > linkIconMaxRunes) {
+		return false
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	idx := -1
+	for i, l := range s.links {
+		if l.ID == id {
+			idx = i
+			break
+		}
+	}
+	if idx < 0 {
+		return false
+	}
+	s.links[idx].Icon = icon
+	_ = s.saveLocked()
+	return true
+}
+
 // Reorder 按给定 ID 顺序重排 Sort（未出现在列表中的条目保持相对顺序排在末尾）。
 func (s *LinkStore) Reorder(ids []int64) {
 	s.mu.Lock()
