@@ -1,1 +1,202 @@
-Ly8gbWFya2V0cGxhY2UtcmVwby90Zy1pbWFnZS1iZWQvdGVsZWdyYW0uZ28KLy8gVGVsZWdyYW0gQm90IEFQSSDlrqLmiLfnq6/vvIjlm77luormuKDpgZPvvInvvJrlj5HpgIHlm77niYfliLDpopHpgZMv576k44CB6YWN5a+55o6i5rWL44CB5Yig6Zmk5raI5oGv44CCCi8vIOacuuWItuWvuem9kCB0ZWxlZ3JhcGgtSW1hZ2Ug55qEIFRHIOa4oOmBk++8iHNlbmREb2N1bWVudC9zZW5kUGhvdG8gKyBnZXRGaWxl77yJ77yaCi8vIEJvdCBUb2tlbiDlj6rlrZjlnKjkuo7mj5Lku7bov5vnqIvlhoXlrZjvvIznu53kuI3ov5vlhaXku7vkvZXov5Tlm57nu5nliY3nq6/nmoQgVVJMIOaIluWTjeW6lOOAggovLyDphY3lr7nkv6Hmga/mr4/mrKHosIPnlKjkvKDlhaXvvIjphY3nva7ljbPml7bnlJ/mlYjvvIzml6Dov5vnqIvlhoXnvJPlrZjvvInvvJthcGlfcHJveHkg5Y+v6YCJ77yI5aSn6ZmG5pyN5Yqh5Zmo5Lit6L2s77yJ44CCCnBhY2thZ2UgbWFpbgoKaW1wb3J0ICgKCSJieXRlcyIKCSJlbmNvZGluZy9qc29uIgoJImZtdCIKCSJpbyIKCSJtaW1lL211bHRpcGFydCIKCSJuZXQvaHR0cCIKCSJuZXQvdXJsIgoJInN0cmluZ3MiCgkidGltZSIKKQoKLy8gdGdDb25maWcgVEcg5rig6YGT6YWN5a+56YWN572u77yI5LuO5o+S5Lu26K6+572u6K+75Y+W77yb57qv5pWw5o2u77yJ44CCCnR5cGUgdGdDb25maWcgc3RydWN0IHsKCUJvdFRva2VuIHN0cmluZyAvLyBCb3QgVG9rZW7vvIhAQm90RmF0aGVyIOWIm+W7uu+8jOWmgiAxMjM0NTY6QUF4eHjvvIkKCUNoYXRJRCAgIHN0cmluZyAvLyDpopHpgZMv576kIGNoYXRfaWTvvIjmlbDlrZfotJ/mlbDmiJYgQOWFrOW8gOmikemBk+eUqOaIt+WQje+8iQoJUHJveHkgICAgc3RyaW5nIC8vIOWPr+mAiSBIVFRQIOS7o+eQhuWcsOWdgO+8iOepuj3nm7Tov57vvJvlpKfpmYbmnI3liqHlmajlu7rorq7phY3nva7vvIkKfQoKLy8g6LaF5pe277ya5o6i5rWL5b+r6YCf5aSx6LSl77yM5LiK5Lyg5pS+5a6977yI5ZCr5aSn5Zu+5LiO6Leo5Luj55CG5Lyg6L6T77yJ44CCCmNvbnN0ICgKCXRnUHJvYmVUaW1lb3V0ICA9IDEwICogdGltZS5TZWNvbmQKCXRnVXBsb2FkVGltZW91dCA9IDYwICogdGltZS5TZWNvbmQKKQoKLy8gdGdNYXhEb3dubG9hZFNpemUgQm90IEFQSSBnZXRGaWxlIOS4i+i9veS4iumZkO+8iDIwTULvvInigJTigJTkuIrkvKDliY3nva7moKHpqozvvIzpgb/lhY3kvKDkuIrljrvlj5bkuI3lm57jgIIKY29uc3QgdGdNYXhEb3dubG9hZFNpemUgPSAyMCA8PCAyMAoKLy8gbmV3VEdDbGllbnQg5oyJ5Y+v6YCJ5Luj55CG5p6E6YCgIEhUVFAg5a6i5oi356uv77yI57qv5Ye95pWw77ybaHR0cHMg57uPIENPTk5FQ1Qg6Zqn6YGT6LWw5Luj55CG77yJ44CCCmZ1bmMgbmV3VEdDbGllbnQocHJveHlBZGRyIHN0cmluZywgdGltZW91dCB0aW1lLkR1cmF0aW9uKSAoKmh0dHAuQ2xpZW50LCBlcnJvcikgewoJdHJhbnNwb3J0IDo9ICZodHRwLlRyYW5zcG9ydHt9CglpZiB0cmltbWVkIDo9IHN0cmluZ3MuVHJpbVNwYWNlKHByb3h5QWRkcik7IHRyaW1tZWQgIT0gIiIgewoJCXByb3h5VVJMLCBlcnIgOj0gdXJsLlBhcnNlKHRyaW1tZWQpCgkJaWYgZXJyICE9IG5pbCB8fCBwcm94eVVSTC5TY2hlbWUgPT0gIiIgfHwgcHJveHlVUkwuSG9zdCA9PSAiIiB7CgkJCXJldHVybiBuaWwsIGZtdC5FcnJvcmYoIuS7o+eQhuWcsOWdgOaXoOaViO+8iOmcgOW9ouWmgiBodHRwOi8vMTI3LjAuMC4xOjc4OTDvvInvvJolcyIsIHRyaW1tZWQpCgkJfQoJCXRyYW5zcG9ydC5Qcm94eSA9IGh0dHAuUHJveHlVUkwocHJveHlVUkwpCgl9CglyZXR1cm4gJmh0dHAuQ2xpZW50e1RpbWVvdXQ6IHRpbWVvdXQsIFRyYW5zcG9ydDogdHJhbnNwb3J0fSwgbmlsCn0KCi8vIHRnRW52ZWxvcGUgQm90IEFQSSDpgJrnlKjlk43lupTljIXnu5zvvIhyZXN1bHQg5oyJ56uv54K55LqM5qyh6Kej5p6Q77yb5aSx6LSl5pe2IGRlc2NyaXB0aW9uIOS4uueUqOaIt+WPr+ivu+WOn+WboO+8ieOAggp0eXBlIHRnRW52ZWxvcGUgc3RydWN0IHsKCU9LICAgICAgICAgIGJvb2wgICAgICAgICAgICBganNvbjoib2siYAoJRGVzY3JpcHRpb24gc3RyaW5nICAgICAgICAgIGBqc29uOiJkZXNjcmlwdGlvbiJgCglSZXN1bHQgICAgICBqc29uLlJhd01lc3NhZ2UgYGpzb246InJlc3VsdCJgCn0KCi8vIGNhbGxURyDosIPnlKggQm90IEFQSSDmn6Xor6LlvI/nq6/ngrnvvIhHRVTvvJtnZXRNZS9nZXRDaGF0L2dldEZpbGUvZGVsZXRlTWVzc2FnZSDnlKjvvInjgIIKZnVuYyBjYWxsVEcoY2xpZW50ICpodHRwLkNsaWVudCwgdG9rZW4gc3RyaW5nLCBtZXRob2Qgc3RyaW5nLCBxdWVyeSB1cmwuVmFsdWVzKSAoanNvbi5SYXdNZXNzYWdlLCBlcnJvcikgewoJdGFyZ2V0IDo9ICJodHRwczovL2FwaS50ZWxlZ3JhbS5vcmcvYm90IiArIHRva2VuICsgIi8iICsgbWV0aG9kCglpZiBsZW4ocXVlcnkpID4gMCB7CgkJdGFyZ2V0ICs9ICI/IiArIHF1ZXJ5LkVuY29kZSgpCgl9CglyZXNwLCBlcnIgOj0gY2xpZW50LkdldCh0YXJnZXQpCglpZiBlcnIgIT0gbmlsIHsKCQlyZXR1cm4gbmlsLCBmbXQuRXJyb3JmKCJUZWxlZ3JhbSDor7fmsYLlpLHotKXvvIjmo4Dmn6XmnI3liqHlmajnvZHnu5zmiJbku6PnkIborr7nva7vvInvvJoldyIsIGVycikKCX0KCWRlZmVyIHJlc3AuQm9keS5DbG9zZSgpCglyYXcsIF8gOj0gaW8uUmVhZEFsbChpby5MaW1pdFJlYWRlcihyZXNwLkJvZHksIDE8PDIwKSkKCXZhciBlbnYgdGdFbnZlbG9wZQoJaWYgZXJyIDo9IGpzb24uVW5tYXJzaGFsKHJhdywgJmVudik7IGVyciAhPSBuaWwgewoJCXJldHVybiBuaWwsIGZtdC5FcnJvcmYoIlRlbGVncmFtIOWTjeW6lOino+aekOWksei0pe+8iEhUVFAgJWTvvIkiLCByZXNwLlN0YXR1c0NvZGUpCgl9CglpZiAhZW52Lk9LIHsKCQlyZXR1cm4gbmlsLCBmbXQuRXJyb3JmKCJUZWxlZ3JhbSAlcyDlpLHotKXvvJolcyIsIG1ldGhvZCwgZW52LkRlc2NyaXB0aW9uKQoJfQoJcmV0dXJuIGVudi5SZXN1bHQsIG5pbAp9CgovLyB0Z1Byb2JlIOmFjeWvueaOoua1i++8mmdldE1lIOmqjCBUb2tlbiArIGdldENoYXQg6aqMIENoYXQgSUTvvIjov5Tlm54gYm90IOeUqOaIt+WQjeS4juiBiuWkqeagh+mimO+8ieOAggovLyDluLjop4HlpLHotKXvvJp0b2tlbiDml6DmlYjvvIhnZXRNZSA0MDAvNDAx77yJ44CBYm90IOacquWKoOWFpemikemBk+aIlumdnueuoeeQhuWRmO+8iGdldENoYXQgNDAw77yJ44CCCmZ1bmMgdGdQcm9iZShjZmcgdGdDb25maWcpIChib3ROYW1lIHN0cmluZywgY2hhdFRpdGxlIHN0cmluZywgZXJyIGVycm9yKSB7CgljbGllbnQsIGVyciA6PSBuZXdUR0NsaWVudChjZmcuUHJveHksIHRnUHJvYmVUaW1lb3V0KQoJaWYgZXJyICE9IG5pbCB7CgkJcmV0dXJuICIiLCAiIiwgZXJyCgl9CgltZVJhdywgZXJyIDo9IGNhbGxURyhjbGllbnQsIGNmZy5Cb3RUb2tlbiwgImdldE1lIiwgbmlsKQoJaWYgZXJyICE9IG5pbCB7CgkJcmV0dXJuICIiLCAiIiwgZXJyCgl9Cgl2YXIgbWUgc3RydWN0IHsKCQlVc2VybmFtZSBzdHJpbmcgYGpzb246InVzZXJuYW1lImAKCX0KCV8gPSBqc29uLlVubWFyc2hhbChtZVJhdywgJm1lKQoJY2hhdFJhdywgZXJyIDo9IGNhbGxURyhjbGllbnQsIGNmZy5Cb3RUb2tlbiwgImdldENoYXQiLCB1cmwuVmFsdWVzeyJjaGF0X2lkIjoge2NmZy5DaGF0SUR9fSkKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBtZS5Vc2VybmFtZSwgIiIsIGZtdC5FcnJvcmYoIiV377yI56Gu6K6kIEJvdCDlt7LliqDlhaXpopHpgZPkuJTkuLrnrqHnkIblkZjvvIkiLCBlcnIpCgl9Cgl2YXIgY2hhdCBzdHJ1Y3QgewoJCVRpdGxlIHN0cmluZyBganNvbjoidGl0bGUiYAoJfQoJXyA9IGpzb24uVW5tYXJzaGFsKGNoYXRSYXcsICZjaGF0KQoJcmV0dXJuIG1lLlVzZXJuYW1lLCBjaGF0LlRpdGxlLCBuaWwKfQoKLy8gdGdTZW5kUmVzdWx0IOWPkemAgeaWh+S7tue7k+aenOOAggp0eXBlIHRnU2VuZFJlc3VsdCBzdHJ1Y3QgewoJRmlsZUlEICAgIHN0cmluZyAvLyDmnIDlpKflsLrlr7jlm77niYcv5paH5qGj55qEIGZpbGVfaWTvvIjlkIzml7bmmK/orr/pl64gVVJMIOmUru+8jOWFrOW8gOaXoOmjjumZqe+8iQoJTWVzc2FnZUlEIGludDY0ICAvLyDpopHpgZPmtojmga8gSUTvvIjliKDpmaTmtojmga/nlKjvvIkKCVNpemUgICAgICBpbnQ2NCAgLy8g5paH5Lu25a2X6IqC5pWw77yIVEcg5Zue5oql77yJCn0KCi8vIHRnU2VuZEZpbGUg5Y+R6YCB5Zu+54mH5Yiw6aKR6YGT77yabW9kZT1kb2N1bWVudCDkv53ljp/lm74gLyBwaG90bz1URyDmnI3liqHnq6/ljovnvKnph43nvJbnoIHjgIIKLy8gc2VuZFBob3RvIOS4jeaUr+aMgeWKqOWbvu+8jHBob3RvIOaooeW8j+mBhyBnaWYg6Ieq5Yqo5Zue6YCAIGRvY3VtZW5077yIVEcg6K+t5LmJ6ZmQ5Yi277yJ44CCCmZ1bmMgdGdTZW5kRmlsZShjZmcgdGdDb25maWcsIG1vZGUgc3RyaW5nLCBmaWxlbmFtZSBzdHJpbmcsIG1pbWVUeXBlIHN0cmluZywgY29udGVudCBbXWJ5dGUpICgqdGdTZW5kUmVzdWx0LCBlcnJvcikgewoJY2xpZW50LCBlcnIgOj0gbmV3VEdDbGllbnQoY2ZnLlByb3h5LCB0Z1VwbG9hZFRpbWVvdXQpCglpZiBlcnIgIT0gbmlsIHsKCQlyZXR1cm4gbmlsLCBlcnIKCX0KCWVuZHBvaW50LCBmaWVsZCA6PSAic2VuZERvY3VtZW50IiwgImRvY3VtZW50IgoJaWYgbW9kZSA9PSAicGhvdG8iICYmICFzdHJpbmdzLkNvbnRhaW5zKHN0cmluZ3MuVG9Mb3dlcihtaW1lVHlwZSksICJnaWYiKSB7CgkJZW5kcG9pbnQsIGZpZWxkID0gInNlbmRQaG90byIsICJwaG90byIKCX0KCWJvZHkgOj0gJmJ5dGVzLkJ1ZmZlcnt9Cgl3cml0ZXIgOj0gbXVsdGlwYXJ0Lk5ld1dyaXRlcihib2R5KQoJaWYgZXJyIDo9IHdyaXRlci5Xcml0ZUZpZWxkKCJjaGF0X2lkIiwgY2ZnLkNoYXRJRCk7IGVyciAhPSBuaWwgewoJCXJldHVybiBuaWwsIGVycgoJfQoJcGFydCwgZXJyIDo9IHdyaXRlci5DcmVhdGVGb3JtRmlsZShmaWVsZCwgZmlsZW5hbWUpCglpZiBlcnIgIT0gbmlsIHsKCQlyZXR1cm4gbmlsLCBlcnIKCX0KCWlmIF8sIGVyciA6PSBwYXJ0LldyaXRlKGNvbnRlbnQpOyBlcnIgIT0gbmlsIHsKCQlyZXR1cm4gbmlsLCBlcnIKCX0KCWlmIGVyciA6PSB3cml0ZXIuQ2xvc2UoKTsgZXJyICE9IG5pbCB7CgkJcmV0dXJuIG5pbCwgZXJyCgl9Cgl0YXJnZXQgOj0gImh0dHBzOi8vYXBpLnRlbGVncmFtLm9yZy9ib3QiICsgY2ZnLkJvdFRva2VuICsgIi8iICsgZW5kcG9pbnQKCXJlcSwgZXJyIDo9IGh0dHAuTmV3UmVxdWVzdChodHRwLk1ldGhvZFBvc3QsIHRhcmdldCwgYm9keSkKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBuaWwsIGVycgoJfQoJcmVxLkhlYWRlci5TZXQoIkNvbnRlbnQtVHlwZSIsIHdyaXRlci5Gb3JtRGF0YUNvbnRlbnRUeXBlKCkpCglyZXNwLCBlcnIgOj0gY2xpZW50LkRvKHJlcSkKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBuaWwsIGZtdC5FcnJvcmYoIlRlbGVncmFtIOS4iuS8oOWksei0pe+8iOajgOafpeacjeWKoeWZqOe9kee7nOaIluS7o+eQhuiuvue9ru+8ie+8miV3IiwgZXJyKQoJfQoJZGVmZXIgcmVzcC5Cb2R5LkNsb3NlKCkKCXJhdywgXyA6PSBpby5SZWFkQWxsKGlvLkxpbWl0UmVhZGVyKHJlc3AuQm9keSwgNDw8MjApKQoJdmFyIGVudiB0Z0VudmVsb3BlCglpZiBlcnIgOj0ganNvbi5Vbm1hcnNoYWwocmF3LCAmZW52KTsgZXJyICE9IG5pbCB7CgkJcmV0dXJuIG5pbCwgZm10LkVycm9yZigiVGVsZWdyYW0g5ZON5bqU6Kej5p6Q5aSx6LSl77yISFRUUCAlZO+8iSIsIHJlc3AuU3RhdHVzQ29kZSkKCX0KCWlmICFlbnYuT0sgewoJCXJldHVybiBuaWwsIGZtdC5FcnJvcmYoIlRlbGVncmFtICVzIOWksei0pe+8miVzIiwgZW5kcG9pbnQsIGVudi5EZXNjcmlwdGlvbikKCX0KCXJldHVybiBwYXJzZVNlbmRSZXN1bHQoZW52LlJlc3VsdCkKfQoKLy8gcGFyc2VTZW5kUmVzdWx0IOS7jiBzZW5kKiDlk43lupTmj5Dlj5YgZmlsZV9pZC9tZXNzYWdlX2lkL3NpemXvvIhwaG90byDmlbDnu4Tlj5bmnIDlpKflsLrlr7jvvJvnuq/lh73mlbDvvInjgIIKZnVuYyBwYXJzZVNlbmRSZXN1bHQocmVzdWx0IGpzb24uUmF3TWVzc2FnZSkgKCp0Z1NlbmRSZXN1bHQsIGVycm9yKSB7Cgl2YXIgbXNnIHN0cnVjdCB7CgkJTWVzc2FnZUlEIGludDY0IGBqc29uOiJtZXNzYWdlX2lkImAKCQlQaG90byAgICAgW11zdHJ1Y3QgewoJCQlGaWxlSUQgICBzdHJpbmcgYGpzb246ImZpbGVfaWQiYAoJCQlGaWxlU2l6ZSBpbnQ2NCAgYGpzb246ImZpbGVfc2l6ZSJgCgkJfSBganNvbjoicGhvdG8iYAoJCURvY3VtZW50IHN0cnVjdCB7CgkJCUZpbGVJRCAgIHN0cmluZyBganNvbjoiZmlsZV9pZCJgCgkJCUZpbGVTaXplIGludDY0ICBganNvbjoiZmlsZV9zaXplImAKCQl9IGBqc29uOiJkb2N1bWVudCJgCgl9CglpZiBlcnIgOj0ganNvbi5Vbm1hcnNoYWwocmVzdWx0LCAmbXNnKTsgZXJyICE9IG5pbCB7CgkJcmV0dXJuIG5pbCwgZm10LkVycm9yZigi5Y+R6YCB5ZON5bqU6Kej5p6Q5aSx6LSl77yaJXciLCBlcnIpCgl9CglvdXQgOj0gJnRnU2VuZFJlc3VsdHtNZXNzYWdlSUQ6IG1zZy5NZXNzYWdlSUR9CglpZiBsZW4obXNnLlBob3RvKSA+IDAgewoJCWxhcmdlc3QgOj0gbXNnLlBob3RvWzBdCgkJZm9yIF8sIHAgOj0gcmFuZ2UgbXNnLlBob3RvIHsKCQkJaWYgcC5GaWxlU2l6ZSA+IGxhcmdlc3QuRmlsZVNpemUgewoJCQkJbGFyZ2VzdCA9IHAKCQkJfQoJCX0KCQlvdXQuRmlsZUlELCBvdXQuU2l6ZSA9IGxhcmdlc3QuRmlsZUlELCBsYXJnZXN0LkZpbGVTaXplCgl9IGVsc2UgaWYgbXNnLkRvY3VtZW50LkZpbGVJRCAhPSAiIiB7CgkJb3V0LkZpbGVJRCwgb3V0LlNpemUgPSBtc2cuRG9jdW1lbnQuRmlsZUlELCBtc2cuRG9jdW1lbnQuRmlsZVNpemUKCX0gZWxzZSB7CgkJcmV0dXJuIG5pbCwgZm10LkVycm9yZigi5Y+R6YCB5ZON5bqU57y65bCRIHBob3RvL2RvY3VtZW50IOWtl+autSIpCgl9CglyZXR1cm4gb3V0LCBuaWwKfQoKLy8gdGdEZWxldGVNZXNzYWdlIOWIoOmZpOmikemBk+a2iOaBr++8iOWwveWKm+iAjOS4uu+8mumUmeivr+i/lOWbnue7meiwg+eUqOaWueWGs+WumuaYr+WQpumYu+WhnuiusOW9leenu+mZpO+8ieOAggpmdW5jIHRnRGVsZXRlTWVzc2FnZShjZmcgdGdDb25maWcsIG1lc3NhZ2VJRCBpbnQ2NCkgZXJyb3IgewoJY2xpZW50LCBlcnIgOj0gbmV3VEdDbGllbnQoY2ZnLlByb3h5LCB0Z1Byb2JlVGltZW91dCkKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBlcnIKCX0KCV8sIGVyciA9IGNhbGxURyhjbGllbnQsIGNmZy5Cb3RUb2tlbiwgImRlbGV0ZU1lc3NhZ2UiLCB1cmwuVmFsdWVzewoJCSJjaGF0X2lkIjoge2NmZy5DaGF0SUR9LCAibWVzc2FnZV9pZCI6IHtmbXQuU3ByaW50KG1lc3NhZ2VJRCl9LAoJfSkKCXJldHVybiBlcnIKfQo=
+// marketplace-repo/tg-image-bed/telegram.go
+// Telegram Bot API 客户端（图床渠道）：发送图片到频道/群、配对探测、删除消息。
+// 机制对齐 telegraph-Image 的 TG 渠道（sendDocument/sendPhoto + getFile）：
+// Bot Token 只存在于插件进程内存，绝不进入任何返回给前端的 URL 或响应。
+// 配对信息每次调用传入（配置即时生效，无进程内缓存）；api_proxy 可选（大陆服务器中转）。
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io"
+	"mime/multipart"
+	"net/http"
+	"net/url"
+	"strings"
+	"time"
+)
+
+// tgConfig TG 渠道配对配置（从插件设置读取；纯数据）。
+type tgConfig struct {
+	BotToken string // Bot Token（@BotFather 创建，如 123456:AAxxx）
+	ChatID   string // 频道/群 chat_id（数字负数或 @公开频道用户名）
+	Proxy    string // 可选 HTTP 代理地址（空=直连；大陆服务器建议配置）
+}
+
+// 超时：探测快速失败，上传放宽（含大图与跨代理传输）。
+const (
+	tgProbeTimeout  = 10 * time.Second
+	tgUploadTimeout = 60 * time.Second
+)
+
+// tgMaxDownloadSize Bot API getFile 下载上限（20MB）——上传前置校验，避免传上去取不回。
+const tgMaxDownloadSize = 20 << 20
+
+// newTGClient 按可选代理构造 HTTP 客户端（纯函数；https 经 CONNECT 隧道走代理）。
+func newTGClient(proxyAddr string, timeout time.Duration) (*http.Client, error) {
+	transport := &http.Transport{}
+	if trimmed := strings.TrimSpace(proxyAddr); trimmed != "" {
+		proxyURL, err := url.Parse(trimmed)
+		if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
+			return nil, fmt.Errorf("代理地址无效（需形如 http://127.0.0.1:7890）：%s", trimmed)
+		}
+		transport.Proxy = http.ProxyURL(proxyURL)
+	}
+	return &http.Client{Timeout: timeout, Transport: transport}, nil
+}
+
+// tgEnvelope Bot API 通用响应包络（result 按端点二次解析；失败时 description 为用户可读原因）。
+type tgEnvelope struct {
+	OK          bool            `json:"ok"`
+	Description string          `json:"description"`
+	Result      json.RawMessage `json:"result"`
+}
+
+// callTG 调用 Bot API 查询式端点（GET；getMe/getChat/getFile/deleteMessage 用）。
+func callTG(client *http.Client, token string, method string, query url.Values) (json.RawMessage, error) {
+	target := "https://api.telegram.org/bot" + token + "/" + method
+	if len(query) > 0 {
+		target += "?" + query.Encode()
+	}
+	resp, err := client.Get(target)
+	if err != nil {
+		return nil, fmt.Errorf("Telegram 请求失败（检查服务器网络或代理设置）：%w", err)
+	}
+	defer resp.Body.Close()
+	raw, _ := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	var env tgEnvelope
+	if err := json.Unmarshal(raw, &env); err != nil {
+		return nil, fmt.Errorf("Telegram 响应解析失败（HTTP %d）", resp.StatusCode)
+	}
+	if !env.OK {
+		return nil, fmt.Errorf("Telegram %s 失败：%s", method, env.Description)
+	}
+	return env.Result, nil
+}
+
+// tgProbe 配对探测：getMe 验 Token + getChat 验 Chat ID（返回 bot 用户名与聊天标题）。
+// 常见失败：token 无效（getMe 400/401）、bot 未加入频道或非管理员（getChat 400）。
+func tgProbe(cfg tgConfig) (botName string, chatTitle string, err error) {
+	client, err := newTGClient(cfg.Proxy, tgProbeTimeout)
+	if err != nil {
+		return "", "", err
+	}
+	meRaw, err := callTG(client, cfg.BotToken, "getMe", nil)
+	if err != nil {
+		return "", "", err
+	}
+	var me struct {
+		Username string `json:"username"`
+	}
+	_ = json.Unmarshal(meRaw, &me)
+	chatRaw, err := callTG(client, cfg.BotToken, "getChat", url.Values{"chat_id": {cfg.ChatID}})
+	if err != nil {
+		return me.Username, "", fmt.Errorf("%w（确认 Bot 已加入频道且为管理员）", err)
+	}
+	var chat struct {
+		Title string `json:"title"`
+	}
+	_ = json.Unmarshal(chatRaw, &chat)
+	return me.Username, chat.Title, nil
+}
+
+// tgSendResult 发送文件结果。
+type tgSendResult struct {
+	FileID    string // 最大尺寸图片/文档的 file_id（同时是访问 URL 键，公开无风险）
+	MessageID int64  // 频道消息 ID（删除消息用）
+	Size      int64  // 文件字节数（TG 回报）
+}
+
+// tgSendFile 发送图片到频道：mode=document 保原图 / photo=TG 服务端压缩重编码。
+// sendPhoto 不支持动图，photo 模式遇 gif 自动回退 document（TG 语义限制）。
+func tgSendFile(cfg tgConfig, mode string, filename string, mimeType string, content []byte) (*tgSendResult, error) {
+	client, err := newTGClient(cfg.Proxy, tgUploadTimeout)
+	if err != nil {
+		return nil, err
+	}
+	endpoint, field := "sendDocument", "document"
+	if mode == "photo" && !strings.Contains(strings.ToLower(mimeType), "gif") {
+		endpoint, field = "sendPhoto", "photo"
+	}
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+	if err := writer.WriteField("chat_id", cfg.ChatID); err != nil {
+		return nil, err
+	}
+	part, err := writer.CreateFormFile(field, filename)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := part.Write(content); err != nil {
+		return nil, err
+	}
+	if err := writer.Close(); err != nil {
+		return nil, err
+	}
+	target := "https://api.telegram.org/bot" + cfg.BotToken + "/" + endpoint
+	req, err := http.NewRequest(http.MethodPost, target, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Telegram 上传失败（检查服务器网络或代理设置）：%w", err)
+	}
+	defer resp.Body.Close()
+	raw, _ := io.ReadAll(io.LimitReader(resp.Body, 4<<20))
+	var env tgEnvelope
+	if err := json.Unmarshal(raw, &env); err != nil {
+		return nil, fmt.Errorf("Telegram 响应解析失败（HTTP %d）", resp.StatusCode)
+	}
+	if !env.OK {
+		return nil, fmt.Errorf("Telegram %s 失败：%s", endpoint, env.Description)
+	}
+	return parseSendResult(env.Result)
+}
+
+// parseSendResult 从 send* 响应提取 file_id/message_id/size（photo 数组取最大尺寸；纯函数）。
+func parseSendResult(result json.RawMessage) (*tgSendResult, error) {
+	var msg struct {
+		MessageID int64 `json:"message_id"`
+		Photo     []struct {
+			FileID   string `json:"file_id"`
+			FileSize int64  `json:"file_size"`
+		} `json:"photo"`
+		Document struct {
+			FileID   string `json:"file_id"`
+			FileSize int64  `json:"file_size"`
+		} `json:"document"`
+	}
+	if err := json.Unmarshal(result, &msg); err != nil {
+		return nil, fmt.Errorf("发送响应解析失败：%w", err)
+	}
+	out := &tgSendResult{MessageID: msg.MessageID}
+	if len(msg.Photo) > 0 {
+		largest := msg.Photo[0]
+		for _, p := range msg.Photo {
+			if p.FileSize > largest.FileSize {
+				largest = p
+			}
+		}
+		out.FileID, out.Size = largest.FileID, largest.FileSize
+	} else if msg.Document.FileID != "" {
+		out.FileID, out.Size = msg.Document.FileID, msg.Document.FileSize
+	} else {
+		return nil, fmt.Errorf("发送响应缺少 photo/document 字段")
+	}
+	return out, nil
+}
+
+// tgDeleteMessage 删除频道消息（尽力而为：错误返回给调用方决定是否阻塞记录移除）。
+func tgDeleteMessage(cfg tgConfig, messageID int64) error {
+	client, err := newTGClient(cfg.Proxy, tgProbeTimeout)
+	if err != nil {
+		return err
+	}
+	_, err = callTG(client, cfg.BotToken, "deleteMessage", url.Values{
+		"chat_id": {cfg.ChatID}, "message_id": {fmt.Sprint(messageID)},
+	})
+	return err
+}

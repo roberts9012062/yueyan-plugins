@@ -1,1 +1,307 @@
-Ly8gbWFya2V0cGxhY2UtcmVwby90Zy1pbWFnZS1iZWQvbWFpbi5nbwovLyBUR+WbvuW6iuaPkuS7tu+8iOi/m+eoi+Wklu+8jOWFjei0ue+8ie+8muWbvueJh+S4iuS8oOebtOi+viBUZWxlZ3JhbSDpopHpgZPvvIhCb3QgQVBJ77yJ77yMCi8vIOiuv+Wuoue7j+ermemVv+iHquWkh+eahOWPjeS7oyBXb3JrZXIg6K+75Y+W77yIQm90IFRva2VuIOS4jeWHuuacjeWKoeerr++8jOa1j+iniOWZqOawuOi/nOaLv+S4jeWIsO+8ieOAggovLwovLyDmnrbmnoTvvIjphY3lr7nkuInku7blpZfvvIzlkIwgaW1hZ2UtY2RuIOaPkuS7tuaooeW8j++8ie+8mgovLyAgIC0gVGVsZWdyYW0gQm9077yIQEJvdEZhdGhlciDliJvlu7rlubbmi4nlhaXpopHpgZPkuLrnrqHnkIblkZjvvIzphY3nva4gVG9rZW4gKyBDaGF0IElE77yJCi8vICAgLSDlj43ku6MgV29ya2Vy77yI56uZ6ZW/6Ieq6KGM6YOo572y77yM6KeB5ZCM55uu5b2VIHdvcmtlci8g5Y+C6ICD5a6e546w77yaL2Yve2ZpbGVfaWR9IOaMgSB0b2tlbiDlj43ku6MgKyDnvJPlrZjvvIkKLy8gICAtIOacrOaPkuS7tu+8iOaPkuS7tuiuvue9ruWhqyBUb2tlbiArIENoYXQgSUQgKyBXb3JrZXIg5Zyw5Z2A5Y2z55So77yJCi8vCi8vIOiDveWKm++8mnNldHRpbmdz77yI6YWN5a+55LqU6aG577yJKyBhcGnvvIjkuIrkvKAv5YiX6KGoL+WIoOmZpCArIHN0b3JhZ2Ug5aWR57qm5aSH55So77yJKyBhZG1pbi5wYWdl77yI5Zu+5bqT6aG177yJ44CCCi8vIOS4iuS8oOWOhuWPsuWtmCBkYXRhL3BsdWdpbnMvdGctaW1hZ2UtYmVkL2hpc3RvcnkuanNvbu+8iOingSBoaXN0b3J5Lmdv77yJ44CCCi8vIOmZkOWItu+8mkJvdCBBUEkgZ2V0RmlsZSDkuIvovb3kuIrpmZAgMjBNQu+8iOS4iuS8oOWJjee9ruagoemqjO+8ie+8m2ZpbGVfcGF0aCDkuLrkuLTml7bpk77mjqXvvIwKLy8g5q+P5qyh6K6/6Zeu55SxIFdvcmtlciDlrp7ml7YgZ2V0RmlsZSDop6PmnpDvvIjlr7npvZAgdGVsZWdyYXBoLUltYWdlIOeahCBjZmlsZSDmnLrliLbvvInjgIIKcGFja2FnZSBtYWluCgppbXBvcnQgKAoJImNvbnRleHQiCgkiZW5jb2RpbmcvYmFzZTY0IgoJImVuY29kaW5nL2pzb24iCgkiZm10IgoJImlvIgoJIm5ldC9odHRwIgoJIm9zIgoJInBhdGgvZmlsZXBhdGgiCgkic3RyaW5ncyIKCSJ0aW1lIgoKCSJnaXRodWIuY29tL3JvYmVydHM5MDEyMDYyL2Jva2UvcGtnL3BsdWdpbi1zZGsiCgkiZ2l0aHViLmNvbS9yb2JlcnRzOTAxMjA2Mi9ib2tlL3BrZy9wbHVnaW4tc2RrL3NlcnZlciIKKQoKLy8gcGx1Z2luSUQg5o+S5Lu25ZSv5LiAIElE77yI5LiOIHBsdWdpbi5qc29uIC8geXVleWFuLXBsdWdpbi5qc29uIOS4gOiHtO+8ieOAggpjb25zdCBwbHVnaW5JRCA9ICJ0Zy1pbWFnZS1iZWQiCgovLyBpbWFnZUV4dFdoaXRlbGlzdCDkuIrkvKDlm77niYfmianlsZXlkI3nmb3lkI3ljZXvvIjlr7npvZAgaW1hZ2UtY2RuIFdvcmtlcu+8m3ZhbHVlIOS4uuinhOiMg+WMliBNSU1F77yJ44CCCnZhciBpbWFnZUV4dFdoaXRlbGlzdCA9IG1hcFtzdHJpbmddc3RyaW5newoJIi5qcGciOiAiaW1hZ2UvanBlZyIsICIuanBlZyI6ICJpbWFnZS9qcGVnIiwgIi5wbmciOiAiaW1hZ2UvcG5nIiwKCSIuZ2lmIjogImltYWdlL2dpZiIsICIud2VicCI6ICJpbWFnZS93ZWJwIiwKfQoKLy8gVEdJbWFnZUJlZFBsdWdpbiBUR+WbvuW6iuaPkuS7tuWunueOsO+8iOi/m+eoi+Wklu+8ieOAggp0eXBlIFRHSW1hZ2VCZWRQbHVnaW4gc3RydWN0IHsKCWhpc3RvcnkgKmhpc3RvcnlTdG9yZSAvLyDkuIrkvKDljoblj7LvvIhPbkFjdGl2YXRlIOaJk+W8gOaVsOaNruebruW9leWIneWni+WMlu+8iQp9CgovLyBJbmZvIOaPkuS7tuS/oeaBr++8iOS4juWVhuWfjua4heWNleS4gOiHtO+8m+iDveWKm+WjsOaYjiArIOiuvue9rumhue+8ieOAggpmdW5jIChwICpUR0ltYWdlQmVkUGx1Z2luKSBJbmZvKCkgc2RrLkluZm8gewoJcmV0dXJuIHNkay5JbmZvewoJCUlEOiAgICAgICAgICBwbHVnaW5JRCwKCQlOYW1lOiAgICAgICAgIlRH5Zu+5bqKIiwKCQlWZXJzaW9uOiAgICAgIjAuMi4wIiwKCQlBdXRob3I6ICAgICAgIuaciOiogOWumOaWuSIsCgkJRGVzY3JpcHRpb246ICJUZWxlZ3JhbSDpopHpgZPlm77luorvvJrlm77niYfkuIrkvKDnm7Tovr4gVEfvvIhCb3QgQVBJIOS/neWOn+Wbvu+8ie+8jOiHquWkh+WPjeS7oyBXb3JrZXIg6K6/6Zeu77yM5ZCO5Y+w5Zu+5bqT566h55CG5LiOIE1hcmtkb3duIOaPkuWbvuOAgiIsCgkJQ2FwYWJpbGl0aWVzOiBbXXN0cmluZ3sic2V0dGluZ3MiLCAiYXBpIiwgImFkbWluLnBhZ2UifSwKCQlTZXR0aW5nczogW11zZGsuU2V0dGluZ0ZpZWxkewoJCQl7S2V5OiAidGdfYm90X3Rva2VuIiwgTGFiZWw6ICJCb3QgVG9rZW7vvIhAQm90RmF0aGVyIOWIm+W7uu+8jOWmgiAxMjM0NTY6QUF4eHjvvIkiLCBUeXBlOiAidGV4dCIsIERlZmF1bHQ6ICIifSwKCQkJe0tleTogInRnX2NoYXRfaWQiLCBMYWJlbDogIumikemBky/nvqQgQ2hhdCBJRO+8iOWmgiAtMTAwMTIzNDU2Nzg5MCDmiJYgQGNoYW5uZWzvvIkiLCBUeXBlOiAidGV4dCIsIERlZmF1bHQ6ICIifSwKCQkJe0tleTogInByb3h5X2Jhc2UiLCBMYWJlbDogIuWPjeS7oyBXb3JrZXIg5Zyw5Z2A77yI5aaCIGh0dHBzOi8vaW1nLmV4YW1wbGUuY29t77yJIiwgVHlwZTogInRleHQiLCBEZWZhdWx0OiAiIn0sCgkJCXtLZXk6ICJzZW5kX21vZGUiLCBMYWJlbDogIuWPkemAgeaooeW8j++8iGRvY3VtZW50PeWOn+WbvuS/neecnyAvIHBob3RvPVRHIOWOi+e8qe+8iSIsIFR5cGU6ICJzZWxlY3QiLCBEZWZhdWx0OiAiZG9jdW1lbnQiLCBPcHRpb25zOiBbXXN0cmluZ3siZG9jdW1lbnQiLCAicGhvdG8ifX0sCgkJCXtLZXk6ICJhcGlfcHJveHkiLCBMYWJlbDogIlRHIEFQSSDku6PnkIbvvIjmnI3liqHlmajlnKjlpKfpmYbml7bloavvvIzlpoIgaHR0cDovLzEyNy4wLjAuMTo3ODkw77yb55WZ56m655u06L+e77yJIiwgVHlwZTogInRleHQiLCBEZWZhdWx0OiAiIn0sCgkJfSwKCX0KfQoKLy8gT25BY3RpdmF0ZSDlkK/nlKjlm57osIPvvJrmiZPlvIDmj5Lku7bmlbDmja7nm67lvZXnmoTkuIrkvKDljoblj7LvvIjluYLnrYnvvIzov5vnqIvph43lkK/oh6rliqjmgaLlpI3vvInjgIIKZnVuYyAocCAqVEdJbWFnZUJlZFBsdWdpbikgT25BY3RpdmF0ZShjdHggY29udGV4dC5Db250ZXh0KSBlcnJvciB7Cgl3ZCwgZXJyIDo9IG9zLkdldHdkKCkKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBlcnIKCX0KCXN0b3JlLCBlcnIgOj0gbmV3SGlzdG9yeVN0b3JlKGZpbGVwYXRoLkpvaW4od2QsICJkYXRhIiwgInBsdWdpbnMiLCBwbHVnaW5JRCkpCglpZiBlcnIgIT0gbmlsIHsKCQlyZXR1cm4gZXJyCgl9CglwLmhpc3RvcnkgPSBzdG9yZQoJcmV0dXJuIG5pbAp9CgovLyBPbkRlYWN0aXZhdGUg5YGc55So5Zue6LCD77yI5Y6G5Y+y5bey5Zyo5q+P5qyh5Y+Y5pu05ZCO6JC955uY77yM5peg6ZyA6aKd5aSW5L+d5a2Y77yJ44CCCmZ1bmMgKHAgKlRHSW1hZ2VCZWRQbHVnaW4pIE9uRGVhY3RpdmF0ZShjdHggY29udGV4dC5Db250ZXh0KSBlcnJvciB7CglwLmhpc3RvcnkgPSBuaWwKCXJldHVybiBuaWwKfQoKLy8gSG9va3Mg6K6i6ZiF6ZKp5a2Q77yI5pys5o+S5Lu25Li654us56uL5Zu+5bqT5b2i5oCB77yM5LiN5o+S5YWl5Lia5Yqh6ZKp5a2Q566h6YGT77yJ44CCCmZ1bmMgKHAgKlRHSW1hZ2VCZWRQbHVnaW4pIEhvb2tzKCkgW11zZGsuSG9vayB7IHJldHVybiBuaWwgfQoKLy8gUmVnaXN0ZXJBUEkg5aWR57qm56uv54K577yaCi8vCi8vCUdFVCAgL3N0b3JhZ2UvaGVhbHRoICAg6YWN5a+55o6i5rWL77yI5a6/5Li75a2Y5YKoIHNlYW0g5aWR57qm77yb5b2T5YmNIHNlYW0g5o+Q5L6b5pa55Li6IGltYWdlLWNkbu+8jOatpOerr+eCueWkh+eUqOWFvOWuue+8iQovLwlQT1NUIC9zdG9yYWdlL3VwbG9hZCAgIOi9rOWtmOWlkee6pu+8iOWuv+S4uyBzZWFtIOWkh+eUqO+8m+S4jiAvbWFuYWdlL3VwbG9hZCDlkIzpk77ot6/vvIkKLy8JUE9TVCAvbWFuYWdlL3VwbG9hZCAgICDlm77lupPnm7TkvKAge2ZpbGVuYW1lLG1pbWUsY29udGVudF9iNjR977yI55m75b2V55So5oi34oCU4oCU5o+S5Zu+5piv5bi46KeE5Y+R5biW6KGM5Li677yJCi8vCVBPU1QgL21hbmFnZS9saXN0ICAgICAg5LiK5Lyg5Y6G5Y+yIHtjdXJzb3J9IOKGkiB7b2JqZWN0cyxjdXJzb3J977yI55m75b2V55So5oi377ya5Zu+5bqT6aG15pWw5o2u5rqQ77yJCi8vCVBPU1QgL21hbmFnZS9kZWxldGUgICAg5om56YeP5Yig6ZmkIHtmaWxlX2lkczpbXX3vvIjnrqHnkIblkZjvvJrlsL3lipvliKDpopHpgZPmtojmga8gKyDnp7vpmaTljoblj7LvvIkKZnVuYyAocCAqVEdJbWFnZUJlZFBsdWdpbikgUmVnaXN0ZXJBUEkoYXBpICpzZGsuQVBJTXV4KSB7CglhcGkuSGFuZGxlKCJHRVQiLCAiL3N0b3JhZ2UvaGVhbHRoIiwgcC5oYW5kbGVIZWFsdGgpCglhcGkuSGFuZGxlKCJQT1NUIiwgIi9zdG9yYWdlL3VwbG9hZCIsIHAuaGFuZGxlVXBsb2FkKQoJYXBpLkhhbmRsZSgiUE9TVCIsICIvbWFuYWdlL3VwbG9hZCIsIHAuaGFuZGxlVXBsb2FkKQoJYXBpLkhhbmRsZSgiUE9TVCIsICIvbWFuYWdlL2xpc3QiLCBwLmhhbmRsZUxpc3QpCglhcGkuSGFuZGxlKCJQT1NUIiwgIi9tYW5hZ2UvZGVsZXRlIiwgcC5oYW5kbGVEZWxldGUpCn0KCi8vIGhhbmRsZUhlYWx0aCDphY3lr7nmjqLmtYvvvJrphY3nva7lrozmlbQg4oaSIGdldE1lL2dldENoYXQg6aqMIEJvdCDkuI7popHpgZMg4oaSIOaOoua1i+WPjeS7oyBXb3JrZXIg5a2Y5rS744CCCmZ1bmMgKHAgKlRHSW1hZ2VCZWRQbHVnaW4pIGhhbmRsZUhlYWx0aChjdHggY29udGV4dC5Db250ZXh0LCBtZXRob2Qgc3RyaW5nLCBwYXRoIHN0cmluZywgYm9keSBbXWJ5dGUpIChpbnQsIFtdYnl0ZSwgZXJyb3IpIHsKCWNmZyA6PSBzZGsuQ29uZmlnKGN0eCkKCWlmIGVyciA6PSB2YWxpZGF0ZVBhaXIoY2ZnKTsgZXJyICE9IG5pbCB7CgkJcmV0dXJuIGpzb25PdXQoMjAwLCBtYXBbc3RyaW5nXWFueXsib2siOiBmYWxzZSwgImVycm9yIjogZXJyLkVycm9yKCl9KQoJfQoJdGcgOj0gdGdDb25maWdGcm9tU2V0dGluZ3MoY2ZnKQoJYm90TmFtZSwgY2hhdFRpdGxlLCBlcnIgOj0gdGdQcm9iZSh0ZykKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBqc29uT3V0KDIwMCwgbWFwW3N0cmluZ11hbnl7Im9rIjogZmFsc2UsICJlcnJvciI6IGVyci5FcnJvcigpfSkKCX0KCWlmIGVyciA6PSBwcm9iZVdvcmtlcihjZmdbInByb3h5X2Jhc2UiXSk7IGVyciAhPSBuaWwgewoJCXJldHVybiBqc29uT3V0KDIwMCwgbWFwW3N0cmluZ11hbnl7Im9rIjogZmFsc2UsICJlcnJvciI6ICLlj43ku6MgV29ya2VyIOS4jeWPr+i+vu+8miIgKyBlcnIuRXJyb3IoKX0pCgl9CglyZXR1cm4ganNvbk91dCgyMDAsIG1hcFtzdHJpbmddYW55ewoJCSJvayI6IHRydWUsICJib3QiOiAiQCIgKyBib3ROYW1lLCAiY2hhdCI6IGNoYXRUaXRsZSwgIndvcmtlciI6IGNmZ1sicHJveHlfYmFzZSJdLAoJfSkKfQoKLy8gdXBsb2FkUmVxdWVzdCDkuIrkvKDor7fmsYLkvZPvvIgvbWFuYWdlL3VwbG9hZCDkuI4gL3N0b3JhZ2UvdXBsb2FkIOWQjOaehO+8ieOAggp0eXBlIHVwbG9hZFJlcXVlc3Qgc3RydWN0IHsKCUZpbGVuYW1lICBzdHJpbmcgYGpzb246ImZpbGVuYW1lImAKCU1pbWUgICAgICBzdHJpbmcgYGpzb246Im1pbWUiYAoJQ29udGVudDY0IHN0cmluZyBganNvbjoiY29udGVudF9iNjQiYAp9CgovLyB1cGxvYWRSZXNwb25zZSDkuIrkvKDlk43lupTkvZPvvIgvc3RvcmFnZS91cGxvYWQg5aWR57qm5a2X5q61ICsg5Zu+5bqT5omp5bGV5a2X5q6177yJ44CCCnR5cGUgdXBsb2FkUmVzcG9uc2Ugc3RydWN0IHsKCUVycm9yICAgICAgc3RyaW5nIGBqc29uOiJlcnJvcixvbWl0ZW1wdHkiYCAvLyDpnZ7nqbo95aSx6LSl5Y6f5ZugCglUeXBlICAgICAgIHN0cmluZyBganNvbjoidHlwZSJgICAgICAgICAgICAgLy8g5aqS5L2T57G75Z6L77yI5oGSIGltYWdl4oCU4oCU55m95ZCN5Y2V5YmN572u5qCh6aqM77yJCglTdG9yYWdlS2V5IHN0cmluZyBganNvbjoic3RvcmFnZV9rZXkiYCAgICAgLy8gPSBmaWxlX2lk77yIVEcg5paH5Lu25qCH6K+G77yJCglVUkwgICAgICAgIHN0cmluZyBganNvbjoidXJsImAgICAgICAgICAgICAgLy8g5YWs5byA6K6/6Zeu5Zyw5Z2A77yIe3Byb3h5X2Jhc2V9L2Yve2ZpbGVfaWR977yJCglNaW1lICAgICAgIHN0cmluZyBganNvbjoibWltZSJgCglTaXplICAgICAgIGludDY0ICBganNvbjoic2l6ZSJgCglNYXJrZG93biAgIHN0cmluZyBganNvbjoibWFya2Rvd24iYCAvLyAhW+aWh+S7tuWQjV0oVVJMKeKAlOKAlOWkjeWItueymOi0tOi/m+ato+aWhwoJTW9kZSAgICAgICBzdHJpbmcgYGpzb246Im1vZGUiYCAgICAgLy8g5a6e6ZmF5Y+R6YCB5qih5byP77yIcGhvdG8g6YGHIGdpZiDlm57pgIAgZG9jdW1lbnQg5pe25LiO6K6+572u5LiN5ZCM77yJCn0KCi8vIGhhbmRsZVVwbG9hZCDlm77lupPnm7TkvKAv5aWR57qm6L2s5a2Y77ya55m95ZCN5Y2V5LiO5aSn5bCP5qCh6aqMIOKGkiDlj5HpgIEgVEcg4oaSIOiQveWOhuWPsiDihpIg5ZON5bqU44CCCmZ1bmMgKHAgKlRHSW1hZ2VCZWRQbHVnaW4pIGhhbmRsZVVwbG9hZChjdHggY29udGV4dC5Db250ZXh0LCBtZXRob2Qgc3RyaW5nLCBwYXRoIHN0cmluZywgYm9keSBbXWJ5dGUpIChpbnQsIFtdYnl0ZSwgZXJyb3IpIHsKCWlmICFzZGsuQ2FsbGVySXNTeXN0ZW0oY3R4KSAmJiBzZGsuQ2FsbGVySUQoY3R4KSA8PSAwIHsKCQlyZXR1cm4ganNvbk91dCg0MDMsIG1hcFtzdHJpbmddYW55eyJlcnJvciI6ICLor7flhYjnmbvlvZUifSkKCX0KCXZhciByZXEgdXBsb2FkUmVxdWVzdAoJaWYgZXJyIDo9IGpzb24uVW5tYXJzaGFsKGJvZHksICZyZXEpOyBlcnIgIT0gbmlsIHx8IHJlcS5Db250ZW50NjQgPT0gIiIgfHwgcmVxLkZpbGVuYW1lID09ICIiIHsKCQlyZXR1cm4ganNvbk91dCg0MDAsIG1hcFtzdHJpbmddYW55eyJlcnJvciI6ICLlj4LmlbDplJnor6/vvJpmaWxlbmFtZS9taW1lL2NvbnRlbnRfYjY0IOW/heWhqyJ9KQoJfQoJbG93ZXIgOj0gc3RyaW5ncy5Ub0xvd2VyKHJlcS5GaWxlbmFtZSkKCWRvdCA6PSBzdHJpbmdzLkxhc3RJbmRleChsb3dlciwgIi4iKQoJaWYgZG90IDwgMCB7CgkJcmV0dXJuIGpzb25PdXQoNDAwLCBtYXBbc3RyaW5nXWFueXsiZXJyb3IiOiAi5paH5Lu257y65bCR5omp5bGV5ZCN77yI5LuF5pSv5oyBIGpwZy9qcGVnL3BuZy9naWYvd2VicO+8iSJ9KQoJfQoJbWltZSwgb2sgOj0gaW1hZ2VFeHRXaGl0ZWxpc3RbbG93ZXJbZG90Ol1dCglpZiAhb2sgewoJCXJldHVybiBqc29uT3V0KDQwMCwgbWFwW3N0cmluZ11hbnl7ImVycm9yIjogIuS7heaUr+aMgeWbvueJh++8iGpwZy9qcGVnL3BuZy9naWYvd2VicO+8iSJ9KQoJfQoJaWYgc3RyaW5ncy5Db250YWlucyhsb3dlciwgIi4uIikgfHwgc3RyaW5ncy5Db250YWluc0FueShsb3dlciwgYC9cYCkgewoJCXJldHVybiBqc29uT3V0KDQwMCwgbWFwW3N0cmluZ11hbnl7ImVycm9yIjogIuaWh+S7tuWQjeS4jeWQiOazle+8iOWQq+i3r+W+hOWIhumalOespu+8iSJ9KQoJfQoJY29udGVudCwgZXJyIDo9IGJhc2U2NC5TdGRFbmNvZGluZy5EZWNvZGVTdHJpbmcocmVxLkNvbnRlbnQ2NCkKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBqc29uT3V0KDQwMCwgbWFwW3N0cmluZ11hbnl7ImVycm9yIjogIuWGheWuuSBiYXNlNjQg6Kej56CB5aSx6LSlIn0pCgl9CglpZiBsZW4oY29udGVudCkgPiB0Z01heERvd25sb2FkU2l6ZSB7CgkJcmV0dXJuIGpzb25PdXQoNDAwLCBtYXBbc3RyaW5nXWFueXsiZXJyb3IiOiAi5Zu+54mH6LaF6L+HIDIwTULvvIhUZWxlZ3JhbSBCb3QgQVBJIOaWh+S7tuS4i+i9veS4iumZkO+8iSJ9KQoJfQoJY2ZnIDo9IHNkay5Db25maWcoY3R4KQoJaWYgZXJyIDo9IHZhbGlkYXRlUGFpcihjZmcpOyBlcnIgIT0gbmlsIHsKCQlyZXR1cm4ganNvbk91dCg0MDAsIG1hcFtzdHJpbmddYW55eyJlcnJvciI6IGVyci5FcnJvcigpfSkKCX0KCXRnIDo9IHRnQ29uZmlnRnJvbVNldHRpbmdzKGNmZykKCW1vZGUgOj0gY2ZnWyJzZW5kX21vZGUiXQoJc2VudCwgZXJyIDo9IHRnU2VuZEZpbGUodGcsIG1vZGUsIHJlcS5GaWxlbmFtZSwgbWltZSwgY29udGVudCkKCWlmIGVyciAhPSBuaWwgewoJCXJldHVybiBqc29uT3V0KDIwMCwgbWFwW3N0cmluZ11hbnl7ImVycm9yIjogZXJyLkVycm9yKCl9KQoJfQoJdXJsIDo9IHN0cmluZ3MuVHJpbVN1ZmZpeChzdHJpbmdzLlRyaW1TcGFjZShjZmdbInByb3h5X2Jhc2UiXSksICIvIikgKyAiL2YvIiArIHNlbnQuRmlsZUlECglpZiBtb2RlID09ICJwaG90byIgJiYgc3RyaW5ncy5Db250YWlucyhtaW1lLCAiZ2lmIikgewoJCW1vZGUgPSAiZG9jdW1lbnQiIC8vIOWTjeW6lOWbnuWRiuWunumZheaooeW8j++8iGdpZiDkuI3mlK/mjIEgc2VuZFBob3RvIOW3suiHquWKqOWbnumAgO+8iQoJfQoJcmVzcCA6PSB1cGxvYWRSZXNwb25zZXsKCQlUeXBlOiAiaW1hZ2UiLCBTdG9yYWdlS2V5OiBzZW50LkZpbGVJRCwgVVJMOiB1cmwsIE1pbWU6IG1pbWUsCgkJU2l6ZTogc2VudC5TaXplLCBNYXJrZG93bjogbWFya2Rvd25Gb3IocmVxLkZpbGVuYW1lLCB1cmwpLCBNb2RlOiBtb2RlLAoJfQoJaWYgcC5oaXN0b3J5ICE9IG5pbCB7CgkJXyA9IHAuaGlzdG9yeS5hcHBlbmQoaGlzdG9yeUVudHJ5ewoJCQlGaWxlSUQ6IHNlbnQuRmlsZUlELCBNZXNzYWdlSUQ6IHNlbnQuTWVzc2FnZUlELCBGaWxlTmFtZTogcmVxLkZpbGVuYW1lLAoJCQlTaXplOiBzZW50LlNpemUsIE1pbWU6IG1pbWUsIFVSTDogdXJsLCBNb2RlOiBtb2RlLCBVcGxvYWRlcklEOiBzZGsuQ2FsbGVySUQoY3R4KSwKCQl9KQoJfQoJcmF3LCBfIDo9IGpzb24uTWFyc2hhbChyZXNwKQoJcmV0dXJuIDIwMCwgcmF3LCBuaWwKfQoKLy8gaGFuZGxlTGlzdCDkuIrkvKDljoblj7LliIbpobXvvIjnmbvlvZXnlKjmiLfigJTigJTlm77lupPpobXmlbDmja7mupDvvJvmlrDlnKjliY3vvInjgIIKZnVuYyAocCAqVEdJbWFnZUJlZFBsdWdpbikgaGFuZGxlTGlzdChjdHggY29udGV4dC5Db250ZXh0LCBtZXRob2Qgc3RyaW5nLCBwYXRoIHN0cmluZywgYm9keSBbXWJ5dGUpIChpbnQsIFtdYnl0ZSwgZXJyb3IpIHsKCWlmICFzZGsuQ2FsbGVySXNTeXN0ZW0oY3R4KSAmJiBzZGsuQ2FsbGVySUQoY3R4KSA8PSAwIHsKCQlyZXR1cm4ganNvbk91dCg0MDMsIG1hcFtzdHJpbmddYW55eyJlcnJvciI6ICLor7flhYjnmbvlvZUifSkKCX0KCXZhciByZXEgc3RydWN0IHsKCQlDdXJzb3Igc3RyaW5nIGBqc29uOiJjdXJzb3IiYCAvLyDlgY/np7vph4/ljYHov5vliLbkuLLvvIjpppbpobXnqbrvvIkKCX0KCV8gPSBqc29uLlVubWFyc2hhbChib2R5LCAmcmVxKQoJaWYgcC5oaXN0b3J5ID09IG5pbCB7CgkJcmV0dXJuIGpzb25PdXQoMjAwLCBtYXBbc3RyaW5nXWFueXsib2JqZWN0cyI6IFtdYW55e30sICJjdXJzb3IiOiAiIn0pCgl9CgllbnRyaWVzLCBuZXh0IDo9IHAuaGlzdG9yeS5wYWdlKHJlcS5DdXJzb3IpCglvYmplY3RzIDo9IG1ha2UoW11tYXBbc3RyaW5nXWFueSwgMCwgbGVuKGVudHJpZXMpKQoJZm9yIF8sIGUgOj0gcmFuZ2UgZW50cmllcyB7CgkJb2JqZWN0cyA9IGFwcGVuZChvYmplY3RzLCBtYXBbc3RyaW5nXWFueXsKCQkJImZpbGVfaWQiOiBlLkZpbGVJRCwgImZpbGVfbmFtZSI6IGUuRmlsZU5hbWUsICJ1cmwiOiBlLlVSTCwKCQkJIm1hcmtkb3duIjogbWFya2Rvd25Gb3IoZS5GaWxlTmFtZSwgZS5VUkwpLCAic2l6ZSI6IGUuU2l6ZSwKCQkJIm1pbWUiOiBlLk1pbWUsICJ1cGxvYWRlZF9hdCI6IGUuVXBsb2FkZWRBdCwKCQl9KQoJfQoJcmV0dXJuIGpzb25PdXQoMjAwLCBtYXBbc3RyaW5nXWFueXsib2JqZWN0cyI6IG9iamVjdHMsICJjdXJzb3IiOiBuZXh0fSkKfQoKLy8gaGFuZGxlRGVsZXRlIOaJuemHj+WIoOmZpO+8iOS7heeuoeeQhuWRmO+8ie+8mumAkOadoeWwveWKmyBkZWxldGVNZXNzYWdl77yI5aSx6LSl5LiN6Zi75aGe77yJ4oaSIOenu+mZpOWOhuWPsuiusOW9leOAggovLyDor7TmmI7vvJrliKDpmaTpopHpgZPmtojmga/lkI4gVEcg5pyN5Yqh5Zmo57yT5a2Y5paH5Lu25Y+v6IO95LuN5Y+v57uP5penIFVSTCDorr/pl67kuIDmrrXml7bpl7TvvIhSRUFETUUg5bey5rOo5piO77yJ44CCCmZ1bmMgKHAgKlRHSW1hZ2VCZWRQbHVnaW4pIGhhbmRsZURlbGV0ZShjdHggY29udGV4dC5Db250ZXh0LCBtZXRob2Qgc3RyaW5nLCBwYXRoIHN0cmluZywgYm9keSBbXWJ5dGUpIChpbnQsIFtdYnl0ZSwgZXJyb3IpIHsKCWlmICFzZGsuVHJ1c3RlZENhbGxlcihjdHgpIHsKCQlyZXR1cm4ganNvbk91dCg0MDMsIG1hcFtzdHJpbmddYW55eyJlcnJvciI6ICLku4XnrqHnkIblkZjlj6/liKDpmaTlm77niYcifSkKCX0KCXZhciByZXEgc3RydWN0IHsKCQlGaWxlSURzIFtdc3RyaW5nIGBqc29uOiJmaWxlX2lkcyJgIC8vIFRHIGZpbGVfaWQg5YiX6KGoCgl9CglpZiBlcnIgOj0ganNvbi5Vbm1hcnNoYWwoYm9keSwgJnJlcSk7IGVyciAhPSBuaWwgfHwgbGVuKHJlcS5GaWxlSURzKSA9PSAwIHsKCQlyZXR1cm4ganNvbk91dCg0MDAsIG1hcFtzdHJpbmddYW55eyJlcnJvciI6ICLlj4LmlbDplJnor6/vvJpmaWxlX2lkcyDlv4XloasifSkKCX0KCWNmZyA6PSBzZGsuQ29uZmlnKGN0eCkKCXRnIDo9IHRnQ29uZmlnRnJvbVNldHRpbmdzKGNmZykgLy8g6YWN572u5LiN5a6M5pW05pe25LuF56e76Zmk5Y6G5Y+y77yI5peg5rOV5Yig6aKR6YGT5raI5oGv77yJCglpZiBwLmhpc3RvcnkgIT0gbmlsIHsKCQlmb3IgXywgaWQgOj0gcmFuZ2UgcmVxLkZpbGVJRHMgewoJCQlpZiBlIDo9IHAuaGlzdG9yeS5maW5kKGlkKTsgZSAhPSBuaWwgJiYgZS5NZXNzYWdlSUQgPiAwIHsKCQkJCV8gPSB0Z0RlbGV0ZU1lc3NhZ2UodGcsIGUuTWVzc2FnZUlEKSAvLyDlsL3lipvliKDpmaTvvJrnvZHnu5wv6YWN572u5aSx6LSl5LiN6Zi75aGe6K6w5b2V56e76ZmkCgkJCX0KCQl9CgkJZGVsZXRlZCA6PSBwLmhpc3RvcnkucmVtb3ZlKHJlcS5GaWxlSURzKQoJCXJldHVybiBqc29uT3V0KDIwMCwgbWFwW3N0cmluZ11hbnl7ImRlbGV0ZWQiOiBkZWxldGVkLCAidG90YWwiOiBsZW4ocmVxLkZpbGVJRHMpfSkKCX0KCXJldHVybiBqc29uT3V0KDIwMCwgbWFwW3N0cmluZ11hbnl7ImRlbGV0ZWQiOiAwLCAidG90YWwiOiBsZW4ocmVxLkZpbGVJRHMpfSkKfQoKLy8gdGdDb25maWdGcm9tU2V0dGluZ3Mg5LuO55Sf5pWI6YWN572u5o+Q5Y+WIFRHIOmFjeWvue+8iOe6r+WHveaVsO+8ieOAggpmdW5jIHRnQ29uZmlnRnJvbVNldHRpbmdzKGNmZyBtYXBbc3RyaW5nXXN0cmluZykgdGdDb25maWcgewoJcmV0dXJuIHRnQ29uZmlnewoJCUJvdFRva2VuOiBzdHJpbmdzLlRyaW1TcGFjZShjZmdbInRnX2JvdF90b2tlbiJdKSwKCQlDaGF0SUQ6ICAgc3RyaW5ncy5UcmltU3BhY2UoY2ZnWyJ0Z19jaGF0X2lkIl0pLAoJCVByb3h5OiAgICBzdHJpbmdzLlRyaW1TcGFjZShjZmdbImFwaV9wcm94eSJdKSwKCX0KfQoKLy8gdmFsaWRhdGVQYWlyIOmFjeWvuemFjee9ruagoemqjO+8iHRva2VuL2NoYXRfaWQg6Z2e56m6ICsgcHJveHlfYmFzZSDlrozmlbQgaHR0cHMg5Zyw5Z2A77ybCi8vIGh0dHA6Ly8g5LuF5YWB6K64IGxvY2FsaG9zdC8xMjcuMC4wLjEg5pys5Zyw6IGU6LCD77yM5LiOIGltYWdlLWNkbiDop4TliJnkuIDoh7TvvInjgIIKZnVuYyB2YWxpZGF0ZVBhaXIoY2ZnIG1hcFtzdHJpbmddc3RyaW5nKSBlcnJvciB7CglpZiBzdHJpbmdzLlRyaW1TcGFjZShjZmdbInRnX2JvdF90b2tlbiJdKSA9PSAiIiB8fCBzdHJpbmdzLlRyaW1TcGFjZShjZmdbInRnX2NoYXRfaWQiXSkgPT0gIiIgewoJCXJldHVybiBmbXQuRXJyb3JmKCLmnKrphY3nva7vvJror7flhYjlnKjmj5Lku7borr7nva7kuK3loavlhpkgQm90IFRva2VuIOS4jiBDaGF0IElEIikKCX0KCWJhc2UgOj0gc3RyaW5ncy5UcmltU3BhY2UoY2ZnWyJwcm94eV9iYXNlIl0pCglpZiBiYXNlID09ICIiIHsKCQlyZXR1cm4gZm10LkVycm9yZigi5pyq6YWN572u77ya6K+35YWI5Zyo5o+S5Lu26K6+572u5Lit5aGr5YaZ5Y+N5LujIFdvcmtlciDlnLDlnYAiKQoJfQoJaWYgc3RyaW5ncy5IYXNQcmVmaXgoYmFzZSwgImh0dHBzOi8vIikgJiYgbGVuKGJhc2UpID4gbGVuKCJodHRwczovL3giKSB7CgkJcmV0dXJuIG5pbAoJfQoJaWYgc3RyaW5ncy5IYXNQcmVmaXgoYmFzZSwgImh0dHA6Ly8iKSAmJgoJCShzdHJpbmdzLkhhc1ByZWZpeChiYXNlLCAiaHR0cDovL2xvY2FsaG9zdCIpIHx8IHN0cmluZ3MuSGFzUHJlZml4KGJhc2UsICJodHRwOi8vMTI3LjAuMC4xIikpIHsKCQlyZXR1cm4gbmlsIC8vIOacrOWcsOiBlOiwg+S+i+Wklu+8iG1vY2sgV29ya2Vy77yJCgl9CglyZXR1cm4gZm10LkVycm9yZigi5Y+N5LujIFdvcmtlciDlnLDlnYDpnIDkuLogaHR0cHM6Ly8g5byA5aS055qE5a6M5pW05Zyw5Z2AIikKfQoKLy8gcHJvYmVXb3JrZXIg5Y+N5LujIFdvcmtlciDlrZjmtLvmjqLmtYvvvJpHRVQge2Jhc2V9L2hlYWx0aCDihpIgSFRUUCAyMDDvvIgxMHMg5b+r6YCf5aSx6LSl77yJ44CCCmZ1bmMgcHJvYmVXb3JrZXIoYmFzZSBzdHJpbmcpIGVycm9yIHsKCWNsaWVudCA6PSAmaHR0cC5DbGllbnR7VGltZW91dDogMTAgKiB0aW1lLlNlY29uZH0KCXJlc3AsIGVyciA6PSBjbGllbnQuR2V0KHN0cmluZ3MuVHJpbVN1ZmZpeChiYXNlLCAiLyIpICsgIi9oZWFsdGgiKQoJaWYgZXJyICE9IG5pbCB7CgkJcmV0dXJuIGVycgoJfQoJZGVmZXIgcmVzcC5Cb2R5LkNsb3NlKCkKCV8sIF8gPSBpby5Db3B5KGlvLkRpc2NhcmQsIGlvLkxpbWl0UmVhZGVyKHJlc3AuQm9keSwgNDA5NikpCglpZiByZXNwLlN0YXR1c0NvZGUgIT0gaHR0cC5TdGF0dXNPSyB7CgkJcmV0dXJuIGZtdC5FcnJvcmYoIkhUVFAgJWTvvIjnoa7orqTlt7Lpg6jnvbIgdGctaW1hZ2UtYmVkIHdvcmtlcu+8iSIsIHJlc3AuU3RhdHVzQ29kZSkKCX0KCXJldHVybiBuaWwKfQoKLy8gbWFya2Rvd25Gb3Ig55Sf5oiQIE1hcmtkb3duIOWbvueJh+ivreazle+8iOaWh+S7tuWQjea4heeQhiBbIF0gKCApIOmYsuivreazleegtOWdj++8m+e6r+WHveaVsO+8ieOAggpmdW5jIG1hcmtkb3duRm9yKGZpbGVuYW1lIHN0cmluZywgdXJsIHN0cmluZykgc3RyaW5nIHsKCXNhZmUgOj0gc3RyaW5ncy5OZXdSZXBsYWNlcigiWyIsICIoIiwgIl0iLCAiKSIsICIoIiwgIigiLCAiKSIsICIpIikuUmVwbGFjZShmaWxlbmFtZSkKCXJldHVybiAiIVsiICsgc2FmZSArICJdKCIgKyB1cmwgKyAiKSIKfQoKLy8ganNvbk91dCBKU09OIOWTjeW6lOWwgeijheOAggpmdW5jIGpzb25PdXQoc3RhdHVzIGludCwgcGF5bG9hZCBtYXBbc3RyaW5nXWFueSkgKGludCwgW11ieXRlLCBlcnJvcikgewoJcmF3LCBfIDo9IGpzb24uTWFyc2hhbChwYXlsb2FkKQoJcmV0dXJuIHN0YXR1cywgcmF3LCBuaWwKfQoKLy8gbWFpbiDmj5Lku7bov5vnqIvlhaXlj6PvvIhzZXJ2ZXIuU2VydmUg5a6M5oiQ5o+h5omL5LiO5aWR57qm5pyN5Yqh5rOo5YaM77yJ44CCCmZ1bmMgbWFpbigpIHsKCWZtdC5GcHJpbnRsbihvcy5TdGRlcnIsICJbdGctaW1hZ2UtYmVkXSDov5vnqIvlkK/liqgiKQoJc2VydmVyLlNlcnZlKCZUR0ltYWdlQmVkUGx1Z2lue30pCn0K
+// marketplace-repo/tg-image-bed/main.go
+// TG图床插件（进程外，免费）：图片上传直达 Telegram 频道（Bot API），
+// 访客经站长自备的反代 Worker 读取（Bot Token 不出服务端，浏览器永远拿不到）。
+//
+// 架构（配对三件套，同 image-cdn 插件模式）：
+//   - Telegram Bot（@BotFather 创建并拉入频道为管理员，配置 Token + Chat ID）
+//   - 反代 Worker（站长自行部署，见同目录 worker/ 参考实现：/f/{file_id} 持 token 反代 + 缓存）
+//   - 本插件（插件设置填 Token + Chat ID + Worker 地址即用）
+//
+// 能力：settings（配对五项）+ api（上传/列表/删除 + storage 契约备用）+ admin.page（图库页）。
+// 上传历史存 data/plugins/tg-image-bed/history.json（见 history.go）。
+// 限制：Bot API getFile 下载上限 20MB（上传前置校验）；file_path 为临时链接，
+// 每次访问由 Worker 实时 getFile 解析（对齐 telegraph-Image 的 cfile 机制）。
+package main
+
+import (
+	"context"
+	"encoding/base64"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
+	"time"
+
+	"github.com/roberts9012062/boke/pkg/plugin-sdk"
+	"github.com/roberts9012062/boke/pkg/plugin-sdk/server"
+)
+
+// pluginID 插件唯一 ID（与 plugin.json / yueyan-plugin.json 一致）。
+const pluginID = "tg-image-bed"
+
+// imageExtWhitelist 上传图片扩展名白名单（对齐 image-cdn Worker；value 为规范化 MIME）。
+var imageExtWhitelist = map[string]string{
+	".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png",
+	".gif": "image/gif", ".webp": "image/webp",
+}
+
+// TGImageBedPlugin TG图床插件实现（进程外）。
+type TGImageBedPlugin struct {
+	history *historyStore // 上传历史（OnActivate 打开数据目录初始化）
+}
+
+// Info 插件信息（与商城清单一致；能力声明 + 设置项）。
+func (p *TGImageBedPlugin) Info() sdk.Info {
+	return sdk.Info{
+		ID:          pluginID,
+		Name:        "TG图床",
+		Version:     "0.2.0",
+		Author:      "月言官方",
+		Description: "Telegram 频道图床：图片上传直达 TG（Bot API 保原图），自备反代 Worker 访问，后台图库管理与 Markdown 插图。",
+		Capabilities: []string{"settings", "api", "admin.page"},
+		Settings: []sdk.SettingField{
+			{Key: "tg_bot_token", Label: "Bot Token（@BotFather 创建，如 123456:AAxxx）", Type: "text", Default: ""},
+			{Key: "tg_chat_id", Label: "频道/群 Chat ID（如 -1001234567890 或 @channel）", Type: "text", Default: ""},
+			{Key: "proxy_base", Label: "反代 Worker 地址（如 https://img.example.com）", Type: "text", Default: ""},
+			{Key: "send_mode", Label: "发送模式（document=原图保真 / photo=TG 压缩）", Type: "select", Default: "document", Options: []string{"document", "photo"}},
+			{Key: "api_proxy", Label: "TG API 代理（服务器在大陆时填，如 http://127.0.0.1:7890；留空直连）", Type: "text", Default: ""},
+		},
+	}
+}
+
+// OnActivate 启用回调：打开插件数据目录的上传历史（幂等，进程重启自动恢复）。
+func (p *TGImageBedPlugin) OnActivate(ctx context.Context) error {
+	wd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	store, err := newHistoryStore(filepath.Join(wd, "data", "plugins", pluginID))
+	if err != nil {
+		return err
+	}
+	p.history = store
+	return nil
+}
+
+// OnDeactivate 停用回调（历史已在每次变更后落盘，无需额外保存）。
+func (p *TGImageBedPlugin) OnDeactivate(ctx context.Context) error {
+	p.history = nil
+	return nil
+}
+
+// Hooks 订阅钩子（本插件为独立图库形态，不插入业务钩子管道）。
+func (p *TGImageBedPlugin) Hooks() []sdk.Hook { return nil }
+
+// RegisterAPI 契约端点：
+//
+//	GET  /storage/health   配对探测（宿主存储 seam 契约；当前 seam 提供方为 image-cdn，此端点备用兼容）
+//	POST /storage/upload   转存契约（宿主 seam 备用；与 /manage/upload 同链路）
+//	POST /manage/upload    图库直传 {filename,mime,content_b64}（登录用户——插图是常规发帖行为）
+//	POST /manage/list      上传历史 {cursor} → {objects,cursor}（登录用户：图库页数据源）
+//	POST /manage/delete    批量删除 {file_ids:[]}（管理员：尽力删频道消息 + 移除历史）
+func (p *TGImageBedPlugin) RegisterAPI(api *sdk.APIMux) {
+	api.Handle("GET", "/storage/health", p.handleHealth)
+	api.Handle("POST", "/storage/upload", p.handleUpload)
+	api.Handle("POST", "/manage/upload", p.handleUpload)
+	api.Handle("POST", "/manage/list", p.handleList)
+	api.Handle("POST", "/manage/delete", p.handleDelete)
+}
+
+// handleHealth 配对探测：配置完整 → getMe/getChat 验 Bot 与频道 → 探测反代 Worker 存活。
+func (p *TGImageBedPlugin) handleHealth(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
+	cfg := sdk.Config(ctx)
+	if err := validatePair(cfg); err != nil {
+		return jsonOut(200, map[string]any{"ok": false, "error": err.Error()})
+	}
+	tg := tgConfigFromSettings(cfg)
+	botName, chatTitle, err := tgProbe(tg)
+	if err != nil {
+		return jsonOut(200, map[string]any{"ok": false, "error": err.Error()})
+	}
+	if err := probeWorker(cfg["proxy_base"]); err != nil {
+		return jsonOut(200, map[string]any{"ok": false, "error": "反代 Worker 不可达：" + err.Error()})
+	}
+	return jsonOut(200, map[string]any{
+		"ok": true, "bot": "@" + botName, "chat": chatTitle, "worker": cfg["proxy_base"],
+	})
+}
+
+// uploadRequest 上传请求体（/manage/upload 与 /storage/upload 同构）。
+type uploadRequest struct {
+	Filename  string `json:"filename"`
+	Mime      string `json:"mime"`
+	Content64 string `json:"content_b64"`
+}
+
+// uploadResponse 上传响应体（/storage/upload 契约字段 + 图库扩展字段）。
+type uploadResponse struct {
+	Error      string `json:"error,omitempty"` // 非空=失败原因
+	Type       string `json:"type"`            // 媒体类型（恒 image——白名单前置校验）
+	StorageKey string `json:"storage_key"`     // = file_id（TG 文件标识）
+	URL        string `json:"url"`             // 公开访问地址（{proxy_base}/f/{file_id}）
+	Mime       string `json:"mime"`
+	Size       int64  `json:"size"`
+	Markdown   string `json:"markdown"` // ![文件名](URL)——复制粘贴进正文
+	Mode       string `json:"mode"`     // 实际发送模式（photo 遇 gif 回退 document 时与设置不同）
+}
+
+// handleUpload 图库直传/契约转存：白名单与大小校验 → 发送 TG → 落历史 → 响应。
+func (p *TGImageBedPlugin) handleUpload(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
+	if !sdk.CallerIsSystem(ctx) && sdk.CallerID(ctx) <= 0 {
+		return jsonOut(403, map[string]any{"error": "请先登录"})
+	}
+	var req uploadRequest
+	if err := json.Unmarshal(body, &req); err != nil || req.Content64 == "" || req.Filename == "" {
+		return jsonOut(400, map[string]any{"error": "参数错误：filename/mime/content_b64 必填"})
+	}
+	lower := strings.ToLower(req.Filename)
+	dot := strings.LastIndex(lower, ".")
+	if dot < 0 {
+		return jsonOut(400, map[string]any{"error": "文件缺少扩展名（仅支持 jpg/jpeg/png/gif/webp）"})
+	}
+	mime, ok := imageExtWhitelist[lower[dot:]]
+	if !ok {
+		return jsonOut(400, map[string]any{"error": "仅支持图片（jpg/jpeg/png/gif/webp）"})
+	}
+	if strings.Contains(lower, "..") || strings.ContainsAny(lower, `/\`) {
+		return jsonOut(400, map[string]any{"error": "文件名不合法（含路径分隔符）"})
+	}
+	content, err := base64.StdEncoding.DecodeString(req.Content64)
+	if err != nil {
+		return jsonOut(400, map[string]any{"error": "内容 base64 解码失败"})
+	}
+	if len(content) > tgMaxDownloadSize {
+		return jsonOut(400, map[string]any{"error": "图片超过 20MB（Telegram Bot API 文件下载上限）"})
+	}
+	cfg := sdk.Config(ctx)
+	if err := validatePair(cfg); err != nil {
+		return jsonOut(400, map[string]any{"error": err.Error()})
+	}
+	tg := tgConfigFromSettings(cfg)
+	mode := cfg["send_mode"]
+	sent, err := tgSendFile(tg, mode, req.Filename, mime, content)
+	if err != nil {
+		return jsonOut(200, map[string]any{"error": err.Error()})
+	}
+	url := strings.TrimSuffix(strings.TrimSpace(cfg["proxy_base"]), "/") + "/f/" + sent.FileID
+	if mode == "photo" && strings.Contains(mime, "gif") {
+		mode = "document" // 响应回告实际模式（gif 不支持 sendPhoto 已自动回退）
+	}
+	resp := uploadResponse{
+		Type: "image", StorageKey: sent.FileID, URL: url, Mime: mime,
+		Size: sent.Size, Markdown: markdownFor(req.Filename, url), Mode: mode,
+	}
+	if p.history != nil {
+		_ = p.history.append(historyEntry{
+			FileID: sent.FileID, MessageID: sent.MessageID, FileName: req.Filename,
+			Size: sent.Size, Mime: mime, URL: url, Mode: mode, UploaderID: sdk.CallerID(ctx),
+		})
+	}
+	raw, _ := json.Marshal(resp)
+	return 200, raw, nil
+}
+
+// handleList 上传历史分页（登录用户——图库页数据源；新在前）。
+func (p *TGImageBedPlugin) handleList(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
+	if !sdk.CallerIsSystem(ctx) && sdk.CallerID(ctx) <= 0 {
+		return jsonOut(403, map[string]any{"error": "请先登录"})
+	}
+	var req struct {
+		Cursor string `json:"cursor"` // 偏移量十进制串（首页空）
+	}
+	_ = json.Unmarshal(body, &req)
+	if p.history == nil {
+		return jsonOut(200, map[string]any{"objects": []any{}, "cursor": ""})
+	}
+	entries, next := p.history.page(req.Cursor)
+	objects := make([]map[string]any, 0, len(entries))
+	for _, e := range entries {
+		objects = append(objects, map[string]any{
+			"file_id": e.FileID, "file_name": e.FileName, "url": e.URL,
+			"markdown": markdownFor(e.FileName, e.URL), "size": e.Size,
+			"mime": e.Mime, "uploaded_at": e.UploadedAt,
+		})
+	}
+	return jsonOut(200, map[string]any{"objects": objects, "cursor": next})
+}
+
+// handleDelete 批量删除（仅管理员）：逐条尽力 deleteMessage（失败不阻塞）→ 移除历史记录。
+// 说明：删除频道消息后 TG 服务器缓存文件可能仍可经旧 URL 访问一段时间（README 已注明）。
+func (p *TGImageBedPlugin) handleDelete(ctx context.Context, method string, path string, body []byte) (int, []byte, error) {
+	if !sdk.TrustedCaller(ctx) {
+		return jsonOut(403, map[string]any{"error": "仅管理员可删除图片"})
+	}
+	var req struct {
+		FileIDs []string `json:"file_ids"` // TG file_id 列表
+	}
+	if err := json.Unmarshal(body, &req); err != nil || len(req.FileIDs) == 0 {
+		return jsonOut(400, map[string]any{"error": "参数错误：file_ids 必填"})
+	}
+	cfg := sdk.Config(ctx)
+	tg := tgConfigFromSettings(cfg) // 配置不完整时仅移除历史（无法删频道消息）
+	if p.history != nil {
+		for _, id := range req.FileIDs {
+			if e := p.history.find(id); e != nil && e.MessageID > 0 {
+				_ = tgDeleteMessage(tg, e.MessageID) // 尽力删除：网络/配置失败不阻塞记录移除
+			}
+		}
+		deleted := p.history.remove(req.FileIDs)
+		return jsonOut(200, map[string]any{"deleted": deleted, "total": len(req.FileIDs)})
+	}
+	return jsonOut(200, map[string]any{"deleted": 0, "total": len(req.FileIDs)})
+}
+
+// tgConfigFromSettings 从生效配置提取 TG 配对（纯函数）。
+func tgConfigFromSettings(cfg map[string]string) tgConfig {
+	return tgConfig{
+		BotToken: strings.TrimSpace(cfg["tg_bot_token"]),
+		ChatID:   strings.TrimSpace(cfg["tg_chat_id"]),
+		Proxy:    strings.TrimSpace(cfg["api_proxy"]),
+	}
+}
+
+// validatePair 配对配置校验（token/chat_id 非空 + proxy_base 完整 https 地址；
+// http:// 仅允许 localhost/127.0.0.1 本地联调，与 image-cdn 规则一致）。
+func validatePair(cfg map[string]string) error {
+	if strings.TrimSpace(cfg["tg_bot_token"]) == "" || strings.TrimSpace(cfg["tg_chat_id"]) == "" {
+		return fmt.Errorf("未配置：请先在插件设置中填写 Bot Token 与 Chat ID")
+	}
+	base := strings.TrimSpace(cfg["proxy_base"])
+	if base == "" {
+		return fmt.Errorf("未配置：请先在插件设置中填写反代 Worker 地址")
+	}
+	if strings.HasPrefix(base, "https://") && len(base) > len("https://x") {
+		return nil
+	}
+	if strings.HasPrefix(base, "http://") &&
+		(strings.HasPrefix(base, "http://localhost") || strings.HasPrefix(base, "http://127.0.0.1")) {
+		return nil // 本地联调例外（mock Worker）
+	}
+	return fmt.Errorf("反代 Worker 地址需为 https:// 开头的完整地址")
+}
+
+// probeWorker 反代 Worker 存活探测：GET {base}/health → HTTP 200（10s 快速失败）。
+func probeWorker(base string) error {
+	client := &http.Client{Timeout: 10 * time.Second}
+	resp, err := client.Get(strings.TrimSuffix(base, "/") + "/health")
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, 4096))
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("HTTP %d（确认已部署 tg-image-bed worker）", resp.StatusCode)
+	}
+	return nil
+}
+
+// markdownFor 生成 Markdown 图片语法（文件名清理 [ ] ( ) 防语法破坏；纯函数）。
+func markdownFor(filename string, url string) string {
+	safe := strings.NewReplacer("[", "(", "]", ")", "(", "(", ")", ")").Replace(filename)
+	return "![" + safe + "](" + url + ")"
+}
+
+// jsonOut JSON 响应封装。
+func jsonOut(status int, payload map[string]any) (int, []byte, error) {
+	raw, _ := json.Marshal(payload)
+	return status, raw, nil
+}
+
+// main 插件进程入口（server.Serve 完成握手与契约服务注册）。
+func main() {
+	fmt.Fprintln(os.Stderr, "[tg-image-bed] 进程启动")
+	server.Serve(&TGImageBedPlugin{})
+}

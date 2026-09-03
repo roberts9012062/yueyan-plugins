@@ -1,1 +1,15 @@
-ewogICJpZCI6ICJ0Zy1pbWFnZS1iZWQiLAogICJuYW1lIjogIlRH5Zu+5bqKIiwKICAidmVyc2lvbiI6ICIwLjIuMCIsCiAgImF1dGhvciI6IHsKICAgICJuYW1lIjogIuaciOiogOWumOaWuSIKICB9LAogICJkZXNjcmlwdGlvbiI6ICJUZWxlZ3JhbSDpopHpgZPlm77luorvvJrlm77niYfkuIrkvKDnm7Tovr4gVEfvvIhCb3QgQVBJIOS/neWOn+Wbvu+8ie+8jOiHquWkh+WPjeS7oyBXb3JrZXIg6K6/6Zeu77yM5ZCO5Y+w5Zu+5bqT566h55CG5LiOIE1hcmtkb3duIOaPkuWbvuOAgiIsCiAgInNkayI6ICI+PTEuMC4wIiwKICAiY2FwYWJpbGl0aWVzIjogWwogICAgInNldHRpbmdzIiwKICAgICJhcGkiLAogICAgImFkbWluLnBhZ2UiCiAgXQp9Cg==
+{
+  "id": "tg-image-bed",
+  "name": "TG图床",
+  "version": "0.2.0",
+  "author": {
+    "name": "月言官方"
+  },
+  "description": "Telegram 频道图床：图片上传直达 TG（Bot API 保原图），自备反代 Worker 访问，后台图库管理与 Markdown 插图。",
+  "sdk": ">=1.0.0",
+  "capabilities": [
+    "settings",
+    "api",
+    "admin.page"
+  ]
+}

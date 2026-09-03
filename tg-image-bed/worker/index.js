@@ -1,1 +1,93 @@
-Ly8gbWFya2V0cGxhY2UtcmVwby90Zy1pbWFnZS1iZWQvd29ya2VyL2luZGV4LmpzCi8vIFRH5Zu+5bqK5Y+N5LujIFdvcmtlcu+8iENsb3VkZmxhcmUgV29ya2VycyDlj4LogIPlrp7njrDvvIx+MTAwIOihjO+8ie+8mgovLyAgIOiuv+Wuoue7j+acrCBXb3JrZXIg5Yy/5ZCN6K+75Y+WIFRlbGVncmFtIOmikemBk+WbvueJh+KAlOKAlEJvdCBUb2tlbiDlj6rlrZjlnKjmnKwgV29ya2VyIOeahAovLyAgIHNlY3JldCDkuK3vvIzmtY/op4jlmajmsLjov5zmi7/kuI3liLDvvIjmnLrliLblr7npvZAgdGVsZWdyYXBoLUltYWdlIOeahCBjZmlsZSDot6/nlLHvvInjgIIKLy8KLy8g546v5aKD5Y+Y6YeP77yIRGFzaGJvYXJkIOaIliB3cmFuZ2xlciBzZWNyZXQg6YWN572u77yJ77yaCi8vICAgVEdfQk9UX1RPS0VOICBCb3QgVG9rZW7vvIhgd3JhbmdsZXIgc2VjcmV0IHB1dCBUR19CT1RfVE9LRU5g77yb5b+F5aGr77yJCi8vCi8vIOi3r+eUseWlkee6pu+8iGJva2XjgIxUR+WbvuW6iuOAjeaPkuS7tuWhq+acrCBXb3JrZXIg5Zyw5Z2A5Y2z6YWN5a+577yJ77yaCi8vICAgR0VUIC9oZWFsdGggICAgICAg5a2Y5rS75o6i5rWLIOKGkiB7Im9rIjp0cnVlfe+8iOaPkuS7tumFjeWvueaOoua1i+eUqO+8jOWFjemJtOadg++8iQovLyAgIEdFVCAvZi97ZmlsZV9pZH0gIOivu+Wbvu+8mmdldEZpbGUg6Kej5p6Q5Li05pe2IGZpbGVfcGF0aCDihpIg5oyBIHRva2VuIOWbnua6kCDihpIgQ0Yg57yT5a2Y5ZCO6L+U5ZueCmV4cG9ydCBkZWZhdWx0IHsKICBhc3luYyBmZXRjaChyZXF1ZXN0LCBlbnYsIGN0eCkgewogICAgY29uc3QgdXJsID0gbmV3IFVSTChyZXF1ZXN0LnVybCk7CiAgICB0cnkgewogICAgICBpZiAodXJsLnBhdGhuYW1lID09PSAiL2hlYWx0aCIpIHsKICAgICAgICBpZiAoIWVudi5UR19CT1RfVE9LRU4pIHsKICAgICAgICAgIHJldHVybiBqc29uKDUwMCwgeyBvazogZmFsc2UsIGVycm9yOiAiVEdfQk9UX1RPS0VOIG5vdCBzZXQgKHdyYW5nbGVyIHNlY3JldCBwdXQgVEdfQk9UX1RPS0VOKSIgfSk7CiAgICAgICAgfQogICAgICAgIHJldHVybiBqc29uKDIwMCwgeyBvazogdHJ1ZSwgc2VydmljZTogInRnLWltYWdlLWJlZC13b3JrZXIiIH0pOwogICAgICB9CiAgICAgIGlmICh1cmwucGF0aG5hbWUuc3RhcnRzV2l0aCgiL2YvIikgJiYgcmVxdWVzdC5tZXRob2QgPT09ICJHRVQiKSB7CiAgICAgICAgcmV0dXJuIGF3YWl0IGhhbmRsZUZpbGUocmVxdWVzdCwgZW52LCBjdHgsIGRlY29kZVVSSUNvbXBvbmVudCh1cmwucGF0aG5hbWUuc2xpY2UoMykpKTsKICAgICAgfQogICAgICByZXR1cm4ganNvbig0MDQsIHsgZXJyb3I6ICJub3QgZm91bmQiIH0pOwogICAgfSBjYXRjaCAoZSkgewogICAgICByZXR1cm4ganNvbig1MDAsIHsgZXJyb3I6IFN0cmluZygoZSAmJiBlLm1lc3NhZ2UpIHx8IGUpIH0pOwogICAgfQogIH0sCn07CgovLyBqc29uIEpTT04g5ZON5bqU6L6F5Yqp44CCCmZ1bmN0aW9uIGpzb24oc3RhdHVzLCBib2R5KSB7CiAgcmV0dXJuIG5ldyBSZXNwb25zZShKU09OLnN0cmluZ2lmeShib2R5KSwgewogICAgc3RhdHVzLAogICAgaGVhZGVyczogeyAiQ29udGVudC1UeXBlIjogImFwcGxpY2F0aW9uL2pzb247IGNoYXJzZXQ9dXRmLTgiIH0sCiAgfSk7Cn0KCi8vIGZpbGVfaWQg5b2i5oCB77yI5a2X5q+N5pWw5a2X5LiL5YiS57q/6L+e5a2X56ym77yM6YCC5Lit6ZW/5bqm77yJ4oCU4oCU5ouS57ud5Lu75oSP5rOo5YWl77yI6Lev5b6EL+afpeivouS4suetie+8ieOAggpjb25zdCBGSUxFX0lEX1JFID0gL15bQS1aYS16MC05Xy1dezEwLDMwMH0kLzsKCi8vIGNvbnRlbnRUeXBlT2Yg5oyJIFRlbGVncmFtIGZpbGVfcGF0aCDmianlsZXlkI3mjqjmlq0gTUlNRe+8iOWvuem9kCB0ZWxlZ3JhcGgtSW1hZ2UgY2ZpbGXvvInjgIIKZnVuY3Rpb24gY29udGVudFR5cGVPZihmaWxlUGF0aCkgewogIGNvbnN0IGV4dCA9IFN0cmluZyhmaWxlUGF0aCkuc3BsaXQoIi4iKS5wb3AoKS50b0xvd2VyQ2FzZSgpOwogIGNvbnN0IG1hcCA9IHsKICAgIGpwZzogImltYWdlL2pwZWciLCBqcGVnOiAiaW1hZ2UvanBlZyIsIHBuZzogImltYWdlL3BuZyIsCiAgICBnaWY6ICJpbWFnZS9naWYiLCB3ZWJwOiAiaW1hZ2Uvd2VicCIsIHN2ZzogImltYWdlL3N2Zyt4bWwiLAogIH07CiAgcmV0dXJuIG1hcFtleHRdIHx8ICJhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW0iOwp9CgovLyBnZXRGaWxlIOaMgSB0b2tlbiDop6PmnpAgZmlsZV9pZCDihpIg5Li05pe2IGZpbGVfcGF0aO+8iOavj+asoeiuv+mXruWunuaXtuino+aekOKAlOKAlFRHIOebtOmTvuacieaXtuaViO+8ieOAggphc3luYyBmdW5jdGlvbiByZXNvbHZlRmlsZVBhdGgoZW52LCBmaWxlSWQpIHsKICBjb25zdCByZXMgPSBhd2FpdCBmZXRjaCgKICAgIGBodHRwczovL2FwaS50ZWxlZ3JhbS5vcmcvYm90JHtlbnYuVEdfQk9UX1RPS0VOfS9nZXRGaWxlP2ZpbGVfaWQ9JHtlbmNvZGVVUklDb21wb25lbnQoZmlsZUlkKX1gLAogICAgeyBoZWFkZXJzOiB7ICJVc2VyLUFnZW50IjogIk1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQpIEFwcGxlV2ViS2l0LzUzNy4zNiIgfSB9CiAgKTsKICBjb25zdCBkYXRhID0gYXdhaXQgcmVzLmpzb24oKTsKICBpZiAoIWRhdGEub2spIHsKICAgIHRocm93IG5ldyBFcnJvcigiZ2V0RmlsZSBmYWlsZWQ6ICIgKyAoZGF0YS5kZXNjcmlwdGlvbiB8fCByZXMuc3RhdHVzKSk7CiAgfQogIHJldHVybiBkYXRhLnJlc3VsdC5maWxlX3BhdGg7Cn0KCi8vIGhhbmRsZUZpbGUg6K+75Zu+5Li75rWB56iL77ya57yT5a2Y5ZG95Lit55u06L+UIOKGkiBnZXRGaWxlIOKGkiDmjIEgdG9rZW4g5Zue5rqQIOKGkiDlhpnnvJPlrZgg4oaSIOi/lOWbnuOAggphc3luYyBmdW5jdGlvbiBoYW5kbGVGaWxlKHJlcXVlc3QsIGVudiwgY3R4LCBmaWxlSWQpIHsKICBpZiAoIWVudi5UR19CT1RfVE9LRU4pIHsKICAgIHJldHVybiBqc29uKDUwMCwgeyBlcnJvcjogIlRHX0JPVF9UT0tFTiBub3Qgc2V0IiB9KTsKICB9CiAgaWYgKCFGSUxFX0lEX1JFLnRlc3QoZmlsZUlkKSkgewogICAgcmV0dXJuIGpzb24oNDAwLCB7IGVycm9yOiAiYmFkIGZpbGVfaWQiIH0pOwogIH0KICAvLyBDbG91ZGZsYXJlIENhY2hlIEFQSe+8muWRveS4reWImei/niBnZXRGaWxlIOmDveecge+8iOWbvueJh+WGheWuueS4jeWPr+WPmO+8jGZpbGVfaWQg5Y2z5YaF5a656ZSu77yJCiAgY29uc3QgY2FjaGUgPSBjYWNoZXMuZGVmYXVsdDsKICBjb25zdCBjYWNoZWQgPSBhd2FpdCBjYWNoZS5tYXRjaChyZXF1ZXN0KTsKICBpZiAoY2FjaGVkKSB7CiAgICByZXR1cm4gY2FjaGVkOwogIH0KICBjb25zdCBmaWxlUGF0aCA9IGF3YWl0IHJlc29sdmVGaWxlUGF0aChlbnYsIGZpbGVJZCk7CiAgY29uc3QgdXBzdHJlYW0gPSBhd2FpdCBmZXRjaChgaHR0cHM6Ly9hcGkudGVsZWdyYW0ub3JnL2ZpbGUvYm90JHtlbnYuVEdfQk9UX1RPS0VOfS8ke2ZpbGVQYXRofWApOwogIGlmICghdXBzdHJlYW0ub2spIHsKICAgIHJldHVybiBqc29uKHVwc3RyZWFtLnN0YXR1cyA9PT0gNDA0ID8gNDA0IDogNTAyLCB7IGVycm9yOiAidGVsZWdyYW0gZmV0Y2ggZmFpbGVkOiAiICsgdXBzdHJlYW0uc3RhdHVzIH0pOwogIH0KICBjb25zdCBidWYgPSBhd2FpdCB1cHN0cmVhbS5hcnJheUJ1ZmZlcigpOwogIGNvbnN0IGhlYWRlcnMgPSBuZXcgSGVhZGVycygpOwogIGhlYWRlcnMuc2V0KCJDb250ZW50LVR5cGUiLCBjb250ZW50VHlwZU9mKGZpbGVQYXRoKSk7CiAgaGVhZGVycy5zZXQoIkNhY2hlLUNvbnRyb2wiLCAicHVibGljLCBtYXgtYWdlPTg2NDAwIik7IC8vIOa1j+iniOWZqC9DRE4g5LiA5aSp77yIV29ya2VyIOS+p+e8k+WtmOmVv+acn+aMgeacie+8iQogIGhlYWRlcnMuc2V0KCJBY2Nlc3MtQ29udHJvbC1BbGxvdy1PcmlnaW4iLCAiKiIpOwogIGNvbnN0IHJlc3AgPSBuZXcgUmVzcG9uc2UoYnVmLCB7IHN0YXR1czogMjAwLCBoZWFkZXJzIH0pOwogIGN0eC53YWl0VW50aWwoY2FjaGUucHV0KHJlcXVlc3QsIHJlc3AuY2xvbmUoKSkpOwogIHJldHVybiByZXNwOwp9Cg==
+// marketplace-repo/tg-image-bed/worker/index.js
+// TG图床反代 Worker（Cloudflare Workers 参考实现，~100 行）：
+//   访客经本 Worker 匿名读取 Telegram 频道图片——Bot Token 只存在本 Worker 的
+//   secret 中，浏览器永远拿不到（机制对齐 telegraph-Image 的 cfile 路由）。
+//
+// 环境变量（Dashboard 或 wrangler secret 配置）：
+//   TG_BOT_TOKEN  Bot Token（`wrangler secret put TG_BOT_TOKEN`；必填）
+//
+// 路由契约（boke「TG图床」插件填本 Worker 地址即配对）：
+//   GET /health       存活探测 → {"ok":true}（插件配对探测用，免鉴权）
+//   GET /f/{file_id}  读图：getFile 解析临时 file_path → 持 token 回源 → CF 缓存后返回
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    try {
+      if (url.pathname === "/health") {
+        if (!env.TG_BOT_TOKEN) {
+          return json(500, { ok: false, error: "TG_BOT_TOKEN not set (wrangler secret put TG_BOT_TOKEN)" });
+        }
+        return json(200, { ok: true, service: "tg-image-bed-worker" });
+      }
+      if (url.pathname.startsWith("/f/") && request.method === "GET") {
+        return await handleFile(request, env, ctx, decodeURIComponent(url.pathname.slice(3)));
+      }
+      return json(404, { error: "not found" });
+    } catch (e) {
+      return json(500, { error: String((e && e.message) || e) });
+    }
+  },
+};
+
+// json JSON 响应辅助。
+function json(status, body) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+  });
+}
+
+// file_id 形态（字母数字下划线连字符，适中长度）——拒绝任意注入（路径/查询串等）。
+const FILE_ID_RE = /^[A-Za-z0-9_-]{10,300}$/;
+
+// contentTypeOf 按 Telegram file_path 扩展名推断 MIME（对齐 telegraph-Image cfile）。
+function contentTypeOf(filePath) {
+  const ext = String(filePath).split(".").pop().toLowerCase();
+  const map = {
+    jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png",
+    gif: "image/gif", webp: "image/webp", svg: "image/svg+xml",
+  };
+  return map[ext] || "application/octet-stream";
+}
+
+// getFile 持 token 解析 file_id → 临时 file_path（每次访问实时解析——TG 直链有时效）。
+async function resolveFilePath(env, fileId) {
+  const res = await fetch(
+    `https://api.telegram.org/bot${env.TG_BOT_TOKEN}/getFile?file_id=${encodeURIComponent(fileId)}`,
+    { headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" } }
+  );
+  const data = await res.json();
+  if (!data.ok) {
+    throw new Error("getFile failed: " + (data.description || res.status));
+  }
+  return data.result.file_path;
+}
+
+// handleFile 读图主流程：缓存命中直返 → getFile → 持 token 回源 → 写缓存 → 返回。
+async function handleFile(request, env, ctx, fileId) {
+  if (!env.TG_BOT_TOKEN) {
+    return json(500, { error: "TG_BOT_TOKEN not set" });
+  }
+  if (!FILE_ID_RE.test(fileId)) {
+    return json(400, { error: "bad file_id" });
+  }
+  // Cloudflare Cache API：命中则连 getFile 都省（图片内容不可变，file_id 即内容键）
+  const cache = caches.default;
+  const cached = await cache.match(request);
+  if (cached) {
+    return cached;
+  }
+  const filePath = await resolveFilePath(env, fileId);
+  const upstream = await fetch(`https://api.telegram.org/file/bot${env.TG_BOT_TOKEN}/${filePath}`);
+  if (!upstream.ok) {
+    return json(upstream.status === 404 ? 404 : 502, { error: "telegram fetch failed: " + upstream.status });
+  }
+  const buf = await upstream.arrayBuffer();
+  const headers = new Headers();
+  headers.set("Content-Type", contentTypeOf(filePath));
+  headers.set("Cache-Control", "public, max-age=86400"); // 浏览器/CDN 一天（Worker 侧缓存长期持有）
+  headers.set("Access-Control-Allow-Origin", "*");
+  const resp = new Response(buf, { status: 200, headers });
+  ctx.waitUntil(cache.put(request, resp.clone()));
+  return resp;
+}

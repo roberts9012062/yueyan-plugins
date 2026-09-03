@@ -1,1 +1,56 @@
-IyBUR+WbvuW6igoKVGVsZWdyYW0g6aKR6YGT5Zu+5bqK77ya5oqK5Y2a5a6i5Zu+54mH5a2Y6L+bIFRlbGVncmFtIOmikemBk++8iEJvdCBBUEnvvInvvIzorr/lrqLnu4/kvaDoh6rlpIfnmoTlj43ku6MgV29ya2VyIOivu+WPluKAlOKAlCoqQm90IFRva2VuIOWFqOeoi+WPquWcqOacjeWKoeerr++8jOa1j+iniOWZqOawuOi/nOaLv+S4jeWIsCoq44CC54G15oSf5p2l6Ieq5byA5rqQ6aG555uuIFt0ZWxlZ3JhcGgtSW1hZ2VdKGh0dHBzOi8vZ2l0aHViLmNvbS94LWRyL3RlbGVncmFwaC1JbWFnZSkg55qEIFRHIOa4oOmBk+aooeW8j++8jOacuuWItuWvuem9kOWumOaWuSBgQ0blm77luopg77yIaW1hZ2UtY2Ru77yJ5o+S5Lu255qE5LiJ5Lu25aWX5p625p6E44CCCgojIyDlip/og73nibnmgKcKCi0gKirljp/lm77kv53nnJ8qKu+8mum7mOiupCBgc2VuZERvY3VtZW50YCDmqKHlvI/vvIzlm77niYfkuI3nu4/ljovnvKnnm7Tovr4gVEcg6aKR6YGT77yb5Y+v5YiH5o2iIGBwaG90b2Ag5qih5byP77yIVEcg5pyN5Yqh56uv5Y6L57yp77yM55yB5rWB6YeP77yJCi0gKirlkI7lj7Dlm77lupMqKu+8mue9keagvOa1j+iniOOAgeeCueWHuy/mi5bmi70v5paH5Lu25aS55om56YeP5LiK5Lyg44CB5aSN5Yi2IE1hcmtkb3duIC8gVVJM44CB5Y2V6YCJ5om56YeP5Yig6ZmkCi0gKipUb2tlbiDlronlhagqKu+8mkJvdCBUb2tlbiDlj6rlrZjmj5Lku7borr7nva7kuI7kvaDnmoQgV29ya2VyIHNlY3JldO+8m+W4luWtkOmHjOeahOWbvueJhyBVUkwg5b2i5aaCIGBodHRwczovL2ltZy5leGFtcGxlLmNvbS9mL3tmaWxlX2lkfWDvvIxgZmlsZV9pZGAg5piv5YWs5byA5qCH6K+G77yM5rOE6Zyy5peg6aOO6ZmpCi0gKirphY3lr7nmjqLmtYsqKu+8muWbvuW6k+mhteWunuaXtuaYvuekuiBCb3QgLyDpopHpgZMgLyBXb3JrZXIg5LiJ5pa56YWN5a+554q25oCB77yIYGdldE1lYCArIGBnZXRDaGF0YCArIFdvcmtlciBgL2hlYWx0aGDvvIkKLSAqKuWkp+mZhuacjeWKoeWZqOWPi+WlvSoq77ya5Y+v6YCJIGBhcGlfcHJveHlgIOiuvue9rumhue+8jOaPkuS7tui/m+eoi+e7jyBIVFRQIOS7o+eQhuiuv+mXriBgYXBpLnRlbGVncmFtLm9yZ2AKCiMjIOWJjee9ruWHhuWkh++8iOS4ieS7tuWll++8iQoKfCDnu4Tku7YgfCDmgI7kuYjmnaUgfCDkvZznlKggfAp8LS0tfC0tLXwtLS18CnwgVGVsZWdyYW0gQm90IHwgW0BCb3RGYXRoZXJdKGh0dHBzOi8vdC5tZS9Cb3RGYXRoZXIpIOWIm+W7uu+8jOaLv+WIsCBUb2tlbiB8IOS4iuS8oOmAmumBkyB8CnwgVGVsZWdyYW0g6aKR6YGTL+e+pCB8IOaKiiBCb3Qg5ouJ5YWl5bm26K6+5Li6KirnrqHnkIblkZgqKiB8IOWbvueJh+WtmOWCqOahtiB8Cnwg5Y+N5LujIFdvcmtlciB8IOmDqOe9suacrOaPkuS7tiBgd29ya2VyL2Ag55uu5b2V55qE5Y+C6ICD5a6e546w77yIW+mDqOe9suivtOaYjl0od29ya2VyL1JFQURNRS5tZCnvvIkgfCDorr/lrqLljL/lkI3or7vlm77vvIjmjIEgdG9rZW4g5Y+N5LujICsg57yT5a2Y77yJIHwKCiMjIOWuieijheS4jumFjee9rgoKMS4g5ZCO5Y+w44CM5o+S5Lu25ZWG5Z+O44CN5a6J6KOFIFRH5Zu+5bqK77yI5oiW5pys5Zyw5LiK5LygIGAuYnBrYO+8ie+8mwoyLiDjgIzmiJHnmoTmj5Lku7Yg4oaSIFRH5Zu+5bqKIOKGkiDorr7nva7jgI3loavlhpnkuInpobnphY3lr7nvvJoKICAgLSAqKkJvdCBUb2tlbioq77yaYDEyMzQ1NjpBQXh4eC4uLmAKICAgLSAqKkNoYXQgSUQqKu+8mmAtMTAwMTIzNDU2Nzg5MGDvvIjnp4HmnInpopHpgZPvvInmiJYgYEBjaGFubmVsYO+8iOWFrOW8gOmikemBk++8iQogICAtICoq5Y+N5LujIFdvcmtlciDlnLDlnYAqKu+8mmBodHRwczovL2ltZy5leGFtcGxlLmNvbWAKMy4g5omT5byA5ZCO5Y+w5L6n5qCP44CMVEflm77luorjgI3lm77lupPpobXvvIzpobbpg6jmmL7npLogYOKckyBCb3QgQHh4eCDCtyDpopHpgZMgeHh4IMK3IFdvcmtlciDmraPluLhgIOWNs+mFjeWvueaIkOWKn++8mwo0LiDkuIrkvKDlm77niYcg4oaSIOeCueWHu+WbvueJh+WNoeeJh+S4iueahOOAjOWkjeWItiBNROOAjeKGkiDnspjotLTov5vluJblrZDmraPmlofjgIIKCioqQ2hhdCBJRCDmgI7kuYjmib4qKu+8muaKiumikemBk+a2iOaBr+i9rOWPkee7mSBbQFZlcnNhVG9vbHNCb3RdKGh0dHBzOi8vdC5tZS9WZXJzYVRvb2xzQm90KSDnrYnlt6XlhbfmnLrlmajkurrljbPlj6/ojrflvpfvvJvmiJblhYjnlKggQm90IOaJgOWcqOmikemBk+WPkeS4gOadoea2iOaBr++8jOeciyBgZ2V0VXBkYXRlc2Ag6L+U5Zue55qEIGBjaGF0LmlkYOOAggoKIyMg5L2/55So6K+05piOCgotICoq5LiK5LygKirvvJrlm77lupPpobXngrnlh7vpgInmi6nmiJbmi5bmi73lm77niYcv5paH5Lu25aS577yI5aSa6YCJ44CB6YCS5b2S5pS26ZuG77yJ77yb5LiK5Lyg5oiQ5Yqf5ZCO572R5qC8572u6aG25pi+56S6Ci0gKirmj5Llm74qKu+8muavj+W8oOWbvuaPkOS+m+OAjOWkjeWItiBNROOAje+8iGAhW+aWh+S7tuWQjV0oVVJMKWDvvInkuI7jgIzlpI3liLYgVVJM44CN5Lik5Liq5oyJ6ZKu77yM5aSN5Yi25ZCO57KY6LS05Yiw5Y+R5biW5q2j5paHCi0gKirliKDpmaQqKu+8mueCueWHu+WbvueJh+mAieS4re+8iOWPr+WkmumAie+8ieKGkuOAjOWIoOmZpOmAieS4reOAje+8m+aPkuS7tuS8muWwveWKm+WIoOmZpOmikemBk+a2iOaBr+W5tuenu+mZpOacrOWcsOWbvuW6k+iusOW9lQotICoq5Y+R6YCB5qih5byPKirvvJrmj5Lku7borr7nva7kuK3liIfmjaLigJTigJRgZG9jdW1lbnRgIOWOn+WbvuS/neecn++8iOm7mOiupO+8ie+8m2BwaG90b2Ag55SxIFRHIOWOi+e8qemHjee8luegge+8iGdpZiDkvJroh6rliqjlm57pgIAgZG9jdW1lbnTvvIzlm6Agc2VuZFBob3RvIOS4jeaUr+aMgeWKqOWbvu+8iQoKIyMg6ZmQ5Yi25LiOIEZBUQoKfCDpobkgfCDor7TmmI4gfAp8LS0tfC0tLXwKfCDljZXlm74g4omkIDIwTUIgfCBUZWxlZ3JhbSBCb3QgQVBJIOaWh+S7tuS4i+i9veS4iumZkO+8jOS4iuS8oOaXtuWJjee9ruagoemqjOW5tuaYjuehruaKpemUmSB8Cnwg5Yig6Zmk5ZCO5penIFVSTCDov5jog73orr/pl67vvJ8gfCDliKDpmaTkvJrnp7vpmaTpopHpgZPmtojmga/kuI7mnKzlnLDlm77lupPorrDlvZXvvIzkvYYgVEcg5pyN5Yqh5Zmo57yT5a2Y5paH5Lu25Y+v6IO95LuN5Y+v57uP5penIFVSTCDorr/pl67kuIDmrrXml7bpl7TvvIjml6Dms5Xku44gQm90IEFQSSDlvLrliLbmuIXpmaTvvIkgfAp8IOacjeWKoeWZqOi/nuS4jeS4iiBUR++8nyB8IOWNmuWuouacjeWKoeWZqOWcqOS4reWbveWkp+mZhuaXtuaXoOazleebtOi/niBgYXBpLnRlbGVncmFtLm9yZ2DvvIzlnKjmj5Lku7borr7nva7loasgYGFwaV9wcm94eWDvvIjlpoIgYGh0dHA6Ly8xMjcuMC4wLjE6Nzg5MGDvvInvvJvorr/lrqLorr/pl67nmoTmmK8gQ2xvdWRmbGFyZSBXb3JrZXLvvIjmtbflpJboioLngrnvvInvvIzkuIDoiKzkuI3lj5flvbHlk40gfAp8IFRva2VuIOazhOmcsuS6huaAjuS5iOWKnu+8nyB8IOeri+WNs+WcqCBAQm90RmF0aGVyIOaJp+ihjCBgL3Jldm9rZWAg5ZCK6ZSA5penIFRva2VuIOKGkiDph43mlrDnlJ/miJAg4oaSIOabtOaWsOaPkuS7tuiuvue9ruS4jiBXb3JrZXIgc2VjcmV0IHwKfCDkuI4gQ0blm77luorlhrLnqoHlkJfvvJ8gfCDkuI3lhrLnqoHlj6/lhbHlrZjvvJvkuKTogIXlnYfkuLrni6znq4vlm77lupPlvaLmgIHvvIzlrr/kuLvlqpLkvZPkuIrkvKDnmoTmjqXnrqHvvIhzZWFt77yJ5b2T5YmN55SxIENG5Zu+5bqK5om/5ouF77yM5pys5o+S5Lu255qEIGAvc3RvcmFnZS8qYCDlpZHnuqbnq6/ngrnlt7Llrp7njrDjgIHlpIfnlKjlhbzlrrkgfAp8IOS4iuS8oOWOhuWPsuWtmOWcqOWTqu+8nyB8IOaPkuS7tuaVsOaNruebruW9lSBgZGF0YS9wbHVnaW5zL3RnLWltYWdlLWJlZC9oaXN0b3J5Lmpzb25g77yI5Y246L296YeN6KOF5LiN5Lii5aSx77yJIHwKCiMjIOmakOengeS4juWuieWFqAoKLSBCb3QgVG9rZW4gLyBDaGF0IElEIOWtmOWuv+S4u+aPkuS7tuiuvue9ru+8iGBzZGsuQ29uZmlnYCDkuIvlj5HvvInvvIzku4Xmj5Lku7bov5vnqIvlhoXlrZjkvb/nlKjvvJsKLSDlj43ku6MgV29ya2VyIOeahCBUb2tlbiDlrZggQ2xvdWRmbGFyZSBzZWNyZXTvvIzku4XlnKggV29ya2VyIOacjeWKoeerr+eUqOS6juWbnua6kO+8mwotIOiuv+WuouWPr+ingeeahOWUr+S4gOagh+ivhuaYryBgZmlsZV9pZGDvvIhUZWxlZ3JhbSDlhazlvIDmlofku7bmoIfor4bvvIzpnZ7mnLrlr4bvvInvvJsKLSDkuIrkvKAv5YiX6KGo6ZyA55m75b2V77yM5Yig6Zmk5LuF566h55CG5ZGY77yI5o+S5Lu2IEFQSSDmnYPpmZDmqKHlnovvvInjgIIK
+# TG图床
+
+Telegram 频道图床：把博客图片存进 Telegram 频道（Bot API），访客经你自备的反代 Worker 读取——**Bot Token 全程只在服务端，浏览器永远拿不到**。灵感来自开源项目 [telegraph-Image](https://github.com/x-dr/telegraph-Image) 的 TG 渠道模式，机制对齐官方 `CF图床`（image-cdn）插件的三件套架构。
+
+## 功能特性
+
+- **原图保真**：默认 `sendDocument` 模式，图片不经压缩直达 TG 频道；可切换 `photo` 模式（TG 服务端压缩，省流量）
+- **后台图库**：网格浏览、点击/拖拽/文件夹批量上传、复制 Markdown / URL、单选批量删除
+- **Token 安全**：Bot Token 只存插件设置与你的 Worker secret；帖子里的图片 URL 形如 `https://img.example.com/f/{file_id}`，`file_id` 是公开标识，泄露无风险
+- **配对探测**：图库页实时显示 Bot / 频道 / Worker 三方配对状态（`getMe` + `getChat` + Worker `/health`）
+- **大陆服务器友好**：可选 `api_proxy` 设置项，插件进程经 HTTP 代理访问 `api.telegram.org`
+
+## 前置准备（三件套）
+
+| 组件 | 怎么来 | 作用 |
+|---|---|---|
+| Telegram Bot | [@BotFather](https://t.me/BotFather) 创建，拿到 Token | 上传通道 |
+| Telegram 频道/群 | 把 Bot 拉入并设为**管理员** | 图片存储桶 |
+| 反代 Worker | 部署本插件 `worker/` 目录的参考实现（[部署说明](worker/README.md)） | 访客匿名读图（持 token 反代 + 缓存） |
+
+## 安装与配置
+
+1. 后台「插件商城」安装 TG图床（或本地上传 `.bpk`）；
+2. 「我的插件 → TG图床 → 设置」填写三项配对：
+   - **Bot Token**：`123456:AAxxx...`
+   - **Chat ID**：`-1001234567890`（私有频道）或 `@channel`（公开频道）
+   - **反代 Worker 地址**：`https://img.example.com`
+3. 打开后台侧栏「TG图床」图库页，顶部显示 `✓ Bot @xxx · 频道 xxx · Worker 正常` 即配对成功；
+4. 上传图片 → 点击图片卡片上的「复制 MD」→ 粘贴进帖子正文。
+
+**Chat ID 怎么找**：把频道消息转发给 [@VersaToolsBot](https://t.me/VersaToolsBot) 等工具机器人即可获得；或先用 Bot 所在频道发一条消息，看 `getUpdates` 返回的 `chat.id`。
+
+## 使用说明
+
+- **上传**：图库页点击选择或拖拽图片/文件夹（多选、递归收集）；上传成功后网格置顶显示
+- **插图**：每张图提供「复制 MD」（`![文件名](URL)`）与「复制 URL」两个按钮，复制后粘贴到发帖正文
+- **删除**：点击图片选中（可多选）→「删除选中」；插件会尽力删除频道消息并移除本地图库记录
+- **发送模式**：插件设置中切换——`document` 原图保真（默认）；`photo` 由 TG 压缩重编码（gif 会自动回退 document，因 sendPhoto 不支持动图）
+
+## 限制与 FAQ
+
+| 项 | 说明 |
+|---|---|
+| 单图 ≤ 20MB | Telegram Bot API 文件下载上限，上传时前置校验并明确报错 |
+| 删除后旧 URL 还能访问？ | 删除会移除频道消息与本地图库记录，但 TG 服务器缓存文件可能仍可经旧 URL 访问一段时间（无法从 Bot API 强制清除） |
+| 服务器连不上 TG？ | 博客服务器在中国大陆时无法直连 `api.telegram.org`，在插件设置填 `api_proxy`（如 `http://127.0.0.1:7890`）；访客访问的是 Cloudflare Worker（海外节点），一般不受影响 |
+| Token 泄露了怎么办？ | 立即在 @BotFather 执行 `/revoke` 吊销旧 Token → 重新生成 → 更新插件设置与 Worker secret |
+| 与 CF图床冲突吗？ | 不冲突可共存；两者均为独立图库形态，宿主媒体上传的接管（seam）当前由 CF图床承担，本插件的 `/storage/*` 契约端点已实现、备用兼容 |
+| 上传历史存在哪？ | 插件数据目录 `data/plugins/tg-image-bed/history.json`（卸载重装不丢失） |
+
+## 隐私与安全
+
+- Bot Token / Chat ID 存宿主插件设置（`sdk.Config` 下发），仅插件进程内存使用；
+- 反代 Worker 的 Token 存 Cloudflare secret，仅在 Worker 服务端用于回源；
+- 访客可见的唯一标识是 `file_id`（Telegram 公开文件标识，非机密）；
+- 上传/列表需登录，删除仅管理员（插件 API 权限模型）。

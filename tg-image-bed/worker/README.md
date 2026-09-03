@@ -1,1 +1,46 @@
-IyBUR+WbvuW6iiDCtyDlj43ku6MgV29ya2VyIOmDqOe9suaMh+WNlwoK6K6/5a6i55qE5rWP6KeI5Zmo5peg5rOV55u05o6l6K+7IFRlbGVncmFtIOaWh+S7tu+8iOebtOmTvuWQqyBCb3QgVG9rZW7vvIznu53kuI3og73mmrTpnLLvvInjgILmnKwgV29ya2VyIOaYr+S9oOmDqOe9suWcqCBDbG91ZGZsYXJlIOS4iueahOS4gOWxguWPquivu+WPjeS7o++8mioq5oyBIFRva2VuIOWbnua6kOOAgeWvueiuv+WuouWPquaatOmcsiBgZmlsZV9pZGAqKu+8jOmFjSBDbG91ZGZsYXJlIOe8k+WtmOaJm+a1gemHj+OAgumDqOe9sue6piAzIOWIhumSn++8jOWFjei0uemineW6pui2s+Wkn+S4quS6uuWNmuWuouWbvuW6iuS9v+eUqOOAggoKIyMg6YOo572y5q2l6aqkCgpgYGBiYXNoCiMgMCkg5YeG5aSH77ya5LiA5LiqIENsb3VkZmxhcmUg6LSm5Y+3ICsg5pys55uu5b2V77yIaW5kZXguanMgLyB3cmFuZ2xlci5leGFtcGxlLnRvbWzvvIkKIyAxKSDlpI3liLbphY3nva7lubbmlLnlkI3vvIhuYW1lIOWGs+Wumum7mOiupOWfn+WQjSA8bmFtZT4uPOi0puWPtz4ud29ya2Vycy5kZXbvvIkKY3Agd3JhbmdsZXIuZXhhbXBsZS50b21sIHdyYW5nbGVyLnRvbWwKCiMgMikg55m75b2VIENsb3VkZmxhcmXvvIjmtY/op4jlmajmjojmnYPvvIkKbnB4IHdyYW5nbGVyIGxvZ2luCgojIDMpIOazqOWFpSBCb3QgVG9rZW4g5Li6IHNlY3JldO+8iEBCb3RGYXRoZXIg5Yib5bu655qEIFRva2Vu77yb5LiN6KaB5YaZ6L+b5Lu75L2V5paH5Lu277yJCm5weCB3cmFuZ2xlciBzZWNyZXQgcHV0IFRHX0JPVF9UT0tFTgoKIyA0KSDpg6jnvbIKbnB4IHdyYW5nbGVyIGRlcGxveQpgYGAKCumDqOe9suaIkOWKn+S8mui+k+WHuiBgaHR0cHM6Ly90Zy1pbWFnZS1iZWQtd29ya2VyLjzkvaDnmoTotKblj7c+LndvcmtlcnMuZGV2YOOAggoKIyMg6YWN5a+55Yiw5Y2a5a6iCgoxLiDljZrlrqLlkI7lj7DjgIzmiJHnmoTmj5Lku7Yg4oaSIFRH5Zu+5bqKIOKGkiDorr7nva7jgI3vvJsKMi4g44CM5Y+N5LujIFdvcmtlciDlnLDlnYDjgI3loasgYGh0dHBzOi8vdGctaW1hZ2UtYmVkLXdvcmtlci485L2g55qE6LSm5Y+3Pi53b3JrZXJzLmRldmDvvIjoh6rlrprkuYnln5/lkI3lkIznkIbvvIzloasgYGh0dHBzOi8vaW1nLuS9oOeahOWfn+WQjWDvvInvvJsKMy4g5omT5byA5ZCO5Y+w44CMVEflm77luorjgI3lm77lupPpobXvvIzpobbpg6jmqKrluYXmmL7npLogYOKckyDphY3lr7nmraPluLggwrcg4oCmIMK3IFdvcmtlciDmraPluLhgIOWNs+aIkOWKn+OAggoKIyMg6Lev55Sx5aWR57qmCgp8IOi3r+eUsSB8IOivtOaYjiB8CnwtLS18LS0tfAp8IGBHRVQgL2hlYWx0aGAgfCDlrZjmtLvmjqLmtYvvvIjmj5Lku7bphY3lr7nmo4DmtYvnlKjvvJvmnKrphY3nva4gVG9rZW4g6L+U5ZueIDUwMCArIOaPkOekuu+8iSB8CnwgYEdFVCAvZi97ZmlsZV9pZH1gIHwg6K+75Zu+77yaYGdldEZpbGVgIOino+aekOS4tOaXtiBgZmlsZV9wYXRoYCDihpIg5oyBIFRva2VuIOWbnua6kCDihpIgQ0Yg57yT5a2YIOKGkiDov5Tlm57orr/lrqIgfAoKIyMg5a6J5YWo6K+05piOCgotICoqVG9rZW4g5Y+q5a2YIENsb3VkZmxhcmUgc2VjcmV0KirvvJrku5PlupPkuI7mnKznm67lvZXnmoTku7vkvZXmlofku7bpg73kuI3lkKsgVG9rZW7vvJtXb3JrZXIg5pel5b+X6buY6K6k5Lmf5LiN5omT5Y2wIFRva2Vu77ybCi0gKirorr/lrqLlj6rop4EgZmlsZV9pZCoq77yaYGZpbGVfaWRgIOaYryBUZWxlZ3JhbSDlhazlvIDmlofku7bmoIfor4bvvIzms4TpnLLml6Dpo47pmanvvIjml6Dms5Xlj43mn6Xlh7ogVG9rZW7vvInvvJsKLSAqKuazhOmcsuWkhOe9rioq77yaQEJvdEZhdGhlciBgL3Jldm9rZWAg5ZCK6ZSA5penIFRva2VuIOKGkiDph43mlrDnlJ/miJAg4oaSIGB3cmFuZ2xlciBzZWNyZXQgcHV0IFRHX0JPVF9UT0tFTmAg5pu05pawIOKGkiDlkIzmraXmm7TmlrDljZrlrqLmj5Lku7borr7nva7vvJsKLSAqKue8k+WtmOivreS5iSoq77ya5ZCM5LiAIGBmaWxlX2lkYCDnmoTmlofku7blhoXlrrnkuI3lj6/lj5jvvIxXb3JrZXIg5L6n6ZW/5pyf57yT5a2Y77yb5rWP6KeI5Zmo5L6nIGBtYXgtYWdlPTg2NDAwYOOAggoKIyMg5Y+v6YCJ77ya57uR5a6a6Ieq5a6a5LmJ5Z+f5ZCNCgp3b3JrZXJzLmRldiDln5/lkI3lnKjpg6jliIbnvZHnu5znjq/looPlj6/og73ooqvmsaHmn5PvvIzlu7rorq7nu5Hlrproh6rmnInln5/lkI3vvIhDbG91ZGZsYXJlIERhc2hib2FyZCDihpIgV29ya2VycyDihpIg6K+lIFdvcmtlciDihpIgU2V0dGluZ3Mg4oaSIERvbWFpbnMgJiBSb3V0ZXMg4oaSIEFkZCBDdXN0b20gRG9tYWlu77yJ44CC6Ieq5a6a5LmJ5Z+f5ZCN6ZyA5omY566h5Zyo5ZCM5LiAIENsb3VkZmxhcmUg6LSm5Y+344CCCg==
+# TG图床 · 反代 Worker 部署指南
+
+访客的浏览器无法直接读 Telegram 文件（直链含 Bot Token，绝不能暴露）。本 Worker 是你部署在 Cloudflare 上的一层只读反代：**持 Token 回源、对访客只暴露 `file_id`**，配 Cloudflare 缓存扛流量。部署约 3 分钟，免费额度足够个人博客图床使用。
+
+## 部署步骤
+
+```bash
+# 0) 准备：一个 Cloudflare 账号 + 本目录（index.js / wrangler.example.toml）
+# 1) 复制配置并改名（name 决定默认域名 <name>.<账号>.workers.dev）
+cp wrangler.example.toml wrangler.toml
+
+# 2) 登录 Cloudflare（浏览器授权）
+npx wrangler login
+
+# 3) 注入 Bot Token 为 secret（@BotFather 创建的 Token；不要写进任何文件）
+npx wrangler secret put TG_BOT_TOKEN
+
+# 4) 部署
+npx wrangler deploy
+```
+
+部署成功会输出 `https://tg-image-bed-worker.<你的账号>.workers.dev`。
+
+## 配对到博客
+
+1. 博客后台「我的插件 → TG图床 → 设置」；
+2. 「反代 Worker 地址」填 `https://tg-image-bed-worker.<你的账号>.workers.dev`（自定义域名同理，填 `https://img.你的域名`）；
+3. 打开后台「TG图床」图库页，顶部横幅显示 `✓ 配对正常 · … · Worker 正常` 即成功。
+
+## 路由契约
+
+| 路由 | 说明 |
+|---|---|
+| `GET /health` | 存活探测（插件配对检测用；未配置 Token 返回 500 + 提示） |
+| `GET /f/{file_id}` | 读图：`getFile` 解析临时 `file_path` → 持 Token 回源 → CF 缓存 → 返回访客 |
+
+## 安全说明
+
+- **Token 只存 Cloudflare secret**：仓库与本目录的任何文件都不含 Token；Worker 日志默认也不打印 Token；
+- **访客只见 file_id**：`file_id` 是 Telegram 公开文件标识，泄露无风险（无法反查出 Token）；
+- **泄露处置**：@BotFather `/revoke` 吊销旧 Token → 重新生成 → `wrangler secret put TG_BOT_TOKEN` 更新 → 同步更新博客插件设置；
+- **缓存语义**：同一 `file_id` 的文件内容不可变，Worker 侧长期缓存；浏览器侧 `max-age=86400`。
+
+## 可选：绑定自定义域名
+
+workers.dev 域名在部分网络环境可能被污染，建议绑定自有域名（Cloudflare Dashboard → Workers → 该 Worker → Settings → Domains & Routes → Add Custom Domain）。自定义域名需托管在同一 Cloudflare 账号。

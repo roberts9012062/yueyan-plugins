@@ -1,1 +1,9 @@
-ewogICJleHRlbnNpb25Qb2ludHMiOiBbXSwKICAicGFnZXMiOiBbCiAgICB7CiAgICAgICJyb3V0ZSI6ICJsaWJyYXJ5IiwKICAgICAgImVudHJ5IjogImxpYnJhcnktcGFnZS5qcyIKICAgIH0KICBdCn0K
+{
+  "extensionPoints": [],
+  "pages": [
+    {
+      "route": "library",
+      "entry": "library-page.js"
+    }
+  ]
+}

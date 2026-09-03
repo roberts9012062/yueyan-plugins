@@ -1,1 +1,65 @@
-ewogICJpZCI6ICJ0Zy1pbWFnZS1iZWQiLAogICJuYW1lIjogIlRH5Zu+5bqKIiwKICAidmVyc2lvbiI6ICIwLjIuMCIsCiAgImNhdGVnb3J5IjogImVuaGFuY2VtZW50IiwKICAicHJpY2UiOiAwLAogICJpbnN0YWxscyI6IDAsCiAgIm9mZmljaWFsIjogdHJ1ZSwKICAiZGVzY3JpcHRpb24iOiAiVGVsZWdyYW0g6aKR6YGT5Zu+5bqK77ya5Zu+54mH5LiK5Lyg55u06L6+IFRH77yIQm90IEFQSSDkv53ljp/lm77vvInvvIzoh6rlpIflj43ku6MgV29ya2VyIOiuv+mXru+8jOWQjuWPsOWbvuW6k+euoeeQhuS4jiBNYXJrZG93biDmj5Llm77jgIIiLAogICJjYXBhYmlsaXRpZXMiOiBbCiAgICAic2V0dGluZ3MiLAogICAgImFwaSIsCiAgICAiYWRtaW4ucGFnZSIKICBdLAogICJyZXBvX3VybCI6ICJodHRwczovL2dpdGh1Yi5jb20vcm9iZXJ0czkwMTIwNjIveXVleWFuLXBsdWdpbnMiLAogICJjb3JlX3ZlcnNpb24iOiAiPj0wLjEuMCIsCiAgIm5hdiI6IHsKICAgICJocmVmIjogIi9hZG1pbi9wbHVnaW4tcGFnZXMvdGctaW1hZ2UtYmVkL2xpYnJhcnkiLAogICAgImxhYmVsIjogIlRH5Zu+5bqKIiwKICAgICJpY29uIjogIm1lZGlhIgogIH0sCiAgInNldHRpbmdzX3NjaGVtYSI6IFsKICAgIHsKICAgICAgImtleSI6ICJ0Z19ib3RfdG9rZW4iLAogICAgICAibGFiZWwiOiAiQm90IFRva2Vu77yIQEJvdEZhdGhlciDliJvlu7rvvIzlpoIgMTIzNDU2OkFBeHh477yJIiwKICAgICAgInR5cGUiOiAidGV4dCIsCiAgICAgICJkZWZhdWx0IjogIiIKICAgIH0sCiAgICB7CiAgICAgICJrZXkiOiAidGdfY2hhdF9pZCIsCiAgICAgICJsYWJlbCI6ICLpopHpgZMv576kIENoYXQgSUTvvIjlpoIgLTEwMDEyMzQ1Njc4OTAg5oiWIEBjaGFubmVs77yJIiwKICAgICAgInR5cGUiOiAidGV4dCIsCiAgICAgICJkZWZhdWx0IjogIiIKICAgIH0sCiAgICB7CiAgICAgICJrZXkiOiAicHJveHlfYmFzZSIsCiAgICAgICJsYWJlbCI6ICLlj43ku6MgV29ya2VyIOWcsOWdgO+8iOWmgiBodHRwczovL2ltZy5leGFtcGxlLmNvbe+8iSIsCiAgICAgICJ0eXBlIjogInRleHQiLAogICAgICAiZGVmYXVsdCI6ICIiCiAgICB9LAogICAgewogICAgICAia2V5IjogInNlbmRfbW9kZSIsCiAgICAgICJsYWJlbCI6ICLlj5HpgIHmqKHlvI/vvIhkb2N1bWVudD3ljp/lm77kv53nnJ8gLyBwaG90bz1URyDljovnvKnvvIkiLAogICAgICAidHlwZSI6ICJzZWxlY3QiLAogICAgICAiZGVmYXVsdCI6ICJkb2N1bWVudCIsCiAgICAgICJvcHRpb25zIjogWwogICAgICAgICJkb2N1bWVudCIsCiAgICAgICAgInBob3RvIgogICAgICBdCiAgICB9LAogICAgewogICAgICAia2V5IjogImFwaV9wcm94eSIsCiAgICAgICJsYWJlbCI6ICJURyBBUEkg5Luj55CG77yI5pyN5Yqh5Zmo5Zyo5aSn6ZmG5pe25aGr77yM5aaCIGh0dHA6Ly8xMjcuMC4wLjE6Nzg5MO+8m+eVmeepuuebtOi/nu+8iSIsCiAgICAgICJ0eXBlIjogInRleHQiLAogICAgICAiZGVmYXVsdCI6ICIiCiAgICB9CiAgXSwKICAiYXNzZXRzIjogewogICAgInBhdHRlcm4iOiAie2lkfS17dmVyc2lvbn0te29zfS17YXJjaH0uYnBrIiwKICAgICJzaGEyNTZfYnlfcGxhdGZvcm0iOiB7CiAgICAgICJsaW51eC1hcm02NCI6ICJkZTkwZWE4Y2RmY2ZmMzI1OTQ4YWI2Y2ZjZGVkZDBiNjBhMGU2OGIxMzAzNGRmOWZkYjcyY2U1ZWYxNDVhYWM1IiwKICAgICAgIndpbmRvd3MtYW1kNjQiOiAiNzU2ZjYxMzFjNGNmZGZmOWVkZDc5ODYxNjA4ZGJhMGUwYmJiYjBmNzNmNTM5MDg2ZTQwMDMxNWRkMTNiZTc5OCIKICAgIH0KICB9Cn0K
+{
+  "id": "tg-image-bed",
+  "name": "TG图床",
+  "version": "0.2.0",
+  "category": "enhancement",
+  "price": 0,
+  "installs": 0,
+  "official": true,
+  "description": "Telegram 频道图床：图片上传直达 TG（Bot API 保原图），自备反代 Worker 访问，后台图库管理与 Markdown 插图。",
+  "capabilities": [
+    "settings",
+    "api",
+    "admin.page"
+  ],
+  "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
+  "core_version": ">=0.1.0",
+  "nav": {
+    "href": "/admin/plugin-pages/tg-image-bed/library",
+    "label": "TG图床",
+    "icon": "media"
+  },
+  "settings_schema": [
+    {
+      "key": "tg_bot_token",
+      "label": "Bot Token（@BotFather 创建，如 123456:AAxxx）",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "tg_chat_id",
+      "label": "频道/群 Chat ID（如 -1001234567890 或 @channel）",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "proxy_base",
+      "label": "反代 Worker 地址（如 https://img.example.com）",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "key": "send_mode",
+      "label": "发送模式（document=原图保真 / photo=TG 压缩）",
+      "type": "select",
+      "default": "document",
+      "options": [
+        "document",
+        "photo"
+      ]
+    },
+    {
+      "key": "api_proxy",
+      "label": "TG API 代理（服务器在大陆时填，如 http://127.0.0.1:7890；留空直连）",
+      "type": "text",
+      "default": ""
+    }
+  ],
+  "assets": {
+    "pattern": "{id}-{version}-{os}-{arch}.bpk",
+    "sha256_by_platform": {
+      "linux-arm64": "de90ea8cdfcff325948ab6cfcdedd0b60a0e68b13034df9fdb72ce5ef145aac5",
+      "windows-amd64": "756f6131c4cfdff9edd79861608dba0e0bbbb0f73f539086e400315dd13be798"
+    }
+  }
+}

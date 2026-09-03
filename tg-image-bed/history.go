@@ -1,1 +1,143 @@
-Ly8gbWFya2V0cGxhY2UtcmVwby90Zy1pbWFnZS1iZWQvaGlzdG9yeS5nbwovLyDkuIrkvKDljoblj7LmjIHkuYXljJbvvJrmj5Lku7bmlbDmja7nm67lvZUgZGF0YS9wbHVnaW5zL3RnLWltYWdlLWJlZC9oaXN0b3J5Lmpzb27jgIIKLy8g6YeP57qn5a6a5L2N5Li65Y2V56uZ6ZW/5Zu+5bqT77yI5Y2D57qn5p2h55uu77yJ77yMSlNPTiDmlofku7botrPlpJ/vvIhLSVNT77yM5LiN5byV5pWw5o2u5bqT77yJ77ybCi8vIGZpbGVfaWQg5Y2z6K6/6ZeuIFVSTCDplK7vvIzljoblj7LlkIzml7bmib/mi4XjgIzlm77lupPliJfooajjgI3kuI7jgIzliKDpmaTml7blj43mn6UgbWVzc2FnZV9pZOOAjeiBjOi0o+OAggpwYWNrYWdlIG1haW4KCmltcG9ydCAoCgkiZW5jb2RpbmcvanNvbiIKCSJmbXQiCgkib3MiCgkicGF0aC9maWxlcGF0aCIKCSJzeW5jIgoJInRpbWUiCikKCi8vIGhpc3RvcnlFbnRyeSDljZXmnaHkuIrkvKDorrDlvZXjgIIKdHlwZSBoaXN0b3J5RW50cnkgc3RydWN0IHsKCUZpbGVJRCAgICAgc3RyaW5nIGBqc29uOiJmaWxlX2lkImAgICAgIC8vIFRHIOaWh+S7tuagh+ivhu+8iOWFrOW8gO+8jFVSTCDplK7vvIkKCU1lc3NhZ2VJRCAgaW50NjQgIGBqc29uOiJtZXNzYWdlX2lkImAgIC8vIOmikemBk+a2iOaBryBJRO+8iGRlbGV0ZU1lc3NhZ2Ug55So77yJCglGaWxlTmFtZSAgIHN0cmluZyBganNvbjoiZmlsZV9uYW1lImAgICAvLyDljp/lp4vmlofku7blkI0KCVNpemUgICAgICAgaW50NjQgIGBqc29uOiJzaXplImAgICAgICAgIC8vIOWtl+iKguaVsO+8iFRHIOWbnuaKpe+8iQoJTWltZSAgICAgICBzdHJpbmcgYGpzb246Im1pbWUiYCAgICAgICAgLy8gTUlNRSDnsbvlnosKCVVSTCAgICAgICAgc3RyaW5nIGBqc29uOiJ1cmwiYCAgICAgICAgIC8vIOWFrOW8gOiuv+mXruWcsOWdgO+8iHtwcm94eV9iYXNlfS9mL3tmaWxlX2lkfe+8iQoJTW9kZSAgICAgICBzdHJpbmcgYGpzb246Im1vZGUiYCAgICAgICAgLy8g5Y+R6YCB5qih5byPIGRvY3VtZW50L3Bob3RvCglVcGxvYWRlZEF0IHN0cmluZyBganNvbjoidXBsb2FkZWRfYXQiYCAvLyBSRkMzMzM5CglVcGxvYWRlcklEIGludDY0ICBganNvbjoidXBsb2FkZXJfaWQiYCAvLyDkuIrkvKDogIXnlKjmiLcgSUTvvIgwPeezu+e7ny/mnKrnn6XvvIkKfQoKLy8gaGlzdG9yeVBhZ2VTaXplIOWIl+ihqOWIhumhteavj+mhteadoeaVsO+8iOS4jiBpbWFnZS1jZG4g5Zu+5bqT5a+56b2QIDYw77yJ44CCCmNvbnN0IGhpc3RvcnlQYWdlU2l6ZSA9IDYwCgovLyBoaXN0b3J5U3RvcmUg5Y6G5Y+y5a2Y5YKo77yI5YaF5a2Y5YiH54mHICsg5paH5Lu25oyB5LmF5YyW77yb5LqS5pal6ZSB5L+d5oqk5bm25Y+R5LiK5LygL+WIoOmZpO+8ieOAggp0eXBlIGhpc3RvcnlTdG9yZSBzdHJ1Y3QgewoJbXUgICAgICBzeW5jLk11dGV4CglwYXRoICAgIHN0cmluZwoJZW50cmllcyBbXWhpc3RvcnlFbnRyeSAvLyDmlrDlnKjliY3vvIjov73liqDml7bmj5LlpLTpg6jvvIkKfQoKLy8gbmV3SGlzdG9yeVN0b3JlIOaJk+W8gC/liJvlu7rljoblj7LlrZjlgqjvvIjnm67lvZXkuI3lrZjlnKjoh6rliqjliJvlu7rvvJvmlofku7bmjZ/lnY/ml7bku47nqbrlvIDlp4vlubblkYrorabvvInjgIIKZnVuYyBuZXdIaXN0b3J5U3RvcmUoZGF0YURpciBzdHJpbmcpICgqaGlzdG9yeVN0b3JlLCBlcnJvcikgewoJaWYgZXJyIDo9IG9zLk1rZGlyQWxsKGRhdGFEaXIsIDBvNzU1KTsgZXJyICE9IG5pbCB7CgkJcmV0dXJuIG5pbCwgZXJyCgl9CglzIDo9ICZoaXN0b3J5U3RvcmV7cGF0aDogZmlsZXBhdGguSm9pbihkYXRhRGlyLCAiaGlzdG9yeS5qc29uIil9CglyYXcsIGVyciA6PSBvcy5SZWFkRmlsZShzLnBhdGgpCglpZiBlcnIgIT0gbmlsIHsKCQlpZiBvcy5Jc05vdEV4aXN0KGVycikgewoJCQlyZXR1cm4gcywgbmlsIC8vIOmmluasoei/kOihjO+8muepuuWOhuWPsgoJCX0KCQlyZXR1cm4gbmlsLCBlcnIKCX0KCXZhciBlbnRyaWVzIFtdaGlzdG9yeUVudHJ5CglpZiBlcnIgOj0ganNvbi5Vbm1hcnNoYWwocmF3LCAmZW50cmllcyk7IGVyciAhPSBuaWwgewoJCWZtdC5GcHJpbnRmKG9zLlN0ZGVyciwgIlt0Zy1pbWFnZS1iZWRdIGhpc3RvcnkuanNvbiDmjZ/lnY/vvIzku47nqbrljoblj7LlvIDlp4vvvJoldlxuIiwgZXJyKQoJfQoJcy5lbnRyaWVzID0gZW50cmllcwoJcmV0dXJuIHMsIG5pbAp9CgovLyBhcHBlbmQg6L+95Yqg5LiA5p2h6K6w5b2V5bm25oyB5LmF5YyW77yI6KGl6b2Q5pe26Ze05oiz77yb5paw5Zyo5YmN77yJ44CCCmZ1bmMgKHMgKmhpc3RvcnlTdG9yZSkgYXBwZW5kKGUgaGlzdG9yeUVudHJ5KSBlcnJvciB7CglzLm11LkxvY2soKQoJZGVmZXIgcy5tdS5VbmxvY2soKQoJZS5VcGxvYWRlZEF0ID0gdGltZS5Ob3coKS5Gb3JtYXQodGltZS5SRkMzMzM5KQoJcy5lbnRyaWVzID0gYXBwZW5kKFtdaGlzdG9yeUVudHJ5e2V9LCBzLmVudHJpZXMuLi4pCglyZXR1cm4gcy5wZXJzaXN0TG9ja2VkKCkKfQoKLy8gcGFnZSDliIbpobXmn6Xor6LvvIhjdXJzb3Ig5Li65YGP56e76YeP5Y2B6L+b5Yi25Liy77yM56m6PeesrOS4gOmhte+8m+WAkuW6jz3mlrDlnKjliY3vvInjgIIKZnVuYyAocyAqaGlzdG9yeVN0b3JlKSBwYWdlKGN1cnNvciBzdHJpbmcpIChbXWhpc3RvcnlFbnRyeSwgc3RyaW5nKSB7CglzLm11LkxvY2soKQoJZGVmZXIgcy5tdS5VbmxvY2soKQoJb2Zmc2V0IDo9IDAKCWlmIGN1cnNvciAhPSAiIiB7CgkJaWYgXywgZXJyIDo9IGZtdC5Tc2NhbmYoY3Vyc29yLCAiJWQiLCAmb2Zmc2V0KTsgZXJyICE9IG5pbCB8fCBvZmZzZXQgPCAwIHsKCQkJb2Zmc2V0ID0gMAoJCX0KCX0KCWlmIG9mZnNldCA+PSBsZW4ocy5lbnRyaWVzKSB7CgkJcmV0dXJuIFtdaGlzdG9yeUVudHJ5e30sICIiCgl9CgllbmQgOj0gb2Zmc2V0ICsgaGlzdG9yeVBhZ2VTaXplCglpZiBlbmQgPiBsZW4ocy5lbnRyaWVzKSB7CgkJZW5kID0gbGVuKHMuZW50cmllcykKCX0KCW91dCA6PSBtYWtlKFtdaGlzdG9yeUVudHJ5LCBlbmQtb2Zmc2V0KQoJY29weShvdXQsIHMuZW50cmllc1tvZmZzZXQ6ZW5kXSkKCW5leHQgOj0gIiIKCWlmIGVuZCA8IGxlbihzLmVudHJpZXMpIHsKCQluZXh0ID0gZm10LlNwcmludChlbmQpCgl9CglyZXR1cm4gb3V0LCBuZXh0Cn0KCi8vIGZpbmQg5oyJIGZpbGVfaWQg5p+l5Y2V5p2h77yI5LiN5a2Y5Zyo6L+U5ZueIG5pbO+8m+WJr+acrOi/lOWbnumYsuWklumDqOaUueWGhemDqOeKtuaAge+8ieOAggpmdW5jIChzICpoaXN0b3J5U3RvcmUpIGZpbmQoZmlsZUlEIHN0cmluZykgKmhpc3RvcnlFbnRyeSB7CglzLm11LkxvY2soKQoJZGVmZXIgcy5tdS5VbmxvY2soKQoJZm9yIGkgOj0gcmFuZ2Ugcy5lbnRyaWVzIHsKCQlpZiBzLmVudHJpZXNbaV0uRmlsZUlEID09IGZpbGVJRCB7CgkJCWUgOj0gcy5lbnRyaWVzW2ldCgkJCXJldHVybiAmZQoJCX0KCX0KCXJldHVybiBuaWwKfQoKLy8gcmVtb3ZlIOaMiSBmaWxlX2lkIOaJuemHj+enu+mZpOiusOW9le+8iOi/lOWbnuenu+mZpOaVsO+8m1RHIOa2iOaBr+WIoOmZpOeUseiwg+eUqOaWueWFiOihjOWkhOeQhu+8ieOAggpmdW5jIChzICpoaXN0b3J5U3RvcmUpIHJlbW92ZShmaWxlSURzIFtdc3RyaW5nKSBpbnQgewoJcy5tdS5Mb2NrKCkKCWRlZmVyIHMubXUuVW5sb2NrKCkKCWRyb3AgOj0gbWFrZShtYXBbc3RyaW5nXWJvb2wsIGxlbihmaWxlSURzKSkKCWZvciBfLCBpZCA6PSByYW5nZSBmaWxlSURzIHsKCQlkcm9wW2lkXSA9IHRydWUKCX0KCWtlcHQgOj0gbWFrZShbXWhpc3RvcnlFbnRyeSwgMCwgbGVuKHMuZW50cmllcykpCglyZW1vdmVkIDo9IDAKCWZvciBfLCBlIDo9IHJhbmdlIHMuZW50cmllcyB7CgkJaWYgZHJvcFtlLkZpbGVJRF0gewoJCQlyZW1vdmVkKysKCQkJY29udGludWUKCQl9CgkJa2VwdCA9IGFwcGVuZChrZXB0LCBlKQoJfQoJaWYgcmVtb3ZlZCA+IDAgewoJCXMuZW50cmllcyA9IGtlcHQKCQlfID0gcy5wZXJzaXN0TG9ja2VkKCkKCX0KCXJldHVybiByZW1vdmVkCn0KCi8vIHBlcnNpc3RMb2NrZWQg6JC955uY77yI6LCD55So5pa56aG75oyB6ZSB77yb5Li05pe25paH5Lu2ICsgcmVuYW1lIOWOn+WtkOabv+aNou+8jOmYsuWGmeS4gOWNiuaNn+Wdj++8ieOAggpmdW5jIChzICpoaXN0b3J5U3RvcmUpIHBlcnNpc3RMb2NrZWQoKSBlcnJvciB7CglyYXcsIGVyciA6PSBqc29uLk1hcnNoYWxJbmRlbnQocy5lbnRyaWVzLCAiIiwgIiAiKQoJaWYgZXJyICE9IG5pbCB7CgkJcmV0dXJuIGVycgoJfQoJdG1wIDo9IHMucGF0aCArICIudG1wIgoJaWYgZXJyIDo9IG9zLldyaXRlRmlsZSh0bXAsIHJhdywgMG82NDQpOyBlcnIgIT0gbmlsIHsKCQlyZXR1cm4gZXJyCgl9CglyZXR1cm4gb3MuUmVuYW1lKHRtcCwgcy5wYXRoKQp9Cg==
+// marketplace-repo/tg-image-bed/history.go
+// 上传历史持久化：插件数据目录 data/plugins/tg-image-bed/history.json。
+// 量级定位为单站长图库（千级条目），JSON 文件足够（KISS，不引数据库）；
+// file_id 即访问 URL 键，历史同时承担「图库列表」与「删除时反查 message_id」职责。
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"sync"
+	"time"
+)
+
+// historyEntry 单条上传记录。
+type historyEntry struct {
+	FileID     string `json:"file_id"`     // TG 文件标识（公开，URL 键）
+	MessageID  int64  `json:"message_id"`  // 频道消息 ID（deleteMessage 用）
+	FileName   string `json:"file_name"`   // 原始文件名
+	Size       int64  `json:"size"`        // 字节数（TG 回报）
+	Mime       string `json:"mime"`        // MIME 类型
+	URL        string `json:"url"`         // 公开访问地址（{proxy_base}/f/{file_id}）
+	Mode       string `json:"mode"`        // 发送模式 document/photo
+	UploadedAt string `json:"uploaded_at"` // RFC3339
+	UploaderID int64  `json:"uploader_id"` // 上传者用户 ID（0=系统/未知）
+}
+
+// historyPageSize 列表分页每页条数（与 image-cdn 图库对齐 60）。
+const historyPageSize = 60
+
+// historyStore 历史存储（内存切片 + 文件持久化；互斥锁保护并发上传/删除）。
+type historyStore struct {
+	mu      sync.Mutex
+	path    string
+	entries []historyEntry // 新在前（追加时插头部）
+}
+
+// newHistoryStore 打开/创建历史存储（目录不存在自动创建；文件损坏时从空开始并告警）。
+func newHistoryStore(dataDir string) (*historyStore, error) {
+	if err := os.MkdirAll(dataDir, 0o755); err != nil {
+		return nil, err
+	}
+	s := &historyStore{path: filepath.Join(dataDir, "history.json")}
+	raw, err := os.ReadFile(s.path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return s, nil // 首次运行：空历史
+		}
+		return nil, err
+	}
+	var entries []historyEntry
+	if err := json.Unmarshal(raw, &entries); err != nil {
+		fmt.Fprintf(os.Stderr, "[tg-image-bed] history.json 损坏，从空历史开始：%v\n", err)
+	}
+	s.entries = entries
+	return s, nil
+}
+
+// append 追加一条记录并持久化（补齐时间戳；新在前）。
+func (s *historyStore) append(e historyEntry) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	e.UploadedAt = time.Now().Format(time.RFC3339)
+	s.entries = append([]historyEntry{e}, s.entries...)
+	return s.persistLocked()
+}
+
+// page 分页查询（cursor 为偏移量十进制串，空=第一页；倒序=新在前）。
+func (s *historyStore) page(cursor string) ([]historyEntry, string) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	offset := 0
+	if cursor != "" {
+		if _, err := fmt.Sscanf(cursor, "%d", &offset); err != nil || offset < 0 {
+			offset = 0
+		}
+	}
+	if offset >= len(s.entries) {
+		return []historyEntry{}, ""
+	}
+	end := offset + historyPageSize
+	if end > len(s.entries) {
+		end = len(s.entries)
+	}
+	out := make([]historyEntry, end-offset)
+	copy(out, s.entries[offset:end])
+	next := ""
+	if end < len(s.entries) {
+		next = fmt.Sprint(end)
+	}
+	return out, next
+}
+
+// find 按 file_id 查单条（不存在返回 nil；副本返回防外部改内部状态）。
+func (s *historyStore) find(fileID string) *historyEntry {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	for i := range s.entries {
+		if s.entries[i].FileID == fileID {
+			e := s.entries[i]
+			return &e
+		}
+	}
+	return nil
+}
+
+// remove 按 file_id 批量移除记录（返回移除数；TG 消息删除由调用方先行处理）。
+func (s *historyStore) remove(fileIDs []string) int {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	drop := make(map[string]bool, len(fileIDs))
+	for _, id := range fileIDs {
+		drop[id] = true
+	}
+	kept := make([]historyEntry, 0, len(s.entries))
+	removed := 0
+	for _, e := range s.entries {
+		if drop[e.FileID] {
+			removed++
+			continue
+		}
+		kept = append(kept, e)
+	}
+	if removed > 0 {
+		s.entries = kept
+		_ = s.persistLocked()
+	}
+	return removed
+}
+
+// persistLocked 落盘（调用方须持锁；临时文件 + rename 原子替换，防写一半损坏）。
+func (s *historyStore) persistLocked() error {
+	raw, err := json.MarshalIndent(s.entries, "", " ")
+	if err != nil {
+		return err
+	}
+	tmp := s.path + ".tmp"
+	if err := os.WriteFile(tmp, raw, 0o644); err != nil {
+		return err
+	}
+	return os.Rename(tmp, s.path)
+}

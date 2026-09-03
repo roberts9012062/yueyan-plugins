@@ -1,1 +1,14 @@
-IyBUR+WbvuW6iuWPjeS7oyBXb3JrZXIg6YOo572y6YWN572u56S65L6L77yI5aSN5Yi25Li6IHdyYW5nbGVyLnRvbWwg5ZCO5oyJ6ZyA5L+u5pS577yJCiMg55So5rOV77yaCiMgICAxLiDlpI3liLbmnKzmlofku7bkuLogd3JhbmdsZXIudG9tbO+8jOaUuSBuYW1l77yI5Yaz5a6a6buY6K6k5Z+f5ZCNIDxuYW1lPi486LSm5Y+3Pi53b3JrZXJzLmRldu+8iQojICAgMi4gY2Qgd29ya2VyICYmIG5wbSBpIC1nIHdyYW5nbGVyICYmIHdyYW5nbGVyIGxvZ2luCiMgICAzLiB3cmFuZ2xlciBzZWNyZXQgcHV0IFRHX0JPVF9UT0tFTiAgIO+8iOeymOi0tCBAQm90RmF0aGVyIOeahCBUb2tlbu+8iQojICAgNC4gd3JhbmdsZXIgZGVwbG95CiMgICA1LiDmioogV29ya2VyIOWcsOWdgO+8iGh0dHBzOi8vPG5hbWU+LjzotKblj7c+LndvcmtlcnMuZGV2IOaIlue7keWumuiHquWumuS5ieWfn+WQje+8ieWhq+i/mwojICAgICAgYm9rZeOAjFRH5Zu+5bqK44CN5o+S5Lu26K6+572u55qE44CM5Y+N5LujIFdvcmtlciDlnLDlnYDjgI0KbmFtZSA9ICJ0Zy1pbWFnZS1iZWQtd29ya2VyIgptYWluID0gImluZGV4LmpzIgpjb21wYXRpYmlsaXR5X2RhdGUgPSAiMjAyNC0wMS0wMSIKCiMg5peg6ZyAIFIyL0QxL0tWIOe7keWumuKAlOKAlOacrCBXb3JrZXIg5Y+q5YGa5oyBIHRva2VuIOWPjeS7oyArIENhY2hlIEFQSSDnvJPlrZjjgIIKIyBUR19CT1RfVE9LRU4g57uPIHNlY3JldCDms6jlhaXvvIjkuI3lhaXlupPkuI3lhaXku5PlupPvvInvvJp3cmFuZ2xlciBzZWNyZXQgcHV0IFRHX0JPVF9UT0tFTgo=
+# TG图床反代 Worker 部署配置示例（复制为 wrangler.toml 后按需修改）
+# 用法：
+#   1. 复制本文件为 wrangler.toml，改 name（决定默认域名 <name>.<账号>.workers.dev）
+#   2. cd worker && npm i -g wrangler && wrangler login
+#   3. wrangler secret put TG_BOT_TOKEN   （粘贴 @BotFather 的 Token）
+#   4. wrangler deploy
+#   5. 把 Worker 地址（https://<name>.<账号>.workers.dev 或绑定自定义域名）填进
+#      boke「TG图床」插件设置的「反代 Worker 地址」
+name = "tg-image-bed-worker"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# 无需 R2/D1/KV 绑定——本 Worker 只做持 token 反代 + Cache API 缓存。
+# TG_BOT_TOKEN 经 secret 注入（不入库不入仓库）：wrangler secret put TG_BOT_TOKEN
