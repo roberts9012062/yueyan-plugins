@@ -1,5 +1,10 @@
 # TG图床 · 反代 Worker 部署指南
 
+> **开源仓库（推荐入口）**：反代 Worker 的代码与完整部署教程已开源至
+> **[roberts9012062/tg-image-bed-worker](https://github.com/roberts9012062/tg-image-bed-worker)**
+> （含 wrangler CLI 与 Dashboard 在线编辑器两种部署方式、自定义域名与安全说明）。
+> 本目录为插件仓库内的部署工作副本，修改请同步贡献至上游开源仓库。
+
 访客的浏览器无法直接读 Telegram 文件（直链含 Bot Token，绝不能暴露）。本 Worker 是你部署在 Cloudflare 上的一层只读反代：**持 Token 回源、对访客只暴露 `file_id`**，配 Cloudflare 缓存扛流量。部署约 3 分钟，免费额度足够个人博客图床使用。
 
 ## 部署步骤
