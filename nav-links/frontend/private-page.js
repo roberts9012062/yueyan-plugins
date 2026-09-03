@@ -3,7 +3,7 @@
 // v1.3.15 起私有导航不占前台导航入口（在精品导航页内切换），本路由仅为
 // 已分享/已收藏的直达链接保留——门禁流程复用 private-gate.js（与页内切换同款）。
 // ctx: { container, api, user, params: {pluginId, page} }
-import { createNavBoard } from "./board.js?v=1";
+import { createNavBoard } from "./board.js?v=2";
 import { loadPrivateView } from "./private-gate.js?v=1";
 
 export default function registerPage(ctx) {
