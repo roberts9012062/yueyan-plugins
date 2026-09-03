@@ -32,8 +32,15 @@ const pageStyles = `
 .nl-layout{display:flex;gap:16px;align-items:flex-start;margin-top:14px}
 .nl-aside{flex:none;width:170px;border:1px solid var(--nl-border);border-radius:14px;background:var(--nl-elev);padding:12px;position:sticky;top:16px}
 .nl-aside h3{margin:2px 4px 8px;font-size:12px;font-weight:600;color:var(--nl-text2);letter-spacing:.5px}
-.nl-menu{display:flex;flex-direction:column;gap:2px}
-.nl-menu button{display:flex;align-items:center;justify-content:space-between;gap:6px;height:34px;padding:0 10px;border:none;border-left:3px solid transparent;border-radius:8px;background:transparent;font-size:13px;color:var(--nl-text2);cursor:pointer;text-align:left;transition:background .15s,color .15s}
+.nl-catfilter{height:28px;width:100%;margin:0 0 6px;border-radius:8px;border:1px solid var(--nl-border);background:transparent;color:var(--nl-text);padding:0 10px;font-size:12px;outline:none;box-sizing:border-box}
+.nl-catfilter::placeholder{color:var(--nl-text2);opacity:.7}
+.nl-catfilter:focus{border-color:var(--nl-accent)}
+.nl-menu{display:flex;flex-direction:column;gap:2px;max-height:calc(100vh - 150px);overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain}
+.nl-menu::-webkit-scrollbar{width:4px}
+.nl-menu::-webkit-scrollbar-thumb{background:var(--nl-border);border-radius:2px}
+.nl-menu::-webkit-scrollbar-track{background:transparent}
+.nl-menu-empty{padding:8px 10px;font-size:12px;color:var(--nl-text2)}
+.nl-menu button{display:flex;flex:none;align-items:center;justify-content:space-between;gap:6px;height:34px;padding:0 10px;border:none;border-left:3px solid transparent;border-radius:8px;background:transparent;font-size:13px;color:var(--nl-text2);cursor:pointer;text-align:left;transition:background .15s,color .15s}
 .nl-menu button:hover{background:var(--nl-soft);color:var(--nl-text)}
 .nl-menu button.nl-on{background:var(--nl-soft);border-left-color:var(--nl-accent);color:var(--nl-accent);font-weight:600}
 .nl-menu .nl-n{font-size:11px;opacity:.75;flex:none}
@@ -62,15 +69,18 @@ const pageStyles = `
 @media (max-width:900px){
  .nl-layout{flex-direction:column}
  .nl-aside,.nl-sphere-wrap{width:100%;position:static}
- .nl-menu{flex-direction:row;flex-wrap:wrap}
+ .nl-menu{flex-direction:row;flex-wrap:wrap;max-height:none;overflow-y:visible}
  .nav-sphere{height:220px}
 }`;
+
+// catFilterThreshold 分类菜单出现筛选输入框的阈值（超过此数量菜单很长，提供过滤）。
+const catFilterThreshold = 10;
 
 // createNavBoard 挂载看板骨架（同步；容器类名 nl-page 提供主题变量作用域）。
 // opts: { settings } 初始设置（标题/副标题/新窗口开关；setData 可覆盖）。
 // 返回 { setData(data), destroy() }：data = { links, categories, tags, settings }。
 export function createNavBoard(ctx, opts) {
-  const state = { links: [], categories: [], tags: [], settings: opts.settings || {}, keyword: "", filterCat: "", filterTag: "", loaded: false, view: readStoredView() };
+  const state = { links: [], categories: [], tags: [], settings: opts.settings || {}, keyword: "", filterCat: "", filterTag: "", catFilter: "", loaded: false, view: readStoredView() };
   let sphere = null; // 3D 标签云实例（重渲染时销毁重建）
 
   const styleEl = document.createElement("style");
@@ -161,6 +171,10 @@ export function createNavBoard(ctx, opts) {
     const s = state.settings;
     const rows = visibleLinks();
     const cats = menuCategories();
+    // 分类菜单按筛选词过滤（catFilter；仅过滤菜单展示，不影响站点数据）
+    const shownCats = state.catFilter
+      ? cats.filter((c) => c.toLowerCase().includes(state.catFilter.toLowerCase()))
+      : cats;
 
     box.innerHTML =
       '<div style="text-align:center;padding:10px 0 6px">' +
@@ -169,12 +183,18 @@ export function createNavBoard(ctx, opts) {
       '<div style="max-width:420px;margin:16px auto 0">' +
       '<input data-kw type="text" placeholder="搜索站点…" style="height:40px;width:100%;border-radius:999px;border:1px solid var(--nl-border);background:var(--nl-elev);color:var(--nl-text);padding:0 18px;font-size:13px;outline:none;box-sizing:border-box;text-align:center"></div>' +
       '<div class="nl-layout">' +
-      // 左栏:分类菜单
-      '<aside class="nl-aside"><h3>分类</h3><div class="nl-menu" data-menu>' +
+      // 左栏:分类菜单（分类多时限高内部滚动 + 筛选输入；sticky 常驻不被长列表撑页）
+      '<aside class="nl-aside">' +
+      '<h3 style="display:flex;justify-content:space-between;align-items:center">分类<span style="font-weight:400;opacity:.7">' + cats.length + "</span></h3>" +
+      (cats.length > catFilterThreshold
+        ? '<input data-catfilter type="text" placeholder="筛选分类…" class="nl-catfilter">'
+        : "") +
+      '<div class="nl-menu" data-menu>' +
       '<button type="button" data-cat="" class="' + (state.filterCat === "" ? "nl-on" : "") + '">全部站点<span class="nl-n">' + state.links.length + "</span></button>" +
-      cats
+      shownCats
         .map((c) => '<button type="button" data-cat="' + escapeHtml(c) + '" class="' + (state.filterCat === c ? "nl-on" : "") + '">' + escapeHtml(c) + '<span class="nl-n">' + catCount(c) + "</span></button>")
         .join("") +
+      (shownCats.length === 0 ? '<p class="nl-menu-empty">没有匹配的分类</p>' : "") +
       "</div></aside>" +
       // 中栏:状态行（筛选 + 计数 + 视图切换）+ 卡片网格
       '<main class="nl-main">' +
@@ -201,6 +221,18 @@ export function createNavBoard(ctx, opts) {
 
   // ---------- 事件绑定（每次渲染后重挂） ----------
   const bind = () => {
+    // 分类筛选输入（分类多时出现；重渲染后保持焦点与光标位置）
+    const catFilterEl = box.querySelector("[data-catfilter]");
+    if (catFilterEl) {
+      catFilterEl.value = state.catFilter;
+      catFilterEl.addEventListener("input", () => {
+        state.catFilter = catFilterEl.value.trim();
+        render();
+        const again = box.querySelector("[data-catfilter]");
+        again.focus();
+        again.setSelectionRange(again.value.length, again.value.length);
+      });
+    }
     const kw = box.querySelector("[data-kw]");
     if (kw) {
       kw.value = state.keyword;
