@@ -38,6 +38,7 @@ export default function registerPage(ctx) {
     '<select data-ftag style="' + inputStyle + '"><option value="">全部标签</option></select>' +
     '<span data-count style="font-size:12px;' + colorText2 + '"></span>' +
     '<span style="flex:1"></span>' +
+    '<button type="button" data-batch-icon style="height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:12px;' + colorText + ';cursor:pointer">🖼 批量补图标</button>' +
     '<button type="button" data-mgmt-cat style="height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:12px;' + colorText + ';cursor:pointer">管理分类</button>' +
     '<button type="button" data-mgmt-tag style="height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--yy-border,#2a3348);background:transparent;font-size:12px;' + colorText + ';cursor:pointer">管理标签</button></div>' +
     // 列表区
@@ -166,6 +167,52 @@ export default function registerPage(ctx) {
   );
   // 私有导航设置（访问方式 + 访问密码 + 私有页文案）
   box.querySelector("[data-private-settings]").addEventListener("click", () => openPrivateSettings({ api: ctx.api }));
+
+  // ---------- 批量补抓图标 ----------
+  // 批量补图标：对全部「无图标」站点循环分批（5 条/批）调 /icons/batch，
+  // 服务端逐条抓取落库；按钮即进度条（已处理/总数），完成刷新列表并回显成功/失败计数。
+  const batchIconBtn = box.querySelector("[data-batch-icon]");
+  const BATCH_SIZE = 4; // 宿主代理对插件调用有 10s 超时：插件端并发抓取 + 单条 8s 预算，批量取 4 保稳
+  const runBatchIcons = async () => {
+    const missing = state.links.filter((l) => !l.icon);
+    if (missing.length === 0) {
+      countEl.textContent = "全部站点已有图标，无需补抓";
+      return;
+    }
+    if (!window.confirm("共 " + missing.length + " 个站点缺失图标，开始批量抓取？\n（在站点服务器上抓取 favicon，逐批进行，期间请勿关闭页面）")) {
+      return;
+    }
+    const originalText = batchIconBtn.textContent;
+    batchIconBtn.disabled = true;
+    let done = 0, ok = 0, fail = 0;
+    try {
+      for (let i = 0; i < missing.length; i += BATCH_SIZE) {
+        const chunk = missing.slice(i, i + BATCH_SIZE);
+        batchIconBtn.textContent = "抓取中 " + Math.min(done + chunk.length, missing.length) + "/" + missing.length + "…";
+        const r = await ctx.api.post("/icons/batch", { ids: chunk.map((l) => l.id) });
+        if (r.error || !Array.isArray(r.results)) {
+          throw new Error(r.error || "批量接口响应异常");
+        }
+        for (const item of r.results) {
+          if (item.ok) {
+            ok++;
+          } else {
+            fail++;
+          }
+        }
+        done += chunk.length;
+        countEl.textContent = "图标补抓：已处理 " + done + "/" + missing.length;
+      }
+      await load();
+      countEl.textContent = "图标补抓完成：成功 " + ok + " · 失败 " + fail + (fail > 0 ? "（多为站点无 favicon 或防盗链，可稍后对单条「编辑 → 重新抓取图标」重试）" : "");
+    } catch (e) {
+      countEl.textContent = "图标补抓中断（已处理 " + done + "/" + missing.length + "）：" + (e.message || "请求失败");
+    } finally {
+      batchIconBtn.disabled = false;
+      batchIconBtn.textContent = originalText;
+    }
+  };
+  batchIconBtn.addEventListener("click", runBatchIcons);
   // 分类管理弹层（增/重命名/删除级联条目）
   box.querySelector("[data-mgmt-cat]").addEventListener("click", () =>
     openTaxonomyManager({
