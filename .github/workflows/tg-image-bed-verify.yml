@@ -1,0 +1,50 @@
+name: tg-image-bed-verify
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        description: Telegram Bot Token（日志不回显）
+        required: true
+      chat_id:
+        description: 频道 Chat ID
+        required: true
+      worker:
+        description: 反代 Worker 基址
+        required: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1-worker-health
+        env:
+          WORKER: ${{ inputs.worker }}
+        run: echo "health => $(curl -fsS --max-time 20 "$WORKER/health")"
+      - name: 2-getme-getchat
+        env:
+          TOKEN: ${{ inputs.token }}
+          CHAT: ${{ inputs.chat_id }}
+        run: |
+          me=$(curl -fsS --max-time 20 "https://api.telegram.org/bot$TOKEN/getMe" | jq -r '.result.username')
+          echo "bot => @$me"
+          chat=$(curl -fsS --max-time 20 "https://api.telegram.org/bot$TOKEN/getChat?chat_id=$CHAT" | jq -r '.result.title')
+          echo "chat => $chat"
+      - name: 3-send-document
+        id: send
+        env:
+          TOKEN: ${{ inputs.token }}
+          CHAT: ${{ inputs.chat_id }}
+        run: |
+          python3 -c "import base64,pathlib;pathlib.Path('t.png').write_bytes(base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='))"
+          resp=$(curl -fsS --max-time 30 "https://api.telegram.org/bot$TOKEN/sendDocument" -F "chat_id=$CHAT" -F "document=@t.png")
+          echo "$resp" | jq '{ok, message_id: .result.message_id, file_size: .result.document.file_size}'
+          echo "file_id=$(echo "$resp" | jq -r '.result.document.file_id')" >> "$GITHUB_OUTPUT"
+      - name: 4-fetch-via-worker
+        env:
+          WORKER: ${{ inputs.worker }}
+          FILE_ID: ${{ steps.send.outputs.file_id }}
+        run: |
+          sleep 2
+          code=$(curl -s -o out.bin -w '%{http_code}' --max-time 30 "$WORKER/f/$FILE_ID")
+          echo "worker fetch => http=$code bytes=$(wc -c < out.bin) type=$(file -b out.bin)"
+          test "$code" = "200"
+          file -b out.bin | grep -qi png
