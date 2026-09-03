@@ -7,12 +7,12 @@
     },
     {
       "route": "index",
-      "entry": "nav-page.js?v=8",
+      "entry": "nav-page.js?v=9",
       "scope": "site"
     },
     {
       "route": "private",
-      "entry": "private-page.js?v=2",
+      "entry": "private-page.js?v=3",
       "scope": "site"
     }
   ],
