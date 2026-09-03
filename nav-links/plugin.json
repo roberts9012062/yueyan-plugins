@@ -1,7 +1,7 @@
 {
   "id": "nav-links",
   "name": "精品导航",
-  "version": "1.3.15",
+  "version": "1.3.16",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
@@ -14,6 +14,63 @@
     "data.read",
     "admin.page",
     "site.page"
+  ],
+  "open_endpoints": [
+    {
+      "endpoint": "nav-links.private-list",
+      "method": "GET",
+      "path": "/api/v1/open/plugins/nav-links/private/links",
+      "name": "私有导航列表",
+      "description": "精品导航中可见性为「私有」的收藏站点（响应结构与开放导航列表一致，仅含私有条目）。需安装并启用「精品导航」插件",
+      "plugin_method": "POST",
+      "trusted_body": {
+        "admin": true
+      }
+    },
+    {
+      "endpoint": "nav-links.private-config",
+      "method": "GET",
+      "path": "/api/v1/open/plugins/nav-links/private/config",
+      "name": "私有导航设置读取",
+      "description": "读取私有导航访问设置（访问方式/是否已设密码/私有页文案/私有条数），不含任何密码材料。需安装并启用「精品导航」插件"
+    },
+    {
+      "endpoint": "nav-links.private-save",
+      "method": "POST",
+      "path": "/api/v1/open/plugins/nav-links/private/config",
+      "name": "私有导航设置写入",
+      "description": "修改私有导航访问设置（访问方式/访问密码/私有页文案）；password 留空=保持现有，修改后前台旧解锁自动失效。需安装并启用「精品导航」插件",
+      "params": [
+        {
+          "name": "mode",
+          "type": "string",
+          "location": "body",
+          "required": true,
+          "description": "访问方式：self=仅自己可见 / password=密码访问"
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "location": "body",
+          "required": false,
+          "description": "访问密码（6-64 位；留空=保持现有；切 password 模式必须已设密码或本次提供）"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "location": "body",
+          "required": false,
+          "description": "私有页标题（≤30 字）"
+        },
+        {
+          "name": "subtitle",
+          "type": "string",
+          "location": "body",
+          "required": false,
+          "description": "私有页副标题（≤60 字）"
+        }
+      ]
+    }
   ],
   "repo_url": "https://github.com/roberts9012062/yueyan-plugins",
   "core_version": ">=0.1.0",
@@ -44,10 +101,10 @@
   ],
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
-    "sha256": "18a62d69018950c9df1310ad83f1ef13496012f704281db35934bccb4ad75a95",
+    "sha256": "3adba9182456817f55e9de36edf7c596366b1f707e152875a619857f3d0e7ddf",
     "sha256_by_platform": {
-      "windows-amd64": "18a62d69018950c9df1310ad83f1ef13496012f704281db35934bccb4ad75a95",
-      "linux-arm64": "a72950a3ab04b139a4ffadf059fc7bfa7798a1f8507f58261c588c0965ee5722"
+      "windows-amd64": "3adba9182456817f55e9de36edf7c596366b1f707e152875a619857f3d0e7ddf",
+      "linux-arm64": "f26c7474299d752e7c1f495776a5080c190c579241fea3cf67d8d9fa541618c8"
     }
   }
 }
