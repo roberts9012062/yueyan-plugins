@@ -46,6 +46,19 @@
 
 **写入可见性**：`navlinks.save` 的每条链接支持可选 `visibility` 字段——不传或 `open`=开放（默认），`private`=私有（进入私有导航页）。
 
+### 声明式开放端点（v1.3.16 起，泛化网关路径）
+
+上表三组私有端点同时经**泛化插件网关**提供（插件清单 `open_endpoints` 声明，安装后自动出现在后台「接口开放」目录，主程序无需为此升级）：
+
+| 接口标识 | 方法 | 路径 |
+|---|---|---|
+| `nav-links.private-list` | GET | `/api/v1/open/plugins/nav-links/private/links` |
+| `nav-links.private-config` | GET | `/api/v1/open/plugins/nav-links/private/config` |
+| `nav-links.private-save` | POST | `/api/v1/open/plugins/nav-links/private/config` |
+
+- 语义与上表同名硬编码端点一致（`private-list` 对外 GET、插件端按 POST + 受信身份调用）；新对接建议优先使用泛化路径。
+- 插件作者为自有插件声明开放端点：在 `plugin.json` 增加 `open_endpoints` 数组（`endpoint` 须以插件 ID 前缀、`path` 须位于 `/api/v1/open/plugins/{插件ID}/` 命名空间下，可用 `plugin_method`/`trusted_body` 做方法映射与受信身份注入），宿主 v1.4.1+ 安装后自动进目录。
+
 调用示例：
 
 ```js
