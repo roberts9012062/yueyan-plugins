@@ -43,4 +43,15 @@ npx wrangler deploy
 
 ## 可选：绑定自定义域名
 
-workers.dev 域名在部分网络环境可能被污染，建议绑定自有域名（Cloudflare Dashboard → Workers → 该 Worker → Settings → Domains & Routes → Add Custom Domain）。自定义域名需托管在同一 Cloudflare 账号。
+workers.dev 域名在部分网络环境可能被污染，**推荐绑定自有域名**（域名需托管在同一 Cloudflare 账号）。两种方式任选：
+
+- **wrangler 配置**（推荐）：在 `wrangler.toml` 末尾添加（example 中有注释模板）：
+  ```toml
+  routes = [
+    { pattern = "tg.你的域名.com", custom_domain = true }
+  ]
+  ```
+  再次 `wrangler deploy`，Cloudflare 自动创建子域 DNS 记录与证书；
+- **Dashboard 手动**：Workers → 该 Worker → Settings → Domains & Routes → Add Custom Domain。
+
+注意：一个域名/hostname 只能路由到一个 Worker——若域名已被其他 Worker 占用，请换一个子域名。
