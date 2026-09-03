@@ -48,6 +48,28 @@ Telegram 频道图床：把博客图片存进 Telegram 频道（Bot API），访
 | 与 CF图床冲突吗？ | 不冲突可共存；两者均为独立图库形态，宿主媒体上传的接管（seam）当前由 CF图床承担，本插件的 `/storage/*` 契约端点已实现、备用兼容 |
 | 上传历史存在哪？ | 插件数据目录 `data/plugins/tg-image-bed/history.json`（卸载重装不丢失） |
 
+## 开放接口（外部应用对接）
+
+v0.3.0 起声明开放端点（宿主 v1.4.1+ 声明式开放端点）：安装/升级后自动进入后台「接口开放」目录，站长创建 API Key 并勾选授权后，外部应用（如月言浏览器插件）即可凭 `X-Api-Key` 调用：
+
+| 端点 | 方法 | 说明 |
+|---|---|---|
+| `/api/v1/open/plugins/tg-image-bed/upload` | POST | 上传图片（`{filename, mime, content_b64}`）→ `{url, markdown, file_id, size, mime}` |
+| `/api/v1/open/plugins/tg-image-bed/list` | POST | 图库分页（`{cursor}` 留空=首页）→ `{objects[], cursor}` |
+
+调用示例：
+
+```js
+const res = await fetch(`${siteOrigin}/api/v1/open/plugins/tg-image-bed/upload`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json", "X-Api-Key": apiKey },
+  body: JSON.stringify({ filename: "a.png", mime: "image/png", content_b64 }),
+});
+const body = await res.json(); // {code, message, data, request_id}，code=0 成功，data.url 即图片地址
+```
+
+注意：响应语义为开放网关统一包络（`{code:0,data}`；插件侧 `error` 转网关 400）；建议只给浏览器插件授权所需端点，Key 泄露时在后台删除重建即可。
+
 ## 隐私与安全
 
 - Bot Token / Chat ID 存宿主插件设置（`sdk.Config` 下发），仅插件进程内存使用；
