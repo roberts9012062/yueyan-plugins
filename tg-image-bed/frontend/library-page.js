@@ -80,8 +80,8 @@ export default function registerPage(ctx) {
     '<span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--yy-accent,#5b8cff);color:#fff;font-size:18px;font-weight:700">✈</span>' +
     '<div style="flex:1;min-width:200px"><h1 style="font-size:18px;font-weight:700;color:var(--yy-text,#e8ecf4);line-height:1.3">TG图床 · 图库管理</h1>' +
     '<p style="' + hintStyle + '">上传直达 Telegram 频道 · 访客经反代 Worker 读图 · Token 不出服务端</p></div>' +
-    '<a href="/admin/plugin-pages/tg-image-bed/detect" style="font-size:13px;color:var(--yy-accent,#5b8cff);text-decoration:none">图片体检 →</a>' +
     '<span data-count style="' + hintStyle + '"></span>' +
+    '<a href="/admin/plugin-pages/tg-image-bed/detect" style="display:inline-flex;align-items:center;gap:6px;height:36px;border-radius:8px;padding:0 18px;font-size:13px;font-weight:600;color:#fff;background:var(--yy-accent,#5b8cff);border:none;cursor:pointer;text-decoration:none">🔍 图片体检</a>' +
     '<button type="button" data-delete-btn style="height:36px;border-radius:8px;padding:0 16px;font-size:13px;color:#fff;background:#e5484d;border:none;cursor:pointer">删除选中</button>' +
     '</div>' +
     '<p data-health style="margin-top:10px;padding:10px 14px;border-radius:10px;font-size:12px;' + cardStyle + '"></p>' +
