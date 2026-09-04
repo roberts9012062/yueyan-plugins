@@ -48,7 +48,7 @@ func (p *TGImageBedPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "TG图床",
-		Version:     "0.4.1",
+		Version:     "0.4.2",
 		Author:      "月言官方",
 		Description: "Telegram 频道图床：图片上传直达 TG（Bot API 保原图），自备反代 Worker 访问，后台图库管理与 Markdown 插图。",
 		Capabilities: []string{"settings", "api", "admin.page"},
