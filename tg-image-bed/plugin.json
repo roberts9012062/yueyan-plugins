@@ -1,7 +1,7 @@
 {
   "id": "tg-image-bed",
   "name": "TG图床",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "category": "enhancement",
   "price": 0,
   "installs": 0,
@@ -108,8 +108,8 @@
   "assets": {
     "pattern": "{id}-{version}-{os}-{arch}.bpk",
     "sha256_by_platform": {
-      "linux-arm64": "62e8aeb610c83120989c218bbd70d33bc4e0cabbfd63e918a76bc519b8d94b71",
-      "windows-amd64": "46bdd2e97c2e60c84066b442c1018be48de6ee21c3dccb17264df53623b282cd"
+      "linux-arm64": "9240fe901718252ad4c811e4125de16402195fa8461b2f482176e26cb7a6a420",
+      "windows-amd64": "d965e2bc62a9f05f139a4852853fd252bbbff50c5fbcfa1f882638cf5c8c2828"
     }
   }
 }
