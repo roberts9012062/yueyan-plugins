@@ -1,0 +1,19 @@
+# TG图床反代 Worker 部署配置示例（复制为 wrangler.toml 后按需修改）
+# 用法：
+#   1. 复制本文件为 wrangler.toml，改 name（决定默认域名 <name>.<账号>.workers.dev）
+#   2. cd worker && npm i -g wrangler && wrangler login
+#   3. wrangler secret put TG_BOT_TOKEN   （粘贴 @BotFather 的 Token）
+#   4. wrangler deploy
+#   5. 把 Worker 地址（https://<name>.<账号>.workers.dev 或绑定自定义域名）填进
+#      boke「TG图床」插件设置的「反代 Worker 地址」
+name = "tg-image-bed-worker"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# 无需 R2/D1/KV 绑定——本 Worker 只做持 token 反代 + Cache API 缓存。
+# TG_BOT_TOKEN 经 secret 注入（不入库不入仓库）：wrangler secret put TG_BOT_TOKEN
+
+# 自定义域名绑定（Cloudflare 自动为子域创建 DNS 记录与证书；域名须托管在同一 CF 账号）
+routes = [
+  { pattern = "tg.aich.eu.org", custom_domain = true }
+]
