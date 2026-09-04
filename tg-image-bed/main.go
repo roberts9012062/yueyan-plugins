@@ -48,7 +48,7 @@ func (p *TGImageBedPlugin) Info() sdk.Info {
 	return sdk.Info{
 		ID:          pluginID,
 		Name:        "TG图床",
-		Version:     "0.3.1",
+		Version:     "0.4.0",
 		Author:      "月言官方",
 		Description: "Telegram 频道图床：图片上传直达 TG（Bot API 保原图），自备反代 Worker 访问，后台图库管理与 Markdown 插图。",
 		Capabilities: []string{"settings", "api", "admin.page"},
@@ -90,6 +90,7 @@ func (p *TGImageBedPlugin) Hooks() []sdk.Hook { return nil }
 //	GET  /storage/health   配对探测（宿主存储 seam 契约；当前 seam 提供方为 image-cdn，此端点备用兼容）
 //	POST /storage/upload   转存契约（宿主 seam 备用；与 /manage/upload 同链路）
 //	POST /manage/upload    图库直传 {filename,mime,content_b64}（登录用户——插图是常规发帖行为）
+//	POST /manage/transfer  外链转存 {url}（登录用户——插件后端下载绕过浏览器 CORS，图片体检页用）
 //	POST /manage/list      上传历史 {cursor} → {objects,cursor}（登录用户：图库页数据源）
 //	POST /manage/delete    批量删除 {file_ids:[]}（管理员：尽力删频道消息 + 移除历史）
 //	POST /upload /list     开放网关别名（open_endpoints 声明：浏览器插件等外部应用凭
@@ -98,6 +99,7 @@ func (p *TGImageBedPlugin) RegisterAPI(api *sdk.APIMux) {
 	api.Handle("GET", "/storage/health", p.handleHealth)
 	api.Handle("POST", "/storage/upload", p.handleUpload)
 	api.Handle("POST", "/manage/upload", p.handleUpload)
+	api.Handle("POST", "/manage/transfer", p.handleTransfer)
 	api.Handle("POST", "/manage/list", p.handleList)
 	api.Handle("POST", "/manage/delete", p.handleDelete)
 	api.Handle("POST", "/upload", p.handleUpload)
@@ -174,28 +176,37 @@ func (p *TGImageBedPlugin) handleUpload(ctx context.Context, method string, path
 	if err := validatePair(cfg); err != nil {
 		return jsonOut(400, map[string]any{"error": err.Error()})
 	}
-	tg := tgConfigFromSettings(cfg)
-	mode := cfg["send_mode"]
-	sent, err := tgSendFile(tg, mode, req.Filename, mime, content)
+	resp, err := p.sendImage(ctx, cfg, req.Filename, mime, content)
 	if err != nil {
 		return jsonOut(200, map[string]any{"error": err.Error()})
+	}
+	raw, _ := json.Marshal(resp)
+	return 200, raw, nil
+}
+
+// sendImage 发送图片到 TG 频道并落历史（直传与外链转存共用链路；入参已完成白名单/大小校验）。
+func (p *TGImageBedPlugin) sendImage(ctx context.Context, cfg map[string]string, filename string, mime string, content []byte) (*uploadResponse, error) {
+	tg := tgConfigFromSettings(cfg)
+	mode := cfg["send_mode"]
+	sent, err := tgSendFile(tg, mode, filename, mime, content)
+	if err != nil {
+		return nil, err
 	}
 	url := strings.TrimSuffix(strings.TrimSpace(cfg["proxy_base"]), "/") + "/f/" + sent.FileID
 	if mode == "photo" && strings.Contains(mime, "gif") {
 		mode = "document" // 响应回告实际模式（gif 不支持 sendPhoto 已自动回退）
 	}
-	resp := uploadResponse{
+	resp := &uploadResponse{
 		Type: "image", StorageKey: sent.FileID, URL: url, Mime: mime,
-		Size: sent.Size, Markdown: markdownFor(req.Filename, url), Mode: mode,
+		Size: sent.Size, Markdown: markdownFor(filename, url), Mode: mode,
 	}
 	if p.history != nil {
 		_ = p.history.append(historyEntry{
-			FileID: sent.FileID, MessageID: sent.MessageID, FileName: req.Filename,
+			FileID: sent.FileID, MessageID: sent.MessageID, FileName: filename,
 			Size: sent.Size, Mime: mime, URL: url, Mode: mode, UploaderID: sdk.CallerID(ctx),
 		})
 	}
-	raw, _ := json.Marshal(resp)
-	return 200, raw, nil
+	return resp, nil
 }
 
 // handleList 上传历史分页（登录用户——图库页数据源；新在前）。
