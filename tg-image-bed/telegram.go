@@ -156,7 +156,10 @@ func tgSendFile(cfg tgConfig, mode string, filename string, mimeType string, con
 	return parseSendResult(env.Result)
 }
 
-// parseSendResult 从 send* 响应提取 file_id/message_id/size（photo 数组取最大尺寸；纯函数）。
+// parseSendResult 从 send* 响应提取 file_id/message_id/size（纯函数）。
+// 兼容 TG 服务器自动转码（sendDocument 的两处隐性行为，实测 v0.4.1 踩坑）：
+//   - webp 符合贴纸规格 → 转为 sticker（响应无 document；file_id 经 getFile 可下载回 webp）；
+//   - gif 动图 → 转码为 animation/mp4（响应无 document；下载回的是 mp4，README 已注明）。
 func parseSendResult(result json.RawMessage) (*tgSendResult, error) {
 	var msg struct {
 		MessageID int64 `json:"message_id"`
@@ -168,12 +171,21 @@ func parseSendResult(result json.RawMessage) (*tgSendResult, error) {
 			FileID   string `json:"file_id"`
 			FileSize int64  `json:"file_size"`
 		} `json:"document"`
+		Sticker struct {
+			FileID   string `json:"file_id"`
+			FileSize int64  `json:"file_size"`
+		} `json:"sticker"`
+		Animation struct {
+			FileID   string `json:"file_id"`
+			FileSize int64  `json:"file_size"`
+		} `json:"animation"`
 	}
 	if err := json.Unmarshal(result, &msg); err != nil {
 		return nil, fmt.Errorf("发送响应解析失败：%w", err)
 	}
 	out := &tgSendResult{MessageID: msg.MessageID}
-	if len(msg.Photo) > 0 {
+	switch {
+	case len(msg.Photo) > 0:
 		largest := msg.Photo[0]
 		for _, p := range msg.Photo {
 			if p.FileSize > largest.FileSize {
@@ -181,9 +193,13 @@ func parseSendResult(result json.RawMessage) (*tgSendResult, error) {
 			}
 		}
 		out.FileID, out.Size = largest.FileID, largest.FileSize
-	} else if msg.Document.FileID != "" {
+	case msg.Document.FileID != "":
 		out.FileID, out.Size = msg.Document.FileID, msg.Document.FileSize
-	} else {
+	case msg.Sticker.FileID != "": // webp 被转贴纸（同 file_id 语义，Worker 直链照常）
+		out.FileID, out.Size = msg.Sticker.FileID, msg.Sticker.FileSize
+	case msg.Animation.FileID != "": // gif 被转 mp4 动画
+		out.FileID, out.Size = msg.Animation.FileID, msg.Animation.FileSize
+	default:
 		return nil, fmt.Errorf("发送响应缺少 photo/document 字段")
 	}
 	return out, nil
