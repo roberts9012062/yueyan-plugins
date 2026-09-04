@@ -9,11 +9,23 @@ import { cardStyle, hintStyle } from "/plugin-sdk/shared.js";
 // KIND_LABEL 图片分类文案。
 const KIND_LABEL = { external: "外部图片", local: "本地图片", tg: "已TG" };
 
-// siteApi 宿主 REST 调用（同源 Cookie 鉴权；剥 {code,message,data} 壳，非 0 抛错）。
+// bearerHeader 主站访问令牌头（与主站前端同源逻辑：localStorage yueyan-tokens 的 access_token；
+// 管理 REST 走 Authorization Bearer 而非 Cookie——v0.4.1 踩坑：缺头时 /admin/* 一律 401）。
+function bearerHeader() {
+  try {
+    const raw = localStorage.getItem("yueyan-tokens");
+    const tokens = raw ? JSON.parse(raw) : {};
+    return tokens.access_token ? { Authorization: "Bearer " + tokens.access_token } : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+// siteApi 宿主 REST 调用（同源 Bearer 鉴权；剥 {code,message,data} 壳，非 0 抛错）。
 async function siteApi(method, url, body) {
   const res = await fetch(url, {
     method,
-    headers: body ? { "Content-Type": "application/json" } : {},
+    headers: { ...bearerHeader(), ...(body ? { "Content-Type": "application/json" } : {}) },
     body: body ? JSON.stringify(body) : undefined,
     credentials: "same-origin",
   });
