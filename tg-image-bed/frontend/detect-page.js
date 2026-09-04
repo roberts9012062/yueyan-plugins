@@ -77,6 +77,7 @@ export default function registerPage(ctx) {
     '<a href="/admin/plugin-pages/tg-image-bed/library" style="font-size:13px;color:var(--yy-accent,#5b8cff);text-decoration:none">← 返回图库</a>' +
     "</div>" +
     '<p data-health style="margin-top:10px;padding:10px 14px;border-radius:10px;font-size:12px;' + cardStyle + '"></p>' +
+    '<p style="' + hintStyle + ';margin-top:8px">扫描范围为公开时间线（推荐流接口）：私密帖与仅关注者可见帖不出现在列表中，如有需要请在对应帖子编辑页手动处理。</p>' +
     '<div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">' +
     '<button type="button" data-scan-btn style="height:36px;border-radius:8px;padding:0 20px;font-size:13px;color:#fff;background:var(--yy-accent,#5b8cff);border:none;cursor:pointer">扫描全部帖子</button>' +
     '<button type="button" data-transfer-btn style="height:36px;border-radius:8px;padding:0 20px;font-size:13px;color:#fff;background:#30a46c;border:none;cursor:pointer;display:none">转存选中到 TG 图床</button>' +
