@@ -47,6 +47,8 @@ Telegram 频道图床：把博客图片存进 Telegram 频道（Bot API），访
 | 项 | 说明 |
 |---|---|
 | 单图 ≤ 20MB | Telegram Bot API 文件下载上限，上传时前置校验并明确报错 |
+| webp 图变"贴纸"？ | TG 服务器会把符合贴纸规格的 webp 自动转为贴纸存储（响应无 document 字段）——插件已兼容（v0.4.2），直链照常访问 |
+| gif 动图变 mp4？ | TG 会把 gif 自动转码为 mp4 动画存储（Bot API 固有行为），直链下载到的是 mp4（正文 `<img>` 无法显示动图，如需动效请用 video 嵌入或改用其他格式） |
 | 删除后旧 URL 还能访问？ | 删除会移除频道消息与本地图库记录，但 TG 服务器缓存文件可能仍可经旧 URL 访问一段时间（无法从 Bot API 强制清除） |
 | 服务器连不上 TG？ | 博客服务器在中国大陆时无法直连 `api.telegram.org`，在插件设置填 `api_proxy`（如 `http://127.0.0.1:7890`）；访客访问的是 Cloudflare Worker（海外节点），一般不受影响 |
 | Token 泄露了怎么办？ | 立即在 @BotFather 执行 `/revoke` 吊销旧 Token → 重新生成 → 更新插件设置与 Worker secret |
